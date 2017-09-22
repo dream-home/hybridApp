@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>修改昵称</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content background="background:#e5e5e5">
+    <ion-row class="nickName">
+        <ion-col>
+            <span>输入昵称</span>
+            <ion-input maxlength="15" bindon-ngModel="nickName" placeholder="请输入昵称" type="text"></ion-input>
+        </ion-col>
+    </ion-row>
+    <ion-row class="btnSubmit">
+        <ion-col text-center>
+            <button ion-button full (click)="saveInfo()">确定</button>
+        </ion-col>
+    </ion-row>
+</ion-content>

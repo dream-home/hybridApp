@@ -1,0 +1,267 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>订单详情</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+
+    <div *ngIf="info && !isShowPayPw">
+       <ion-grid no-padding>
+            <ion-row style="padding-left:5px;background:#fff;line-height: 25px;">
+                <ion-col width-50 style="color:#999;">订单明细</ion-col>
+                <ion-col width-50 text-right>
+                    <span *ngIf="info.status==2" style="color:#f7689e;">待发货</span>
+                    <span *ngIf="info.status==3" style="color:#03bb03;">已发货</span>
+                    <span *ngIf="info.status==0" style="color:#BF3EFF;">待付款</span>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-list no-margin *ngIf="info.storeId">
+            <button ion-item  (click)="gotoShop(info.storeId)">
+                <img item-left src="{{info.storeIcon}}" style="width:36px; height: auto;"/>
+                {{info.storeName}}
+            </button>
+        </ion-list>
+        <ion-grid style=" background: #fff;border-bottom:1px solid #dfdfdf;"  *ngIf="info.orderType=='3'">
+            <ion-row *ngFor="let orderitm of info.cartList">
+                <ion-col width-50>{{orderitm.goodsName}}</ion-col>
+                <ion-col width-25 text-center>x{{orderitm.num}}</ion-col>
+                <ion-col width-25 text-center>¥{{orderitm.price}}</ion-col>
+            </ion-row>
+             <ion-row >
+                <ion-col width-50></ion-col>
+                <ion-col width-25 text-center>订单总价</ion-col>
+                <ion-col width-25 text-center>
+                  <span style="color:#f10214;">¥{{commonService.toDecimal(info.price*1)}}
+                     <span *ngIf="info.remark=='EP兑换'">EP</span>
+                     </span>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-grid style=" background: #fff;border-bottom:1px solid #dfdfdf;" *ngIf="info.orderType=='1'||info.orderType=='2'">
+
+            <ion-row >
+                <ion-col width-50>{{info.goodsName}}</ion-col>
+                <ion-col width-25 text-center>x{{info.num}}</ion-col>
+                <ion-col width-25 text-center  *ngIf="info.remark=='EP兑换'">¥{{(info.price*1/info.num*1)}}</ion-col>
+                 <ion-col width-25 text-center  *ngIf="info.remark!='EP兑换'">¥{{info.price}}</ion-col>
+            </ion-row>
+            <ion-row >
+                <ion-col width-50></ion-col>
+                <ion-col width-25 text-center>订单总价</ion-col>
+                <ion-col width-25 text-center>
+                    <span style="color:#f10214;" *ngIf="info.remark!='EP兑换'" >¥{{commonService.toDecimal(info.price*info.num)}}
+                    </span>
+                    <span style="color:#f10214;" *ngIf="info.remark=='EP兑换'">{{commonService.toDecimal(info.price)}}EP
+
+                    </span>
+                </ion-col>
+            </ion-row>
+          </ion-grid>
+        <ion-grid style=" background: #fff;border-bottom:1px solid #dfdfdf;" *ngIf="info.status=='0'">
+
+            <!-- <ion-row >
+                <ion-col width-50>{{info.goodsName}}</ion-col>
+                <ion-col width-25 text-center>x{{info.num}}</ion-col>
+                <ion-col width-25 text-center  *ngIf="info.remark=='EP兑换'">¥{{(info.price*1/info.num*1)}}</ion-col>
+                 <ion-col width-25 text-center  *ngIf="info.remark!='EP兑换'">¥{{info.price}}</ion-col>
+            </ion-row>
+            <ion-row >
+                <ion-col width-50></ion-col>
+                <ion-col width-25 text-center>订单总价</ion-col>
+                <ion-col width-25 text-center>
+                    <span style="color:#f10214;" *ngIf="info.remark!='EP兑换'" >¥{{commonService.toDecimal(info.price)}}
+                    </span>
+                    <span style="color:#f10214;" *ngIf="info.remark=='EP兑换'">{{commonService.toDecimal(info.price)}}EP
+
+                    </span>
+                </ion-col>
+            </ion-row> -->
+            <!-- EP抵用券 -->
+            <ion-row *ngIf="orderGoodsEp!=null && orderGoodsEp.originalDiscountEp>0" class="discountEP">
+                <ion-col *ngIf="discountBoolean">可用{{commonService.toDecimal(orderGoodsEp.originalDiscountEp)}}EP券抵用{{commonService.toDecimal(orderGoodsEp.originalDiscountEp)}}元(&nbsp;EP余额&nbsp;{{myEP}}&nbsp;)</ion-col>
+                <ion-col *ngIf="!discountBoolean" style="color:#ccc;">可用{{commonService.toDecimal(orderGoodsEp.originalDiscountEp)}}EP券抵用{{commonService.toDecimal(orderGoodsEp.originalDiscountEp)}}元(&nbsp;EP余额&nbsp;{{myEP}}&nbsp;)</ion-col>
+                <ion-col>
+                    <ion-radio class="ionRadio" *ngIf="discountBoolean && myEP!=0" (click)="epDiscount()" checked="{{discountBoolean}}"></ion-radio>
+                    <ion-radio class="ionRadio1" *ngIf="!discountBoolean && myEP!=0" (click)="epDiscount()" checked="{{discountBoolean}}"></ion-radio>
+                    <ion-radio class="ionRadio1" *ngIf="myEP==0" checked="false"></ion-radio>
+                </ion-col>
+            </ion-row>
+            <ion-row class="payForInfo" *ngIf="orderGoodsEp!=null">
+                <ion-col>支付明细</ion-col>
+            </ion-row>
+            <ion-row *ngIf="orderGoodsEp!=null" class="epDiscount">
+                <ion-col width-75>EP券抵用</ion-col>
+                <ion-col width-25 text-center *ngIf="discountBoolean">-{{orderGoodsEp.totalDiscountEp>myEP?myEP:orderGoodsEp.totalDiscountEp}}</ion-col>
+                <ion-col width-25 text-center *ngIf="!discountBoolean">0</ion-col>
+            </ion-row>
+            <ion-row *ngIf="orderGoodsEp!=null" class="actualPayMent">
+                <ion-col width-75>实际付款</ion-col>
+                <ion-col width-25 text-center *ngIf="discountBoolean" style="color:#f10214;">¥{{commonService.toDecimal(orderGoodsEp.originalPrice-(orderGoodsEp.totalDiscountEp>myEP?myEP:orderGoodsEp.totalDiscountEp))}}</ion-col>
+                <ion-col width-25 text-center *ngIf="!discountBoolean" style="color:#f10214;">¥{{commonService.toDecimal(orderGoodsEp.originalPrice)}}</ion-col>
+            </ion-row>
+        </ion-grid>
+        <div *ngIf="info.remark!='EP兑换'">
+          <ion-grid no-padding style="margin-top:5px;" *ngIf="info.status=='3'||info.status=='2'">
+              <ion-row style="padding-left:5px;border-bottom:1px solid #dfdfdf;background:#fff;line-height: 25px;">
+                  <ion-col style="color:#999;">支付明细</ion-col>
+              </ion-row>
+              <ion-row style="padding: 5px;" *ngIf="info.discountEP>0">
+                  <ion-col width-75 style="color: #666;">EP券抵用</ion-col>
+                  <ion-col width-25 text-center>-{{info.discountEP}}</ion-col>
+              </ion-row>
+              <ion-row style="padding: 5px;" *ngIf="info.orderType!='3'">
+                  <ion-col width-75>实际付款</ion-col>
+                  <ion-col width-25 text-center style="color:#f10214;">
+                      ¥{{commonService.toDecimal(info.price*info.num-info.discountEP)}}
+                  </ion-col>
+              </ion-row>
+               <ion-row style="padding: 5px;" *ngIf="info.orderType=='3'">
+                  <ion-col width-75>实际付款</ion-col>
+                  <ion-col width-25 text-center style="color:#f10214;">
+                    ¥{{commonService.toDecimal(info.price*1-info.discountEP)}}
+                  </ion-col>
+              </ion-row>
+          </ion-grid>
+        </div>
+        <ion-grid no-padding style="margin-top:5px;" *ngIf="info.status=='3'">
+            <ion-row style="padding-left:5px;border-bottom:1px solid #dfdfdf;background:#fff;line-height: 25px;">
+                <ion-col style="color:#999;">物流信息</ion-col>
+            </ion-row>
+        </ion-grid>
+         <ion-list *ngIf="info.status=='3'" no-margin >
+                <ion-item>
+                    快递公司：{{info.expressName}}
+                </ion-item>
+                <ion-item>
+                   快递单号：{{info.expressNo}}
+                </ion-item>
+                <ion-item>
+                   发货时间：{{commonService.dateFormatLong(info.updateTime,'yyyy-MM-dd HH:mm')}}
+                </ion-item>
+         </ion-list>
+       <ion-grid no-padding style="margin-top:5px;">
+           <ion-row style="padding-left:5px;border-bottom:1px solid #dfdfdf;background:#fff;line-height: 25px;">
+               <ion-col style="color:#999;">收货信息</ion-col>
+           </ion-row>
+       </ion-grid>
+
+        <ion-list no-margin no-padding *ngIf="info" class="info_getgoods" >
+            <ion-item style="border-top:none;">
+               <span>收&nbsp;货&nbsp;人：{{info.userName}}</span>
+            </ion-item>
+            <ion-item >
+               <span>联系电话：{{info.phone}}</span>
+            </ion-item>
+            <ion-item style="border-bottom:none;">
+              <span>收货地址：</span><span style="overflow: auto;white-space: normal;">{{info.addr}} </span>
+            </ion-item>
+        </ion-list>
+        <ion-grid no-padding style="margin-top:5px;">
+            <ion-row style="padding-left:5px;border-bottom:1px solid #dfdfdf;background:#fff;line-height: 25px;">
+                <ion-col style="color:#999;">订单信息</ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-list no-margin no-padding *ngIf="info" class="info_getgoods">
+            <ion-item style="border-top:none;">
+               <span>订单编号：{{info.orderNo}}</span>
+            </ion-item>
+            <ion-item>
+               下单时间：<span *ngIf="info.createTime!=null && info.createTime!=''">{{commonService.dateFormatLong(info.createTime,'yyyy-MM-dd HH:mm')}}</span>
+            </ion-item>
+            <ion-item *ngIf="info&&info.status!=0">
+                <span>支付方式：</span>
+                <span *ngIf="(40>info.payWay&&info.payWay>=30)||info.payWay==3">余额支付</span>
+                <span *ngIf="(20>info.payWay&&info.payWay>=10)||info.payWay==1">支付宝支付</span>
+                <span *ngIf="(30>info.payWay&&info.payWay>=20)||info.payWay==2">微信支付</span>
+                <span *ngIf="info.payWay==null">其他支付</span>
+            </ion-item>
+            <!-- 选择支付方式 -->
+            <ion-list *ngIf="info&&info.status==0&&!noPay" radio-group class="payWay">
+                <ion-row>
+                  <ion-col style="line-height: 25px;">选择支付方式</ion-col>
+                </ion-row>
+                <ion-item *ngIf="type == '1004'">
+                    <ion-label style="border:0;">EP支付</ion-label>
+                    <ion-radio checked="true"></ion-radio>
+                </ion-item>
+                <ion-item *ngIf="type != '1004' && onePayWay">
+                    <ion-label style="border:0;">余额支付( ¥{{myScore}} )</ion-label>
+                    <ion-radio (click)="changeSource(3)" checked="true" value="3"></ion-radio>
+                </ion-item>
+                <ion-item *ngIf="type != '1004' && !onePayWay">
+                    <ion-label style="border:0;">余额支付( ¥{{myScore}} )</ion-label>
+                    <ion-radio (click)="changeSource(3)" checked="true" value="3"></ion-radio>
+                </ion-item>
+                <ion-item *ngIf="type != '1004' && onePayWay">
+                    <ion-label style="border:0;">微信支付</ion-label>
+                    <ion-radio (click)="changeSource(2)" value="2" [disabled]="true"></ion-radio>
+                </ion-item>
+                <ion-item *ngIf="type != '1004' && !onePayWay">
+                    <ion-label style="border:0;">微信支付</ion-label>
+                    <ion-radio (click)="changeSource(2)" value="2"></ion-radio>
+                </ion-item>
+                <ion-item style="border-bottom:0;" *ngIf="type != '1004' && onePayWay">
+                    <ion-label style="border:0;">支付宝支付</ion-label>
+                    <ion-radio (click)="changeSource(1)" value="1" [disabled]="true"></ion-radio>
+                </ion-item>
+                <ion-item style="border-bottom:0;" *ngIf="type != '1004' && !onePayWay">
+                    <ion-label style="border:0;">支付宝支付</ion-label>
+                    <ion-radio (click)="changeSource(1)" value="1"></ion-radio>
+                </ion-item>
+            </ion-list>
+            </ion-list>
+        <div style="height:60px;"></div>
+    </div>
+    <!--支付界面-->
+      <ion-grid *ngIf="isShowPayPw">
+          <ion-row>
+              <ion-col text-center>
+                  <h3>请输入6位支付密码</h3>
+              </ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col text-center>
+                  <span color="yanbao">需要支付：{{commonService.toDecimal(discountBoolean?(orderGoodsEp.originalPrice-(orderGoodsEp.totalDiscountEp>myEP?myEP:orderGoodsEp.totalDiscountEp)):orderGoodsEp.originalPrice)}}元</span>
+              </ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col>
+                  <ion-list no-padding no-margin>
+                      <ion-item>
+                          <ion-label fixed>
+                              支付密码
+                          </ion-label>
+                          <ion-input maxlength="6" clearInput="true" bindon-ngModel="payPwd" placeholder="输入6位数" type="password"></ion-input>
+                      </ion-item>
+                  </ion-list>
+              </ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col width-50 text-right>
+                  <button [disabled]="payPwd==null || payPwd.length<6 || isDisable" style="height:32px;margin-right:20px;" id="okBtn" (click)="orderPay()" ion-button>确定</button>
+              </ion-col>
+              <ion-col width-50>
+                  <button style="height:32px;margin-left:20px;"  ion-button (click)="goToBackPage()" color="light">取消</button>
+              </ion-col>
+          </ion-row>
+      </ion-grid>
+</ion-content>
+<ion-footer *ngIf="info&&info.status==0 && !isShowPayPw">
+    <ion-grid style="background: #fff;">
+        <ion-row>
+            <ion-col text-center>
+                <button (click)="orderCancel()" ion-button outline no-margin small color="dark">取消订单</button>
+            </ion-col>
+             <ion-col *ngIf="!noPay" text-center>
+                <button (click)="orderPay()" [disabled]="submitDisabled" ion-button outline no-margin small>立即付款</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-footer>

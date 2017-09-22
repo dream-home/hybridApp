@@ -1,0 +1,38 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>选择地址</ion-title>
+
+    </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content no-padding>
+    <div id="container" style="height: 100%;"></div>
+</ion-content>
+<ion-footer class="mapLocation">
+    <ion-grid no-padding>
+        <ion-row>
+            <ion-col no-padding width-80 class="location">
+                <ion-row class="locationAddr">
+                    <ion-col no-padding>
+                        <span>{{mapposition.addr}}</span>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="locationPositionaddr">
+                    <ion-col no-padding>
+                        <span>{{mapposition.positionaddr}}</span>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+            <ion-col no-padding width-20 class="btnComfim">
+                <button (click)="confirmAddr()" [disabled]="submitDisabled">确认</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-footer>

@@ -1,0 +1,83 @@
+page-myDouDou{
+    .myDouDou{
+        background:#fff;
+        ion-col{
+            padding:5px 5px 5px 12px;
+            div:nth-child(1){
+                color:#00cccc;
+                padding:10px 0;
+            }
+            div:nth-child(2){
+                color:#00cccc;
+                font-size: 20px;
+                span{
+                    mark{
+                        background:none;
+                        color:#00cccc;
+                        font-size: 12px;
+                    }
+                }
+                button{
+                  background:#ff561e;
+                  height:25px;
+                  color:#fff;
+                  float:right;
+                  border-radius:3px;
+                }
+            }
+        }
+    }
+    .noneImage{
+        background:#fff;
+        border-top:1px #e5e5e5 solid;
+        img{
+            margin-top:30px;
+        }
+    }
+    .joinPartner{
+        background:#fff;
+        margin-top:3px;
+        position: absolute;
+        bottom:125px;
+        left:0;
+        ion-col{
+          padding:6px 0 4px 0;
+            text-align: center;
+            img{
+                width:50%;
+            }
+        }
+    }
+    .transactionFlow{
+        border-top:5px #e5e5e5 solid;
+        .transactionFlowTitle{
+            background:#fff;
+            font-weight:bold;
+            font-size:14px;
+            padding:8px 5px;
+            span:nth-child(1){
+                margin:0 auto;
+            }
+            span:nth-child(2){
+                position: absolute;
+                right:0;
+                color:#999;
+                font-size:12px;
+                margin-top:1px;
+            }
+        }
+        .transactionFlowInfo{
+          margin-top:2px;
+            ion-col{
+                padding:0;
+                .transactionFlowContent{
+                    background:#fff;
+                    font-size: 12px;
+                    ion-col{
+                        padding:5px;
+                    }
+                }
+            }
+        }
+    }
+}

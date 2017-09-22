@@ -1,0 +1,54 @@
+page-searchShop {
+    .shopTatol{
+        background:#e5e5e5;
+        position: absolute;
+        width:100%;
+        height:100%;
+        left:0;top:0;
+    }
+    .goodsPlate{
+        width:50%;
+        float:left;
+        padding:3px;
+        .storeImg{
+            background:#fff;
+            height:156px;
+            padding:5px;
+            img{
+                border-radius: 5px;
+            }
+        }
+        .storeName{
+            font-size: 12px;
+            height:20px;
+            line-height: 20px;
+            background:#fff;
+            padding-left: 3px;
+        }
+        .storeCont{
+            font-size: 12px;
+            height:20px;
+            line-height: 20px;
+            background:#fff;
+            padding-left: 3px;
+            padding-right: 3px;
+            color:#999;
+            span:nth-child(1){
+                float:left;
+            }
+            span:nth-child(2){
+                float:right;
+                height:20px;
+                img{
+                      height:15px;
+                      margin-top:2px;
+                      margin-right:3px;
+                      float:left;
+                }
+                span{
+                    float:left;
+                }
+            }
+        }
+    }
+}

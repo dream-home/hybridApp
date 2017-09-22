@@ -1,0 +1,114 @@
+page-perfectUserData {
+   	.scroll-content{ background:#e5e5e5;}
+   	.addrs button span{margin-left: 20px;color: #666;}
+     .list-ios {
+  	    margin: -1px 0 10px 0;
+  	}
+    ion-list{
+        margin:0 !important;
+    }
+    .list-ios:not([inset]) + .list-ios:not([inset]) ion-list-header{
+        margin-top:0;
+    }
+    .addrs_info{
+        font-size: 12px;
+        background:#fff;
+        border-bottom:0 !important;
+        height:30px;
+        line-height: 30px;
+        padding-left:16px;
+        color:#999;
+    }
+    .addrs_province,.addrs_city,.addrs_country{
+        span:nth-child(1){
+            float:left;
+            margin-left:0 !important;
+            font-size: 14px;
+            color:#000;
+        }
+        span:nth-child(2){
+            float:right;
+            font-size: 14px;
+            color:#999;
+        }
+        span:nth-child(3){
+            float:right;
+            font-size: 14px;
+            color:#999;
+        }
+    }
+    .addrs_province{
+        margin-top:1px;
+    }
+    .addrs_country{
+        border-bottom:0 !important;
+    }
+    .bindTel{
+        font-size: 12px;
+        background:#fff;
+        border-bottom:0 !important;
+        margin-top:5px !important;
+        color:#999;
+        height:30px;
+        line-height: 30px;
+        padding-left:16px;
+    }
+    .telPhone{
+        margin-top:1px;
+        ion-label{
+            font-size: 14px;
+            width:70px;
+            margin:0 !important;
+        }
+        ion-input{
+            font-size: 14px;
+        }
+        button{
+
+        }
+    }
+    .telCode{
+        border-bottom:0 !important;
+        ion-label{
+            font-size: 14px;
+            width:70px;
+            margin:0 !important;
+        }
+        ion-input{
+            font-size: 14px;
+        }
+    }
+    .password{
+        font-size: 12px;
+        background:#fff;
+        border-bottom:0 !important;
+        margin-top:5px !important;
+        color:#999;
+        height:30px;
+        line-height: 30px;
+        padding-left:16px;
+    }
+    .loginPwd{
+        margin-top:1px;
+        ion-label{
+            font-size: 14px;
+            width:70px;
+            margin:0 !important;
+        }
+        ion-input{
+            font-size: 14px;
+        }
+    } 
+    .payPwd{
+        border-bottom:0 !important;
+        margin-top:1px;
+        ion-label{
+            font-size: 14px;
+            width:70px;
+            margin:0 !important;
+        }
+        ion-input{
+            font-size: 14px;
+        }
+    }
+}

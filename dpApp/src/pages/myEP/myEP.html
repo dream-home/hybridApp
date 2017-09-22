@@ -1,0 +1,138 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>我的EP</ion-title>
+        <ion-buttons end>
+            <button ion-button clear small (click)="gotoGoodLuckEpPage()" style="font-size:12px;">
+                共享E家
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="background:#e5e5e5;" id="aboutContent">
+    <ion-row class="myEP" *ngIf="!isShowPayPw">
+        <ion-col>
+            <div>当前EP</div>
+            <div>
+                <span>{{ep}}<mark>个</mark></span>
+                <!-- <button *ngIf="commonService.params.epSwitch==1" (click)="exchangeDouDou()">兑换斗斗</button> -->
+            </div>
+        </ion-col>
+    </ion-row>
+    <ion-list class="scoreOperation" *ngIf="!isShowPayPw">
+        <ion-item (click)="exchangeDouDou()">
+             <img item-left src="assets/icon/icon_doudou.png"/>
+            兑换斗斗
+        </ion-item>
+        <ion-item *ngIf="commonService.params.donateEpSwich=='1'" ion-item (click)="gotoGiveScorePage()">
+             <img item-left src="assets/icon/icon_giveep.png"/>
+            好友互赠
+        </ion-item>
+    </ion-list>
+
+    <div class="exchangeDou" *ngIf="isShow && !isShowPayPw" ontouchmove="event.preventDefault();event.stopPropagation();">
+        <div class="exchangeDouAlert">
+            <div class="exchangeDouTitle">
+                <span>兑换斗斗</span>
+                <span><img src="assets/icon/close.png" (click)="close()"/></span>
+            </div>
+            <ion-row class="EPAccount">
+                <ion-col text-center>
+                    EP数量&nbsp;&nbsp;<mark>{{ep}}</mark>&nbsp;(个)
+                </ion-col>
+            </ion-row>
+            <ion-row class="inputEP">
+                <ion-col text-center>
+                    <ion-input type="number" bindon-ngModel="epNumber" placeholder="输入EP数量" clearInput="true" (keyup)="limit()"></ion-input>
+                </ion-col>
+            </ion-row>
+            <ion-row class="prompt">
+                <ion-col>
+                    提示：最少兑换数量为100，请输入100的整数倍
+                </ion-col>
+            </ion-row>
+            <ion-row class="acquisitionDou">
+                <ion-col *ngIf="epNumber==null">
+                    兑换获得斗斗数量：<mark>0</mark>
+                </ion-col>
+                <ion-col *ngIf="epNumber!=null">
+                    兑换获得斗斗数量：<mark>{{commonService.toDecimal(epNumber*commonService.params.EPToDouScale)}}</mark>
+                </ion-col>
+            </ion-row>
+            <ion-row class="exchangBtn">
+                <ion-col text-center>
+                    <button (click)="submitExchang()">确认</button>
+                </ion-col>
+            </ion-row>
+        </div>
+    </div>
+    <!--支付界面-->
+    <ion-grid *ngIf="isShowPayPw" class="payForIt">
+        <ion-row>
+            <ion-col text-center>
+                <h3>请输入6位支付密码</h3>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center>
+                <span color="yanbao">需要支付：{{commonService.toDecimal(epNumber)}}EP</span>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center>
+                <span>支付密码</span>
+                <ion-input maxlength="6" clearInput="true" bindon-ngModel="payPwd" placeholder="输入6位数" type="password"></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-50 text-right>
+                <button [disabled]="payPwd==null || payPwd.length<6 || isDisable" style="height:32px;margin-right:20px;" id="okBtn" (click)="submitExchang()" ion-button>确定</button>
+            </ion-col>
+            <ion-col width-50>
+                <button style="height:32px;margin-left:20px;"  ion-button (click)="goToBackPage()" color="light">取消</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-list class="transactionFlow" *ngIf="!isShowPayPw">
+        <ion-row>
+            <ion-col class="transactionFlowTitle" text-center>
+                交易明细
+            </ion-col>
+        </ion-row>
+        <div *ngIf="items==null || items.length==0" style="background:#fff;position:absolute;width:100%;height:100%;margin-top:1px;">
+            <ion-row class="noneImage">
+                <ion-col text-center no-padding>
+                    <img src="assets/images/null2.png">
+                </ion-col>
+            </ion-row>
+        </div>
+        <ion-grid *ngFor="let itm of items" no-padding>
+            <ion-row class="transactionFlowInfo">
+                <ion-col>
+                    <ion-row class="transactionFlowRemark">
+                        <ion-col>{{(itm.remark==''|| itm.remark==null)?itm.recordTypeDesc:itm.remark}}</ion-col>
+                    </ion-row>
+                    <ion-row class="transactionFlowContent">
+                        <ion-col *ngIf="itm.recordType=='20'" class="transactionFlowAmount">
+                            {{commonService.user.id==itm.sendUserId?itm.ep*-1:itm.ep}}EP
+                        </ion-col>
+                        <ion-col *ngIf="itm.recordType!='20'" class="transactionFlowAmount">
+                            {{itm.ep}}EP
+                        </ion-col>
+                        <ion-col class="transactionFlowDate">
+                            {{commonService.dateFormatLong(itm.createTime,'yyyy-MM-dd HH:mm')}}
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-infinite-scroll *ngIf="showScroll" (ionInfinite)="doInfinite($event)">
+            <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+    </ion-list>
+</ion-content>

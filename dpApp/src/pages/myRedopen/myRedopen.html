@@ -1,0 +1,27 @@
+<ion-content>
+    <!-- 签到红包 -->
+    <div class="exchangeDou" *ngIf="isShowPartnerRed">
+        <div class="exchangeDouAlert">
+            <div>
+                <img class="notOpenRed" *ngIf="!isOpenPartnerRed" src="assets/images/partnerRegin.png" (click)="openPartnerRed()"/>
+                <img class="openRed" *ngIf="isOpenPartnerRed" src="assets/images/partnerRegin_open.png"/>
+                <div class="redAccount" *ngIf="isOpenPartnerRed"><mark>余额</mark>+{{SignPartnerNum}}</div>
+            </div>
+        </div>
+        <div class="redClose" (click)="partnerRedClose()" *ngIf="isOpenPartnerRed">
+            <img src="assets/images/depositScore.png"/>
+        </div>
+    </div>
+    <div class="exchangeDou" *ngIf="isShowDDRed">
+        <div class="exchangeDouAlert">
+            <div>
+                <img class="notOpenRed" *ngIf="!isOpenDDRed" src="assets/images/ddRegin.png" (click)="openDouDouRed()"/>
+                <img class="openRed" *ngIf="isOpenDDRed" src="assets/images/ddRegin_open.png"/>
+                <div class="redAccount" *ngIf="isOpenDDRed"><mark>余额</mark>+{{SignDouNum}}</div>
+            </div>
+        </div>
+        <div class="redClose" (click)="DDRedClose()" *ngIf="isOpenDDRed">
+            <img src="assets/images/depositScore.png"/> 
+        </div>
+    </div>
+</ion-content>

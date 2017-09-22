@@ -1,0 +1,51 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>我的商品</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="isNull" class="nullPage">
+        <img src="assets/images/null.png">
+    </div>
+    <div class="showGoods">
+        <ion-grid class="goodsInfo" no-padding *ngFor="let itm of items">
+            <ion-row style="border-bottom:1px solid #EFEFEF;" (click)="showGoodsInfo(itm.goodsId,itm.storeId)">
+                <ion-col no-padding text-center width-33>
+                    <img src="{{itm.icon}}"/>
+                </ion-col>
+                <ion-col width-66 style="padding-left:5px;">
+                    <div no-padding>
+                        <strong>{{itm.goodsName}}</strong>
+                    </div>
+                    <div no-padding class="goodsFontColor">
+                        商品价格：{{itm.price}}积分
+                    </div>
+                    <div no-padding class="goodsFontColor">
+                        斗拍价格：{{itm.drawPrice}}积分
+                    </div>
+                    <div no-padding class="goodsFontColor">
+                        期数：第{{itm.issueNo}}期
+                    </div>
+                    <div no-padding class="goodsFontColor">
+                        中奖积分：<span class="score">{{itm.score}}</span>&nbsp;积分
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col text-right>
+                    <button *ngIf="itm.saleSwitch==1" (click)="sellGoods(itm.goodsId,itm.orderNo,itm.score)" small outline  ion-button>委托出售</button>
+                    <button (click)="buyGoods(itm)" small outline ion-button>积分购买</button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+    <ion-infinite-scroll *ngIf="showScroll" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

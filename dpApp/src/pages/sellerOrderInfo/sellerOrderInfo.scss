@@ -1,0 +1,20 @@
+page-sellerOrderInfo {
+	 .scroll-content {
+      background:#f4f4f4;
+    }
+
+	.label-ios + ion-input .text-input,
+	.label-ios + ion-textarea .text-input,
+	.label-ios + .input + .cloned-input {
+	  margin-left:0;
+	}
+	.label-ios {
+	    margin: 11px 0 11px 0;
+	}
+	.hr_6{ height:6px;}
+	.infos span,.info_input input{ color:#666;}
+	.addr_label ion-label{
+	 	white-space: normal;
+	}
+		
+}

@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>支付完成</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="background:rgb(229, 229, 229);">
+  <ion-grid no-padding class="payCompleted">
+    <ion-row class="payAmount">
+      <ion-col width-33>实际付款金额</ion-col>
+      <ion-col width-66 text-right>¥{{commonService.toDecimal(actualPayMent)}}</ion-col>
+    </ion-row>
+    <ion-row class="payAmount" style="padding:0;" *ngIf="discountAmount>0">
+      <ion-col width-33>EP券抵用</ion-col>
+      <ion-col width-66 text-right>-{{commonService.toDecimal(discountAmount)}}</ion-col>
+    </ion-row>
+    <ion-row class="goodsName">
+      <ion-col width-33>商品名称</ion-col>
+      <ion-col width-66 text-right>斗拍扫码支付</ion-col>
+    </ion-row>
+    <ion-row class="currentState">
+      <ion-col width-33>当前状态</ion-col>
+      <ion-col width-66 text-right>支付成功</ion-col>
+    </ion-row>
+    <ion-row class="paymentTime">
+      <ion-col width-33>支付时间</ion-col>
+      <ion-col width-66 text-right>{{commonService.dateFormatLong(payTime,'yyyy-MM-dd HH:mm')}}</ion-col>
+    </ion-row>
+    <ion-row class="paymentMethod">
+      <ion-col width-33>支付方式</ion-col>
+      <ion-col width-66 text-right>{{payWay}}</ion-col>
+    </ion-row>
+    <ion-row class="transactionNumber">
+      <ion-col width-33>交易单号</ion-col>
+      <ion-col width-66 text-right>{{orderNo}}</ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-row style="margin-top:20px;">
+    <ion-col text-center>
+      <button ion-button style="width:95%;" (click)="gotoFmyPage()">确定</button>
+    </ion-col>
+  </ion-row>
+</ion-content>

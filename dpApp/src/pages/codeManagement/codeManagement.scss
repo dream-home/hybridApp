@@ -1,0 +1,134 @@
+page-codeManagement{
+  .collectionAmount{
+      background:url('../assets/images/pack.png');
+      background-size:100% 100%;
+      height:120px;
+      .collectionImg{
+          height:100px;
+          ion-col{
+              text-align: center;
+              img{
+                  height:80px;
+                  border-radius: 50%;
+              }
+              span{
+                height:20px;
+                color:#fff;
+                display: block;
+              }
+          }
+      }
+  }
+  .myCode{
+      background:#fff;
+      margin-top:5px;
+      ion-col{
+          padding:10px !important;
+          mark{
+              background:none;
+              float:right;
+              font-size: 16px;
+              color:#dfdfdf;
+          }
+      }
+  }
+  .collectionSet{
+      background:#fff;
+      margin-top:5px;
+      ion-col{
+          padding:10px !important;
+      }
+  }
+  .automaticReceipt{
+      background:#fff;
+      border-top:1px #dfdfdf solid;
+      ion-col:nth-child(1){
+          padding:10px !important;
+      }
+      ion-col:nth-child(2){
+          padding:10px !important;
+          ion-toggle{
+              float: right;
+              .toggle-icon{
+                  height:20px;
+                  width:45px;
+                  .toggle-inner{
+                    height: 20px;
+                    margin-top: -2px;
+                    margin-left: -2px;
+                  }
+              }
+          }
+      }
+  }
+  .marketingSet{
+      background:#fff;
+      margin-top:5px;
+      ion-col:nth-child(1){
+          padding:10px !important;
+      }
+      ion-col:nth-child(2){
+          text-align: right;
+          button{
+              background:#ff651e;
+              height:39px;
+              color:#fff;
+              padding:0 10px;
+          }
+      }
+  }
+  .marketingInfo{
+      background:#fff;
+      margin:0 !important;
+      .discountEP{
+          padding:5px 0;
+          border-top:1px #ccc solid;
+      }
+  		.prompt{
+  				font-size: 12px;
+          border-top:1px #ccc solid;
+  				ion-col{
+  						padding:3px 5px 3px 15px !important;
+  						mark{
+  								color:red;
+  								background:none;
+  						}
+  				}
+  		}
+      .sendEP{
+          padding:5px 0;
+          border-bottom:1px #ccc solid;
+          border-top:1px #ccc solid;
+      }
+      .distributionOne{
+          padding:5px 0;
+          margin-top:5px;
+          border-bottom:1px #ccc solid;
+      }
+      .distributionTwo{
+          padding:5px 0;
+          border-bottom:1px #ccc solid;
+      }
+      .distributionThree{
+           padding:5px 0;
+      }
+      .amount,.discountEP,.sendEP,.distributionOne,.distributionTwo,.distributionThree{
+          ion-col:nth-child(1){
+              text-align:left;
+              padding-left:10px;
+              max-width:35%;
+          }
+          ion-col:nth-child(2){
+              max-width:55%;
+              input{
+                 border:0;
+                 margin:0 !important;
+              }
+          }
+          ion-col:nth-child(3){
+              text-align:center;
+              max-width:10%;
+          }
+      }
+  }
+}

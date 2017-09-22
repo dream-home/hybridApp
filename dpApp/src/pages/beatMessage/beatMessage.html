@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>中拍记录</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <button *ngFor="let itm of items" ion-item (click)="showBeatInfoPage(itm.id,itm.orderNo)">
+            <h2 style="overflow: hidden; text-overflow: ellipsis;font-size: 1.6rem;">{{itm.title}}</h2>
+            <div style="color:#666; font-size: 1.4rem;">
+                {{itm.detail}}
+                
+                <p style="float:right;">
+                <span *ngIf="itm.status==0"  color="danger" >●</span>
+                {{commonService.dateFormatLong(itm.createTime,'yyyy-MM-dd HH:mm')}}
+                </p>
+            </div>
+                
+        </button>
+    </ion-list>
+    <ion-infinite-scroll *ngIf="showScroll" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

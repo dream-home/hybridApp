@@ -1,0 +1,51 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>我的收款码</ion-title>
+        <!-- <ion-buttons end>
+           <button style="background:none;color:#fff;" (click)="saveCode()">保存收款码</button>
+        </ion-buttons> -->
+    </ion-toolbar>
+</ion-header>
+<ion-content style="background:rgb(229, 229, 229);">
+    <ion-grid no-padding>
+        <ion-row class="storeInfo">
+            <ion-col no-padding>
+                商户信息
+            </ion-col>
+        </ion-row>
+        <ion-row class="storeName">
+            <ion-col no-padding>
+                商户名称：{{storeName}}
+            </ion-col>
+        </ion-row>
+        <ion-row class="storeAddr">
+            <ion-col no-padding>
+                商铺地址：{{storeProvince+storeCity+storeCountry+storeAddr}}
+            </ion-col>
+        </ion-row>
+        <ion-row class="welcomeUse">
+            <ion-col no-padding>欢迎使用</ion-col>
+        </ion-row>
+        <ion-row class="storeCode">
+            <ion-col no-padding padding-vertical text-center>
+                <div style="width:220px; padding:8px; margin: 0 auto; position: relative;">
+                     <img src="{{info}}" style="width:200px;height:200px;"/>
+                     <span style="display: block;position: absolute;top: 0; left: 0; width: 10px; height: 10px;
+                     border-top:2px solid #000;border-left:2px solid #000; z-index: 2;"></span>
+                      <span style="display: block;position: absolute;top: 0; right: 0; width: 10px; height:10px;
+                     border-top:2px solid #000;border-right:2px solid #000; z-index: 2;"></span>
+
+                      <span style="display: block;position: absolute;bottom:0; left: 0; width:10px; height:10px;
+                     border-bottom:2px solid #000;border-left:2px solid #000; z-index: 2;"></span>
+                      <span style="display: block;position: absolute;bottom:0; right:0; width:10px; height:10px;
+                     border-bottom:2px solid #000;border-right:2px solid #000; z-index: 2;"></span>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

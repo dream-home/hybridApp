@@ -1,0 +1,161 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>用户信息</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content background="background:#f4f4f4">
+    <div *ngIf="userInfo!=null">
+        <ion-list style="margin-bottom:10px;" class="person_info" >
+            <button ion-item  (click)="changeImg()" class="headPortrait">
+                头像
+               <div item-right>
+                    <img src="{{userInfo.headImgUrl}}"/>
+               </div>
+            </button>
+            <button ion-item  (click)="gotoChangeUserNamePage()" class="nickName">
+                昵称<span item-right >{{userInfo.nickName}}</span>
+            </button>
+            <button class="uid">
+                <span>UID</span>
+                <span item-right>{{userInfo.uid}}</span>
+            </button>
+            <button class="area" *ngIf="userInfo.areaId!=null && userInfo.areaId!='' ">
+                <span>所在地区</span>
+                <span item-right>{{userInfo.province}}{{userInfo.city}}{{userInfo.county}}</span>
+            </button>
+        </ion-list>
+        <ion-list style="margin-bottom:10px;" class="person_info" >
+             <button class="telPhone">
+                <span>手机</span>
+                <span item-right style="color:#999;" *ngIf="userInfo.phone!=null || userInfo.phone!=''">{{userInfo.phone}}</span>
+                <span item-right style="color:#FF651E;" *ngIf="userInfo.phone==null || userInfo.phone==''" >未绑定</span>
+            </button>
+             <button class="weChat">
+                <span>微信</span>
+                <span item-right style="color:#FF651E;" *ngIf="userInfo.isBindWeixin==0">已绑定</span>
+                <span item-right style="margin:0 -15px 0 0;color:#FF651E;" *ngIf="userInfo.isBindWeixin!=0" >未绑定</span>
+            </button>
+        </ion-list>
+        <ion-list style="margin-bottom:10px;" *ngIf="userInfo.isSetPassword==1">
+             <button ion-item (click)="settingLoginPw()" class="loginPwd">
+                登录密码<span item-right>修改</span>
+            </button>
+            <button ion-item (click)="settingPayPw()" *ngIf="userInfo.isSetPayPwd==1" class="payPwd">
+                支付密码<span item-right>修改</span>
+            </button>
+        </ion-list>
+        <ion-list *ngIf="show" class="perfectData">
+            <button ion-item (click)="gotoPerfectUserDataPage()">
+               完善资料
+            </button>
+        </ion-list>
+    </div>
+   <!--  <ion-grid no-padding class="fmyTitle">
+        <ion-row>
+            <ion-col text-right width-25>
+                <img style="width:70px;height:70px; margin-bottom:5px;" class="userImg" src="{{commonService.user.headImgUrl}}"/>
+            </ion-col>
+             <ion-col text-left width-75 style="padding-left:5px;">
+                <ion-row>
+                    <ion-col style="color:#FFF; margin-top:6px; font-size: 1.6rem;" >
+                        {{commonService.user.nickName}}
+                    </ion-col>
+                </ion-row>
+                <ion-row >
+                    <ion-col style="color:#FFF;">
+                        UID:{{commonService.user.uid}}
+                        <button (click)="changeImg()" ion-button  style="color:#ff651e;height:25px;font-size:1.2rem;background:#ffd4c1; float: right;">
+                        编辑头像
+                    </button>
+                    </ion-col>
+                </ion-row>
+
+            </ion-col>
+
+        </ion-row>
+
+    </ion-grid> -->
+    <!-- <ion-list no-margin no-padding>
+        <ion-item>
+            <ion-label fixed>
+                微信
+            </ion-label>
+            <ion-input [disabled]="true" placeholder="已绑定" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                手机号
+            </ion-label>
+            <ion-input [disabled]="true" placeholder="未绑定" bindon-ngModel="commonService.user.phone" type="text"></ion-input>
+            <button *ngIf="commonService.user.phone== null || commonService.user.phone==''" item-right clear ion-button (click)="bindMobile()">去绑定</button>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                <span style="color:red;">*</span>
+                昵称
+            </ion-label>
+            <ion-input maxlength="10" bindon-ngModel="subData.nickName" placeholder="输入昵称" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                <span style="color:red;">*</span>
+                真实姓名
+            </ion-label>
+            <ion-input maxlength="15" [disabled]="commonService.user.userName != null && commonService.user.userName!=''" bindon-ngModel="subData.userName" placeholder="输入姓名(一经填写不可修改)" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                <span style="color:red;">*</span>
+                银行
+            </ion-label>
+            <ion-select bindon-ngModel="subData.userBankcard.bankId" okText="确认" cancelText="取消">
+                <ion-option *ngFor="let opt of commonService.user.bankList;let i=index" value="{{opt.id}}">{{opt.name}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                <span style="color:red;">*</span>
+                银行卡号
+            </ion-label>
+            <ion-input maxlength="19" bindon-ngModel="subData.userBankcard.cardNo" placeholder="输入银行卡号" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                省份
+            </ion-label>
+            <ion-select #item1 [(ngModel)]="province" (ionChange)="selectProvi(item1)" okText="确认" cancelText="取消">
+              <ion-option *ngFor="let itm of provinces" value="{{itm.value}}">{{itm.text}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                城市
+            </ion-label>
+            <ion-select #item2 [(ngModel)]="city"  okText="确认" (ionChange)="selectCity(item2)" cancelText="取消">
+              <ion-option *ngFor="let itm of citys" value="{{itm.value}}">{{itm.text}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                区域
+            </ion-label>
+            <ion-select #item3 [(ngModel)]="county" okText="确认" (ionChange)="selectCounty(item3)" cancelText="取消">
+              <ion-option *ngFor="let itm of countys" value="{{itm.value}}">{{itm.text}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                <span style="color:red;">*</span>
+                具体地址
+            </ion-label>
+            <ion-textarea maxlength="100" bindon-ngModel="subData.userAddress.addr" placeholder="输入具体地址" type="text"></ion-textarea>
+        </ion-item>
+    </ion-list>
+ -->
+</ion-content>

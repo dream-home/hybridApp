@@ -1,0 +1,161 @@
+page-userInfo {
+    .fmyTitle{
+        background: url('../assets/images/pack.png');
+        filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+        -moz-background-size:100% 100%;
+        background-size:100% 100%;
+        img{
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+        }
+    }
+    .scroll-content{ background:#e5e5e5;}
+    .person_info button span{color:#666;}
+
+    .nonext span{display: inline-block; padding-right: 15px; background-color: #fff;}
+    .list-ios {
+      margin: -1px 0 10px 0;
+    }
+
+    .list-ios > .item-block:first-child{
+        border-top:none;
+    }
+    .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block{
+        border-bottom:none;
+    }
+    .list-ios .item-block .item-inner{
+        border-bottom:none;
+    }
+    .input-wrapper{
+        height:100% !important;
+        font-size: 14px;
+    }
+    .person_info{
+        margin:0 0 5px 0 !important;
+        padding:0 !important;
+    }
+    .headPortrait{
+        div{
+            width: 40px;
+            height: 40px;
+            border-radius: 40px;
+            overflow: hidden;
+        }
+        img{
+            width: 40px;
+            height: 40px;
+            border-radius: 40px;
+        }
+    }
+    .nickName{
+        margin-top:1px;
+        span{
+            color:#999 !important;
+            font-size: 12px;
+        }
+    }
+    .uid{
+        margin-top:1px;
+        background:#fff;
+        height:52px;
+        line-height: 52px;
+        width:100%;
+        padding:0 !important;
+        span:nth-child(1){
+            font-size: 14px;
+            float:left;
+            margin-left:16px;
+            color:#000;
+        }
+        span:nth-child(2){
+            color:#999 !important;
+            font-size: 12px;
+            float:right;
+            margin:0 35px 0 0;
+        }
+    }
+    .area{
+        margin-top:-3px;
+        background:#fff;
+        height:52px;
+        line-height: 52px;
+        width:100%;
+        padding:0 !important;
+        span:nth-child(1){
+            font-size: 14px;
+            float:left;
+            margin-left:16px;
+            color:#000;
+        }
+        span:nth-child(2){
+            color:#999 !important;
+            font-size: 12px;
+            float:right;
+            margin:0 35px 0 0;
+        }
+    }
+    .telPhone{
+        margin-top:-4px;
+        background:#fff;
+        height:52px;
+        line-height: 52px;
+        width:100%;
+        padding:0 !important;
+        span:nth-child(1){
+            font-size: 14px;
+            float:left;
+            margin-left:16px;
+            color:#000;
+        }
+        span:nth-child(2){
+            color:#999 !important;
+            font-size: 12px;
+            float:right;
+            margin:0 35px 0 0;
+        }
+        span:nth-child(3){
+            font-size: 12px;
+            float:right;
+            margin:0 35px 0 0;
+        }
+    }
+    .weChat{
+        margin-top:-3px;
+        background:#fff;
+        height:52px;
+        line-height: 52px;
+        width:100%;
+        padding:0 !important;
+        span:nth-child(1){
+            font-size: 14px;
+            float:left;
+            margin-left:16px;
+            color:#000;
+        }
+        span:nth-child(2){
+            font-size: 12px;
+            float:right;
+            margin:0 35px 0 0;
+        }
+    }
+    .loginPwd{
+        margin-top:-4px;
+        span{
+            font-size: 12px;
+            margin:0 -15px 0 0;
+            color:#999 !important;
+        }
+    }
+    .payPwd{
+        margin-top:1px;
+        span{
+            font-size: 12px;
+            margin:0 -15px 0 0;
+            color:#999 !important;
+        }
+    }
+    .perfectData{
+        margin-top:-4px;
+    }
+}

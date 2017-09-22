@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>设置支付密码</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-list no-margin>
+        <ion-item text-center>
+            <strong style="color:red;font-size:16px;">提示：密码必须为6位数字</strong>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>旧密码</ion-label>
+            <ion-input [disabled]="true" type="password" *ngIf="commonService.user.isSetPayPwd=='0'" placeholder="未设置" bindon-ngModel="oldPayPwd"></ion-input>
+            <ion-input maxlength="6" type="password" bindon-ngModel="oldPayPwd" placeholder="输入6位数旧密码" *ngIf="commonService.user.isSetPayPwd=='1'"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>新密码</ion-label>
+            <ion-input maxlength="6" type="password" bindon-ngModel="newPayPwd" placeholder="输入6位数新密码"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>确认密码</ion-label>
+            <ion-input maxlength="6" type="password" bindon-ngModel="newPayPwd2" placeholder="输入6位数确认码"></ion-input>
+        </ion-item>
+    </ion-list>
+    <div padding>
+      <button ion-button (click)="submitData()" block>确定</button>
+      <button (click)="gotoFindPayPwdPage()" style="background:none;color:red;float:right;margin-top:10px;">忘记密码?</button>
+    </div>
+</ion-content>

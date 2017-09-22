@@ -1,0 +1,139 @@
+page-newShop {
+    .list-ios{
+        margin:0 !important;
+    }
+    .storeName,.storeAddr{
+        background:#fff;
+        margin-top:5px;
+        ion-col:nth-child(1){
+            padding-left:10px;
+            height:50px;
+            line-height: 40px;
+            span{
+                mark{
+                    background:none;
+                    color:red;
+                }
+            }
+        }
+        ion-col:nth-child(2){
+            height:50px;
+            line-height: 40px;
+            ion-input{
+                input{
+                    margin:0 !important;
+                }
+            }
+        }
+    }
+    .storePhone{
+        background:#fff;
+        margin-top:5px;
+        ion-col:nth-child(1){
+            padding-left:10px;
+            height:50px;
+            line-height: 40px;
+            span{
+                mark{
+                    background:none;
+                    color:red;
+                }
+            }
+        }
+        ion-col:nth-child(2){
+            height:50px;
+            line-height: 40px;
+            ion-input{
+                input{
+                    margin:0 !important;
+                }
+            }
+            div{
+                color:#999;
+                width:100%;
+                float:left;
+                span{float:left;}
+                mark{
+                    background:none;
+                    color:#999;
+                    float:right;
+                }
+            }
+        }
+    }
+    .choiceArea,.uploadAptitude{
+        background:#fff;
+        margin-top:5px;
+        ion-col:nth-child(1){
+            padding-left:10px;
+            height:50px;
+            line-height: 40px;
+            span{
+                mark{
+                    background:none;
+                    color:red;
+                }
+            }
+        }
+        ion-col:nth-child(2){
+            height:50px;
+            line-height: 40px;
+            div{
+                color:#999;
+                width:100%;
+                float:left;
+                span{float:left;}
+                mark{
+                    background:none;
+                    color:#999;
+                    float:right;
+                }
+            }
+        }
+    }
+    .storeContTitle{
+        background:#fff;
+        margin-top:5px;
+        ion-col{
+            padding-left:10px;
+            span{
+                mark{
+                    background:none;
+                    color:red;
+                }
+            }
+        }
+    }
+    .storeCont{
+        background:#fff;
+        ion-col{
+            padding:0 0 5px 10px;
+            ion-textarea{
+                textarea{
+                    margin:0 !important;
+                }
+            }
+        }
+    }
+    .storeAgreement{
+        background:#fff;
+        margin-top:5px;
+        ion-col{
+            padding-left:10px;
+            height:50px;
+            line-height: 40px;
+            ion-checkbox{
+                float:left;
+                margin-top:8px;
+            }
+            span{
+                float:left;
+                margin-left:10px;
+                mark{
+                    background: none;
+                    color:#ff651e;
+                }
+            }
+        }
+    }
+}

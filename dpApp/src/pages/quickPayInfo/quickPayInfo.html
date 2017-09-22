@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>payWeb</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid no-padding >
+        <ion-row>
+            <ion-col text-center>
+                正在充值中......
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+		<!-- <form id="quickPayform" action="https://www.6pyun.com/pay/payAlipaySDK/paymentMoney" name="quickPayform" method="POST" target="_blank">
+				<input type="hidden" name="tradeNo" id="tradeNo" value="{{orderNo}}" />
+				<input type="hidden" name="payAmount" id="payAmount" value="{{score}}" />
+				<input type="hidden" name="orderTitle" id="orderTitle" value="{{orderTitle}}" />
+				<input type="hidden" name="userId" id="userId" value="{{userId}}" />
+                <input type="hidden" name="returnUrl" id="returnUrl" value="{{returnUrl}}" />
+		</form> -->
+
+</ion-content>

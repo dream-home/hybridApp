@@ -1,0 +1,66 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>{{title}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="background:#e5e5e5;">
+    <ion-list no-padding *ngIf="!isShowPayPw" no-margin>
+        <div style="padding:10px 0 10px 15px;background:#fff;">
+            {{intotype=='myEP'?'EP数量':'余额'}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {{intotype=='myEP'?'':'¥'}}<label style="border:0;background:#fff;">{{totalScore}}</label>&nbsp;&nbsp;{{intotype=='myEP'?'EP':''}}
+        </div>
+        <div class="giveUser">
+            对方账户
+            &nbsp;&nbsp;&nbsp;
+            <ion-input (blur)=showName() [disabled]="uid!=null  && uid != ''" maxlength="11" bindon-ngModel="donateTo" placeholder="手机号／UID" type="text" style="border:0;"></ion-input>
+            <span item-right color="yanbao">{{name}}</span>
+        </div>
+        <div class="giveScore">
+            {{intotype=='myEP'?'赠送EP':'赠送余额'}}
+            &nbsp;&nbsp;&nbsp;
+            <ion-input maxlength="10" bindon-ngModel="score" placeholder="输入数量{{intotype=='myEP'?commonService.params.donateEpMin:commonService.params.donateMin}}~{{intotype=='myEP'?commonService.params.donateEpMax:commonService.params.donateMax}}" type="number" style="border:0;"></ion-input>
+        </div>
+    </ion-list>
+    <button *ngIf="!isShowPayPw" (click)="submitData()" ion-button style="width:98%;margin-top:30px;">确定</button>
+    <!--支付界面-->
+    <ion-grid *ngIf="isShowPayPw" no-padding>
+        <ion-row>
+            <ion-col text-center>
+                <h3>请输入6位支付密码</h3>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center>
+                <span color="yanbao" *ngIf="intotype!='myEP'">需要支付余额：¥{{score}}</span>
+                <span color="yanbao" *ngIf="intotype=='myEP'">需要支付EP{{score}}</span>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-list no-padding no-margin>
+                    <ion-item>
+                        <ion-label fixed>
+                            <span style="color:red;">*</span>
+                            支付密码
+                        </ion-label>
+                        <ion-input placeholder="输入6位数字" bindon-ngModel="payPwd" maxlength="6" type="password"></ion-input>
+                    </ion-item>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-50 text-right>
+                <button [disabled]="payPwd==null || payPwd.length<6 || isDisable" style="height:32px;margin-right:20px;" id="okBtn" (click)="submitPay()" ion-button>确定</button>
+            </ion-col>
+            <ion-col width-50>
+                <button style="height:32px;margin-left:20px;"  ion-button (click)="cancel()" color="light">取消</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

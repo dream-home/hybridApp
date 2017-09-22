@@ -1,0 +1,30 @@
+page-changeUserName {
+ 	  .scroll-content{ background:#e5e5e5;}
+    .nickName{
+        background:#fff;
+        height:40px;
+        line-height: 30px;
+        span{
+            float:left;
+            margin-left:10px;
+        }
+        ion-input{
+            float:left;
+            width:200px;
+            margin-left:10px;
+            font-size: 12px;
+            color:#999;
+            input{
+                margin:0 !important;
+            }
+        }
+    }
+    .btnSubmit{
+        text-align: center;
+        button{
+            margin:20px auto 0 auto;
+            width:95%;
+            height:30px;
+        }
+    }
+}

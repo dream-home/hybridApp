@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>系统信息</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="items==null || items.length==0" style="text-align:center;" class="nullPage">
+        <img src="assets/images/null.png">
+    </div>
+    <ion-list>
+        <button *ngFor="let itm of items" ion-item (click)="showSystemInfoPage(itm.id)">
+            <h2>{{itm.title}}</h2>
+            <p ><span *ngIf="itm.status==0" color="danger">●</span> {{commonService.dateFormatLong(itm.createTime,'yyyy-MM-dd HH:mm')}}</p>
+        </button>
+    </ion-list>
+    <ion-infinite-scroll *ngIf="showScroll" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

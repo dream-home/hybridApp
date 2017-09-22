@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>商铺二维码</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content style="background:rgb(229, 229, 229);">
+    <ion-grid no-padding *ngIf="amountSum!=null">
+        <ion-row class="income">
+            <ion-col no-padding>
+                <span>今日收入(元)</span>
+                <span>{{commonService.toNumber(amountSum.countMoney)}}</span>
+            </ion-col>
+        </ion-row>
+        <ion-row class="incomeToolBar">
+            <ion-col>
+                <img src="assets/images/Receivables.png" (click)="gotoCollectionBillPage()"/>
+                <span>收款账单</span>
+            </ion-col>
+            <ion-col>
+                <img src="assets/images/Withdrawals.png" (click)="gotoExchang()"/>
+                <span>申请提现</span>
+            </ion-col>
+            <ion-col>
+                <img src="assets/images/codeManagement.png" (click)="gotoCodeManagementPage()"/>
+                <span>二维码管理</span>
+            </ion-col>
+        </ion-row>
+        <ion-row class="serviceGuidance">
+            <ion-col>服务指导&nbsp;>>></ion-col>
+        </ion-row>
+        <ion-row class="collectionGuidance" (click)="collectionGuidancePage()">
+            <ion-col>收款码如何使用指导</ion-col>
+        </ion-row>
+        <!-- <ion-row class="remindGuidance">
+            <ion-col>收款码语音提醒开启</ion-col>
+        </ion-row> -->
+        <ion-row class="marketingGuidance" (click)="marketingGuidancePage()">
+            <ion-col>营销分成设置指导</ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

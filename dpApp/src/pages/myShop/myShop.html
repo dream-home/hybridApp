@@ -1,0 +1,126 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>我的店铺</ion-title>
+        <ion-buttons end style="width:30%;">
+          <button ion-button icon-only (click)="presentPopover($event)" style="float: right;">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+         <button (click)="presentPopover1($event,shopData)" text-center style="color:#fff;background: #FF651E; float: right;">
+            <img src="assets/icon/share1.png" style="width: 18px;">
+              <p style="margin:0; margin-top:2px; font-size: 1rem;">分享</p>
+          </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <!-- 轮播图片 -->
+    <ion-slides style="height:300px;" loop="true" pager="true">
+        <ion-slide *ngFor="let img of icons">
+            <div>
+                <img style="width:100%;"  src="{{img.path}}" (click)="showImg(img.path)">
+            </div>
+        </ion-slide>
+    </ion-slides>
+    <ion-grid *ngIf="isShow">
+        <ion-row style="border-bottom:solid 1px #AFAFAF;">
+            <ion-col text-center padding-vertical>
+                <span style="font-size:16px;" color="yanbao">未添加商品</span>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center>
+                <button style="font-size:3.0rem;" no-margin clear ion-button icon-only>
+                    <ion-icon color="yanbao" name="alert"></ion-icon>
+                </button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center>
+                <span color="yanbao">提示：小铺最多添加{{commonService.params.storeGoodsMax}}件商品斗拍</span>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center>
+                <button ion-button icon-left clear (click)="addGoods()">
+                    <ion-icon name="add-circle"></ion-icon>
+                    添加商品
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+
+    <!-- 商品展示 -->
+    <div class="showGoods">
+        <ion-grid class="goodsInfo" no-padding *ngFor="let itm of items">
+            <ion-row no-padding>
+                <ion-col text-left style="padding:5px 10px;">
+                    <strong>{{itm.name}}</strong>
+                </ion-col>
+            </ion-row>
+            <ion-row style="border-bottom:1px solid #EFEFEF;" (click)="showGoodsInfo(itm.id,itm.status)">
+                <ion-col text-center width-33>
+                    <img  src="{{itm.icon}}"/>
+                </ion-col>
+                <ion-col width-66>
+                    <ion-row style="line-height: 25px; color: #666;">
+                            <ion-col no-padding no-margin style="padding-left: 5px;">
+                                 购买价：<span style="color:#f7689e;">¥{{itm.price}}</span> 
+                            </ion-col>
+                    </ion-row>
+                    <ion-row style="line-height: 25px; color: #666;">
+                            <ion-col  no-padding no-margin style="padding-left: 5px;">
+                                 门市价：¥{{itm.originalPrice}}
+                            </ion-col>
+                    </ion-row>
+                    <ion-row style="line-height: 25px; color: #666;">
+                            <ion-col no-padding no-margin style="padding-left: 5px;">
+                                  赠送：<span style="color:#30a119;">{{itm.businessSendEp}}&nbsp;EP</span>
+                            </ion-col>
+                    </ion-row>
+                    <ion-row style="line-height: 25px; color: #666;">
+                            <ion-col  no-padding no-margin style="padding-left: 5px;">
+                                 库存：{{itm.stock}}
+                            </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col text-right style="padding:5px 0;">
+                    <button *ngIf="itm.status==1" (click)="presentPopover2($event,itm)" small no-margin ion-button clear>
+                          <img src="assets/icon/share3.png" style="width: 16px;">&nbsp;分享
+                    </button>
+                    <button *ngIf="itm.status==1" (click)="stopAuction(itm.id)" small no-margin ion-button outline>
+                        下架
+                    </button>
+                    <button *ngIf="itm.status==0" (click)="editData(itm.id)" small no-margin ion-button outline>
+                        编辑
+                    </button>
+                    <button [disabled]="itm.stock>=this.commonService.params.storeStockMax" (click)="addStock(itm.id,itm.stock)" small no-margin ion-button outline>
+                        添加库存
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+    <ion-infinite-scroll *ngIf="showScroll" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <div style="height:40px;"></div>
+</ion-content>
+
+<ion-footer *ngIf="showButton == true">
+    <ion-grid no-padding>
+        <ion-row>
+            <ion-col no-padding text-center class="shopCode">
+                <button (click)="gotoShopCode()">商铺二维码</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-footer>

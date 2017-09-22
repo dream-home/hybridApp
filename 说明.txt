@@ -1,0 +1,13 @@
+
+要想初始化项目，必须找到这两个东西，注释掉，不然项目不能进行初始化
+
+	package.json      "mx.ferreyra.callnumber": "~0.0.2",      "mx.ferreyra.callnumber": {},
+
+	config.xml <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
+
+1.初始化项目  ionic init
+
+2.启动项目  ionic start
+
+
+3.打包项目  ionic build

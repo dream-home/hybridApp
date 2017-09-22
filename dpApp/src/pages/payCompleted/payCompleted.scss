@@ -1,0 +1,36 @@
+page-payCompleted{
+	.payCompleted{
+		background:#fff;
+		padding-bottom:15px;
+		.payAmount{
+			width:95%;
+			margin:0 auto;
+			border-bottom:1px dashed #ccc;
+			padding:15px 0;
+			ion-col:nth-child(1){
+				font-size:16px;
+				color:#999;
+				height:41px;
+				line-height:41px;
+			}
+			ion-col:nth-child(2){
+				font-size:24px;
+				font-weight:bold;
+				height:41px;
+				line-height:41px;
+			}
+		}
+		.goods,.goodsName,.currentState,.paymentTime,.paymentMethod,.transactionNumber{
+			font-size:14px;
+			color:#999;
+			width:95%;
+			margin:0 auto;
+			ion-col:nth-child(2){
+				display:block;
+				white-space:nowrap;
+				overflow:hidden;
+				text-overflow:ellipsis;
+			}
+		}
+	}
+}

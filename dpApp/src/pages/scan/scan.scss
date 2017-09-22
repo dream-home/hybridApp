@@ -1,0 +1,129 @@
+page-scan{
+	.scan{
+		ion-row{
+			background:#fff;
+			input{
+				background:none;
+			}
+		}
+		.amount{
+			padding:5px 0;
+			span{
+				display: inline-block;
+    			margin-top: 5px;
+			}
+			input{
+			    font-size: 22px;
+			    float: left;
+			    position: absolute;
+			    margin-top: -1px;
+			}
+		}
+		.sendEP{
+			padding:3px 0;
+			margin-top:5px;
+		}
+		.distributionOne{
+			padding:5px 0;
+			margin-top:5px;
+			border-bottom:1px #ccc solid;
+		}
+		.distributionTwo{
+			padding:5px 0;
+			border-bottom:1px #ccc solid;
+		}
+		.distributionThree{
+			padding:5px 0;
+		}
+		.discountEP{
+				padding:3px 0 !important;
+				margin-top:5px;
+				ion-col:nth-child(1){
+						text-align:left;
+						max-width:85%;
+						padding-left: 16px !important;
+				}
+				ion-col:nth-child(2){
+						max-width:15%;
+						text-align: center;
+						.ionRadio,.ionRadio1{
+								border:1px #dfdfdf solid;
+								border-radius:50%;
+								height:21px;
+								width:21px;
+								line-height: 21px;
+								.radio-inner{
+										border-color:#fff;
+										height:10px;
+								}
+						}
+						.ionRadio{
+								background:#FF651E;
+						}
+						.ionRadio1{
+								background:#fff;
+						}
+				}
+		}
+		.amount,.sendEP,.distributionOne,.distributionTwo,.distributionThree{
+			ion-col:nth-child(1){
+				text-align:center;
+				max-width:25%;
+			}
+			ion-col:nth-child(2){
+				max-width:65%;
+				input{
+					border:0;
+				}
+			}
+			ion-col:nth-child(3){
+				text-align:center;
+				max-width:10%;
+			}
+		}
+		button{
+			width:95%;
+		}
+		.payWay{
+			margin-top:5px;
+			ion-list-header{
+				color:#999;
+				background:#fff;
+				font-size:14px;
+			}
+			ion-item{
+				font-size:14px;
+			}
+			ion-radio{
+				.radio-icon{
+					width: 21px;
+			    height: 21px;
+			    border-width: 1px;
+			    border-style: solid;
+					border-color:#c8c7cc;
+			    border-radius: 50%;
+					.radio-inner{
+							border-color:#fff;
+							height:10px;
+					}
+				}
+			}
+			.radio-checked{
+		    	border-color: #FF651E;
+		    	background-color: #FF651E;
+			}
+		}
+		.list-ios{
+				margin-bottom:0 !important;
+		}
+		.discountInfo{
+				margin-top:5px;
+				ion-col:nth-child(1){
+						padding:10px 0 10px 16px !important;
+				}
+				ion-col:nth-child(2){
+						padding:10px 0 !important;
+				}
+		}
+	}
+}

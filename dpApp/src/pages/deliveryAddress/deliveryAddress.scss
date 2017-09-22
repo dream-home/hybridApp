@@ -1,0 +1,77 @@
+page-deliveryAddress{
+    ion-content{
+        background:#e5e5e5 !important;
+    }
+    .addAddress{
+        ion-col{
+            padding:0;
+            button{
+                background:#FF651E;
+                height:35px;
+                width:100%;
+                line-height: 35px;
+                color:#fff;
+                font-size: 16px;
+            }
+        }
+    }
+    .addressInfo{
+        padding:0;
+        .nullAddress{
+            text-align:center;
+            img{
+                width:150px;
+                margin-top:100px;
+            }
+        }
+        .addressInfoContent{
+            margin-bottom:5px;
+            .name_phone{
+                background:#fff;
+                font-size: 16px;
+            }
+            .detailedAddress{
+                background:#fff;
+                color:#999;
+                font-size: 12px;
+            }
+            .addressOperation{
+                background:#fff;
+                margin-top:1px;
+                ion-col:nth-child(1){
+                    height:35px;
+                    line-height: 25px;
+                    ion-checkbox{
+                        height:13px;
+                        width:13px;
+                        float:left;
+                        margin-top:5px;
+                        border-radius: 50px;
+                        border:1px #ccc solid;
+                        div{
+                            height:7px;
+                            width:7px;
+                            margin:2px 0 0 2px;
+                            border:none;
+                            .checkbox-inner{
+                                display: none;
+                            }
+                        }
+                    }
+                    span{
+                        float:left;
+                        margin-left:5px;
+                        font-size: 12px;
+                    }
+                }
+                ion-col:nth-child(2){
+                    button{
+                        background:none;
+                        border:1px #ccc solid;
+                        padding:4px 15px;
+                    }
+                }
+            }
+        }
+    }
+}

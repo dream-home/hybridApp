@@ -1,0 +1,60 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+            <button ion-button icon-only (click)="goToBackPage()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title center>意见反馈</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="background:#e5e5e5;">
+    <ion-list>
+        <ion-row class="feedBackType">
+            <ion-col>请选择您反馈问题的类型<mark>*</mark></ion-col>
+        </ion-row>
+        <ion-row class="feedBackChoice">
+            <ion-col>
+                <span (click)="feedBackChoiceType(0,'功能建议')">功能建议</span>
+                <span (click)="feedBackChoiceType(1,'性能问题')">性能问题</span>
+                <span (click)="feedBackChoiceType(2,'购买遇到问题')">购买遇到问题</span>
+                <span (click)="feedBackChoiceType(3,'其他')">其他</span>
+            </ion-col>
+        </ion-row>
+        <ion-row class="feedBackInfo">
+            <ion-col>
+                <ion-textarea maxlength="200" bindon-ngModel="feedBackDetail" placeholder="描述一下您的问题" type="text" (keyup)="checkLength()"></ion-textarea>
+                <span class="numPrompt"><mark>*</mark>问题反馈最少输入5个字符</span>
+                <span class="stringNum">{{feedBackDetailLength}}/200</span>
+            </ion-col>
+        </ion-row>
+        <ion-row class="feedBackScreenshot">
+            <ion-col>请提供相关问题截图</ion-col>
+        </ion-row>
+        <ion-row class="feedBackAddImg">
+            <ion-col width-25 *ngFor="let item of feedBackImgs;let i=index ">
+                <img src="{{item}}"/>
+                <span (click)="removeImg(i)">×</span>
+            </ion-col>
+            <ion-col width-25 (click)="addImages(1)" *ngIf="isShowAdd">
+                <img src="assets/images/addImages.png"/>
+            </ion-col>
+        </ion-row>
+    </ion-list>
+</ion-content>
+
+<ion-footer>
+    <div class="footIfo">
+        <ion-row class="btn_submit">
+            <ion-col>
+                <button [disabled]="submitDisabled" (click)="submitFeedBack()">提交</button>
+            </ion-col>
+        </ion-row>
+        <ion-row class="serviceTelephone" *ngIf="commonService.params.servicePhone">
+            <ion-col text-center>
+                <span>服务电话：{{commonService.params.servicePhone}}</span>
+            </ion-col>
+        </ion-row>
+    </div>
+</ion-footer>

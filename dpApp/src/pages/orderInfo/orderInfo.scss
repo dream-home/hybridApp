@@ -1,0 +1,95 @@
+page-orderInfo {
+		.list-ios .item-block .item-inner{
+				border-bottom:1px #ececec dashed;
+		}
+		.scroll-content {
+	      background:#f4f4f4;
+	    }
+		.hr_6{ height:6px;}
+		.infos span,.info_input input{ color:#666;}
+
+		.addr_label ion-label{
+			overflow: auto;
+		 	white-space: normal;
+		 	color:red;
+		}
+		.payWay{
+	    margin-top:5px;
+	    ion-row{
+	      padding-left:5px;
+	      border-bottom:1px solid #dfdfdf;
+	      background:#fff;
+	      ion-col{
+	        color:#999;
+	      }
+	    }
+	    ion-item{
+	        font-size:14px;
+	        .input-wrapper{
+	            padding-left:12px;
+	        }
+	    }
+	    ion-radio{
+	      .radio-icon{
+	        width: 21px;
+	        height: 21px;
+	        border-width: 1px;
+	        border-style: solid;
+	        border-color:#c8c7cc;
+	        border-radius: 50%;
+	        .radio-inner{
+	            border-color:#fff;
+	            height:10px;
+	        }
+	      }
+	    }
+	    .radio-checked{
+	        border-color: #FF651E;
+	        background-color: #FF651E;
+	    }
+	  }
+	  .discountEP{
+		  padding:3px 0 !important;
+		  margin-top:5px;
+		  background:#fff;
+		  ion-col:nth-child(1){
+			  text-align:left;
+			  max-width:85%;
+			  padding-left: 16px;
+		  }
+		  ion-col:nth-child(2){
+			  max-width:15%;
+			  text-align: center;
+			  .ionRadio,.ionRadio1{
+				  border:1px #dfdfdf solid;
+				  border-radius:50%;
+				  height:21px;
+				  width:21px;
+				  line-height: 21px;
+				  .radio-inner{
+					  border-color:#fff;
+					  height:10px;
+				  }
+			  }
+			  .ionRadio{
+				  background:#FF651E;
+			  }
+			  .ionRadio1{
+				  background:#fff;
+			  }
+		  }
+	  }
+		.payForInfo{
+				border-top:3px #f4f4f4 solid;
+		}
+		/*.epDiscount{
+				ion-col:nth-child(2){
+						text-align: right;
+				}
+		}
+		.actualPayMent{
+				ion-col:nth-child(2){
+						text-align: right;
+				}
+		}*/
+}

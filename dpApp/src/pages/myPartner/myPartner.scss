@@ -1,0 +1,105 @@
+page-myPartner {
+    ion-grid,ion-list{
+      background: #fff;
+    }
+    .payWay{
+      border-top:5px #e5e5e5 solid;
+      margin-top:5px;
+      ion-row{
+        padding-left:5px;
+        border-bottom:1px solid #dfdfdf;
+        background:#fff;
+        ion-col{
+          color:#999;
+        }
+      }
+      ion-item{
+          font-size:14px;
+      }
+      ion-radio{
+        .radio-icon{
+          width: 21px;
+          height: 21px;
+          border-width: 1px;
+          border-style: solid;
+          border-color:#c8c7cc;
+          border-radius: 50%;
+          .radio-inner{
+              border-color:#fff;
+              height:10px;
+          }
+        }
+      }
+      .radio-checked{
+          border-color: #FF651E;
+          background-color: #FF651E;
+      }
+    }
+    .receiveNum{
+        ion-col{
+            font-size: 14px;
+        }
+    }
+    .submit{
+        width:95%;
+        margin:20px auto 5px auto;
+        button{
+            width:100%;
+            height:35px;
+            color:#fff;
+            font-size:16px;
+            line-height: 35px;
+            background:#FF651E;
+            border-radius: 5px;
+        }
+    }
+    .list-ios{
+        margin:0 !important;
+    }
+    .payForPanel{
+      padding:0 !important;
+      .EPDeductible{
+        height:40px;
+        line-height: 30px;
+          span{
+              float:left;
+              margin-left:5px;
+          }
+          ion-toggle{
+              float:right;
+          }
+          .toggle-ios .toggle-icon{
+            width:40px !important;
+            height:20px;
+            margin-top:5px;
+          }
+          .toggle-inner{
+              height:20px;
+              width:20px;
+              top:0;
+          }
+      }
+      .input_EPDeductible{
+          border-top:1px #e5e5e5 solid;
+          padding-left:5px;
+          input{
+              margin:0 !important;
+              height:30px;
+              font-size: 12px;
+          }
+      }
+    }
+    .panelTitle{
+        padding-left:5px !important;
+        background: #fff;
+        font-size: 16px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+    .panelTitle1{
+        padding-left:5px !important;
+        background: #fff;
+        color:#ccc;
+        font-size:12px;
+    }
+}

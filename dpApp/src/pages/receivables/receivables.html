@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>我要收款</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="background:rgb(229, 229, 229);">
+	<ion-grid no-padding class="toReceivables">
+		<ion-row class="receivablesTitle">
+			<ion-col>
+            	&nbsp;&nbsp;我要收款
+			</ion-col>
+		</ion-row>
+		<ion-row class="receivablesTxt">
+			<ion-col text-center>打开扫一扫，向我付钱</ion-col>
+		</ion-row>
+		<ion-row class="receivablesCode">
+			<ion-col text-center>
+				<img src="{{base64Img}}" />
+			</ion-col>
+		</ion-row>
+		<ion-row class="receivablesAmount">
+			<ion-col text-center>¥{{payAmount}}</ion-col>
+		</ion-row>
+	</ion-grid>
+  <ion-row>
+      <ion-col text-center>提示：面对面扫码只能在斗拍APP内使用</ion-col>
+  </ion-row>
+</ion-content>
+
+<ion-footer>
+	<ion-grid no-padding class="collectionBill">
+		<ion-row>
+			<ion-col text-center>
+            	<span (click)="viewRecord(19)">收款账单</span>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-footer>

@@ -1,0 +1,175 @@
+page-myEP{
+    .myEP{
+        background:#fff;
+        ion-col{
+            padding:5px 5px 5px 12px;
+            div:nth-child(1){
+                color:#30a119;
+                padding:10px 0;
+            }
+            div:nth-child(2){
+                color:#30a119;
+                font-size: 20px;
+                span{
+                    mark{
+                        background:none;
+                        color:#30a119;
+                        font-size: 12px;
+                    }
+                }
+                button{
+                    float:right;
+                    background:#ff651e;
+                    color:#fff;
+                    padding:5px 10px;
+                    border-radius:2px;
+                }
+            }
+        }
+    }
+    .payForIt{
+        background:#fff;
+        ion-row:nth-child(3){
+            ion-col{
+                span{
+                    display:inline-block;
+                    height:30px;
+                    line-height:30px;
+                    margin:0 10px 0 0;
+                }
+                ion-input{
+                    display:inline-block;
+                    width:200px;
+                    height:30px;
+                    margin:0 auto;
+                    text-indent: 10px;
+                    border:1px #dedede solid;
+                    input{
+                        margin:0 !important;
+                        padding:0 !important;
+                        height:30px;
+                        width:100%;
+                        line-height:30px;
+                    }
+                }
+            }
+        }
+    }
+    .exchangeDou{
+        background-color:rgba(0, 0, 0, 0.3);
+        position: fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        z-index:999;
+        .exchangeDouAlert{
+            width:250px;
+            height:250px;
+            background:#fff;
+            margin:150px auto 0 auto;
+            .exchangeDouTitle{
+                position: relative;
+                background:#1eb8ff;
+                text-align: center;
+                height:30px;
+                line-height:30px;
+                span:nth-child(1){
+                    margin:0 auto;
+                    color:#fff;
+                }
+                span:nth-child(2){
+                    position: absolute;
+                    right:0;
+                    width:20px;
+                    margin:5px 5px 0 0;
+                }
+            }
+            .EPAccount{
+                margin:10px 0;
+                mark{
+                    background:none;
+                    color:#30a119;
+                    font-size: 20px;
+                }
+            }
+            .inputEP{
+                ion-col{
+                    ion-input{
+                        border:1px #ccc solid;
+                        height:30px;
+                        text-indent: 10px;
+                        input{
+                            height:30px;
+                            margin:0;
+                        }
+                    }
+                }
+            }
+            .prompt{
+                ion-col{
+                    font-size:12px;
+                }
+            }
+            .acquisitionDou{
+                ion-col{
+                    font-size: 12px;
+                    mark{
+                        background:none;
+                        color:#ff651e;
+                        font-size: 18px;
+                    }
+                }
+            }
+            .exchangBtn{
+                margin-top:10px;
+                ion-col{
+                    button{
+                        background:#FF651E;
+                        color:#fff;
+                        width:95%;
+                        height:25px;
+                        margin:0 auto;
+                        border-radius: 25px;
+                    }
+                }
+            }
+        }
+    }
+    .noneImage{
+        background:#fff;
+        margin-top:1px;
+    }
+    .transactionFlow{
+        margin:5px 0 0 0;
+        .transactionFlowTitle{
+            background:#fff;
+            font-weight:bold;
+            font-size:14px;
+            padding:8px 5px;
+        }
+        .transactionFlowInfo{
+            background:#fff;
+            margin-top:2px;
+            .transactionFlowContent{
+                .transactionFlowDate{
+                    text-align: right;
+                }
+            }
+        }
+    }
+    .scoreOperation{
+        margin:5px 0 0 0;
+        ion-item{
+            border:0 !important;
+            border-bottom: 1px #e5e5e5 solid !important;
+            img{
+                width:25px;
+                height:25px;
+            }
+        }
+    }
+    .list-ios .item-block .item-inner{
+        border-bottom: 0 !important;
+    }
+}

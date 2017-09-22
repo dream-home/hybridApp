@@ -1,0 +1,115 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>扫一扫</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="background:rgb(229, 229, 229);">
+	<ion-grid no-padding class="scan" *ngIf="!isShowPayPw">
+		<ion-row class="amount">
+			<ion-col style="line-height:26px;">
+				付款金额
+			</ion-col>
+			<ion-col style="height:28px;">
+				<span>¥</span>
+				<input bindon-ngModel="scanText.payAmount" [disabled]="true" value="0.00" type="number">
+			</ion-col>
+			<ion-col text-right>
+
+			</ion-col>
+		</ion-row>
+    <!-- EP抵用券 -->
+    <ion-row class="discountEP" *ngIf="scanText.discountEP != '0'">
+        <ion-col *ngIf="discountBoolean">EP券{{commonService.toDecimal(discountAmount)}}EP可抵用{{commonService.toDecimal(discountAmount)}}元(&nbsp;EP余额&nbsp;{{myEP}}&nbsp;)</ion-col>
+        <ion-col *ngIf="!discountBoolean" style="color:#ccc;">EP券{{commonService.toDecimal(discountAmount)}}EP可抵用{{commonService.toDecimal(discountAmount)}}元(&nbsp;EP余额&nbsp;{{myEP}}&nbsp;)</ion-col>
+        <ion-col>
+            <ion-radio class="ionRadio" *ngIf="discountBoolean && myEP!=0" (click)="epDiscount()" checked="{{discountBoolean}}"></ion-radio>
+            <ion-radio class="ionRadio1" *ngIf="!discountBoolean && myEP!=0" (click)="epDiscount()" checked="{{discountBoolean}}"></ion-radio>
+            <ion-radio class="ionRadio1" *ngIf="myEP==0" checked="false"></ion-radio>
+        </ion-col>
+    </ion-row>
+		<!-- 选择支付方式 -->
+		<ion-list radio-group class="payWay">
+            <ion-list-header text-left>
+                选择支付方式
+            </ion-list-header>
+            <ion-item *ngIf="onePayWay">
+                <ion-label style="border:0;">余额支付( ¥{{myScore}} )</ion-label>
+                <ion-radio (click)="changeSource(3)" checked="true" value="3"></ion-radio>
+            </ion-item>
+            <ion-item *ngIf="!onePayWay">
+                <ion-label style="border:0;">余额支付( ¥{{myScore}} )</ion-label>
+                <ion-radio (click)="changeSource(3)" checked="true" value="3"></ion-radio>
+            </ion-item>
+            <ion-item *ngIf="onePayWay">
+                <ion-label style="border:0;">微信支付</ion-label>
+                <ion-radio (click)="changeSource(2)" value="2" [disabled]="true"></ion-radio>
+            </ion-item>
+            <ion-item *ngIf="!onePayWay">
+                <ion-label style="border:0;">微信支付</ion-label>
+                <ion-radio (click)="changeSource(2)" value="2"></ion-radio>
+            </ion-item>
+            <ion-item *ngIf="onePayWay">
+                <ion-label style="border:0;">支付宝支付</ion-label>
+                <ion-radio (click)="changeSource(1)" value="1" [disabled]="true"></ion-radio>
+            </ion-item>
+            <ion-item *ngIf="!onePayWay">
+                <ion-label style="border:0;">支付宝支付</ion-label>
+                <ion-radio (click)="changeSource(1)" value="1"></ion-radio>
+            </ion-item>
+    </ion-list>
+    <ion-row class="discountInfo" *ngIf="discountBoolean">
+        <ion-col>实际付款：¥{{commonService.toDecimal(actualPayMent)}}</ion-col>
+        <ion-col>EP券数量：{{commonService.toDecimal(epDiscountnum)}}</ion-col>
+    </ion-row>
+    <ion-row class="discountInfo" *ngIf="!discountBoolean">
+        <ion-col>实际付款：¥{{commonService.toDecimal(actualPayMent)}}</ion-col>
+        <ion-col style="color:#ccc;">EP券数量：0</ion-col>
+    </ion-row>
+    <!-- 确认支付 -->
+    <ion-row style="background:none;margin-top:20px;">
+        <ion-col text-center>
+            <button *ngIf="!isShowPayPw" (click)="submitData()" [disabled]="submitDisabled" ion-button>确定支付</button>
+  			</ion-col>
+		</ion-row>
+	</ion-grid>
+	<!--支付界面-->
+    <ion-grid *ngIf="isShowPayPw" no-padding>
+        <ion-row>
+            <ion-col text-center style="padding:5px !important;">
+                <h3>请输入6位支付密码</h3>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center style="padding:5px !important;">
+                <span color="yanbao">需要支付余额：{{commonService.toDecimal(actualPayMent)}}元</span>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col style="padding:5px !important;">
+                <ion-list no-padding no-margin>
+                    <ion-item>
+                        <ion-label fixed>
+                            <span style="color:red;">*</span>
+                            支付密码
+                        </ion-label>
+                        <ion-input placeholder="输入6位数字" bindon-ngModel="payPwd" maxlength="6" type="password"></ion-input>
+                    </ion-item>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-50 text-right style="padding:5px !important;">
+                <button [disabled]="payPwd==null || payPwd.length<6 || isDisable" style="height:32px;margin-right:20px;" id="okBtn" (click)="buildPayOrder()" ion-button>确定</button>
+            </ion-col>
+            <ion-col width-50 style="padding:5px !important;">
+                <button style="height:32px;margin-left:20px;"  ion-button (click)="goToBackPage()" color="light">取消</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

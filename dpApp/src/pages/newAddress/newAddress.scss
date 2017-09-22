@@ -1,0 +1,90 @@
+page-newAddress{
+    ion-content{
+        background:#e5e5e5 !important;
+        ion-grid{
+            padding:0 !important;
+            .addressName{
+                background:#fff;
+                padding:5px 0;
+                ion-input{
+                    input{
+                        margin:0 !important;
+                        text-align: right;
+                    }
+                }
+            }
+            .addressPhone{
+                background:#fff;
+                margin-top:1px;
+                padding:5px 0;
+                ion-input{
+                    input{
+                        margin:0 !important;
+                        text-align: right;
+                    }
+                }
+            }
+            .addressProvince{
+                margin-top:5px;
+                background:#fff;
+                padding:5px 0;
+                .select-ios{
+                    padding:0 8px 0 0;
+                    float:right;
+                    max-width:310px;
+                }
+                .item-cover{
+                    height:0;
+                }
+            }
+            .addressCity{
+                background:#fff;
+                margin-top:1px;
+                padding:5px 0;
+                .select-ios{
+                    padding:0 8px 0 0;
+                    float:right;
+                    max-width:310px;
+                }
+                .item-cover{
+                    height:0;
+                }
+            }
+            .addressCountry{
+                background:#fff;
+                margin-top:1px;
+                padding:5px 0;
+                .select-ios{
+                    padding:0 8px 0 0;
+                    float:right;
+                    max-width:310px;
+                }
+                .item-cover{
+                    height:0;
+                }
+            }
+            .addressCont{
+                background:#fff;
+                margin-top:1px;
+                padding:5px 0;
+                ion-input{
+                    margin-top:3px;
+                    input{
+                        margin:0 !important;
+                        text-align: right;
+                    }
+                }
+            }
+            .saveAddress{
+                margin-top:40px;
+                button{
+                    background:#ff651e;
+                    color:#fff;
+                    width:98%;
+                    height:35px;
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}

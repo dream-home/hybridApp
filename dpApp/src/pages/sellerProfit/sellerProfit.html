@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>商家收益</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="background:rgb(229, 229, 229)">
+    <ion-list>
+        <ion-list-header style="background-color:#fff;margin-bottom:5px;border-bottom:0;">
+            <span>总收益：{{commonService.toNumber(total)}}金额</span>
+            <span item-right>销售量：{{totalGoods}}件</span>
+        </ion-list-header>
+        <ion-row style="background-color:#fff;margin-bottom:1px;">
+            <ion-col no-padding style="font-size:16px;padding:5px 5px 5px 12px;">销售列表</ion-col>
+        </ion-row>
+        <ion-item *ngFor="let itm of items" style="background-color:#fff;">
+            <ion-avatar item-left>
+                <img src="{{itm.icon}}">
+            </ion-avatar>
+            <h3>{{itm.name}}</h3>
+            <p item-right>{{itm.total}}件</p>
+        </ion-item>
+    </ion-list>
+</ion-content>

@@ -1,0 +1,216 @@
+<ion-header>
+  <ion-toolbar color="yanbao">
+    <ion-buttons start>
+      <button *ngIf="showBack" ion-button icon-only (click)="goToHomePage()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title center>商品详情</ion-title>
+    <ion-buttons end *ngIf="shopData && pageType==1" class="collectHead" style="width:25%;">
+      <button (click)="presentPopover2($event,goodsInfo)" text-center style="color:#fff;background: #FF651E;">
+        <img src="assets/icon/share1.png" style="width: 18px;">
+          <p style="margin:0; margin-top:2px; font-size: 1rem;">分享</p>
+      </button>
+      <button text-center class="addCollect" *ngIf="shopData.isCollect==0" (click)="addCollection(shopData.id)">
+          <img src="assets/images/collect_k.png">
+          <p>收藏</p>
+      </button>
+      <button text-center class="removeCollect" *ngIf="shopData.isCollect==1" (click)="removeCollection(shopData.id)">
+          <img src="assets/images/collect_w.png">
+          <p>已收藏</p>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="background:#e5e5e5;">
+    <ion-grid no-padding *ngIf="goodsInfo" style="background:#e5e5e5;">
+        <ion-row>
+            <ion-slides loop="true" pager="true" style="height:300px;" *ngIf="goodsImages">
+                <ion-slide *ngFor="let img of goodsImages">
+                    <div>
+                      <!-- img.path.substring(0,7)=='http://'?img.path+'-goodsdetail': -->
+                        <img style="width:100%" class="slideImg"  src="{{img.path}}" (click)="showImg(img.path)">
+                    </div>
+                </ion-slide>
+            </ion-slides>
+            <div style="width:100%;height:300px;text-align:center;background:#fff;" *ngIf="!goodsImages">
+                <img style="margin-top:50px;" class="slideImg" src="assets/images/imgLoading.png">
+            </div>
+        </ion-row>
+        <ion-row class="rowBgcolor" style="padding-left:5px;">
+            <ion-col no-padding class="goodsName">
+                <span>{{goodsInfo.name}}</span>
+            </ion-col>
+        </ion-row>
+        <ion-row class="rowBgcolor" style="padding-left:5px;">
+            <ion-col no-padding class="buyPrice">
+               <span style="color:#f7689e;font-size:16px;">¥{{goodsInfo.price}}</span>
+                <span style="color:#999;font-size:10px; margin-left:5px;">门市价:¥{{goodsInfo.originalPrice}}</span>
+            </ion-col>
+        </ion-row>
+        <ion-row class="rowBgcolor" style="padding-left:5px;">
+            <ion-col no-padding class="goodsFontColor" width-33 >
+                <span style="font-size:12px;">当期赠送{{goodsInfo.businessSendEp}}EP</span>
+            </ion-col>
+            <ion-col no-padding class="goodsFontColor" width-33 >
+                <span style="font-size:12px;">EP抵{{goodsInfo.discountEP}}%</span>
+            </ion-col>
+            <ion-col no-padding width-33 *ngIf="pageType==1" class="addCar_addNum">
+                <button (click)="addGoods()" *ngIf="myShopGood.num <= 0 && goodsInfo.stock>0">加入购物车</button>
+                <button (click)="addGoods()" *ngIf="myShopGood.num <= 0 && goodsInfo.stock==0" [disabled]="true">加入购物车</button>
+                <div class="num" *ngIf="myShopGood.num > 0 && goodsInfo.stock!=0">
+                    <button class="numRemove" (click)="numRemove($event)">
+                        <img src="assets/images/delGoods.png"/>
+                    </button>
+                    <span (click)="stopPropagation($event,this)">
+                        <input type="number" bindon-ngModel="myShopGood.num" [disabled]="true"/>
+                    </span>
+                    <button class="numAdd" (click)="numAdd($event)">
+                        <img src="assets/images/addGoods.png"/>
+                    </button>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row class="rowBgcolor referrerScale">
+            <ion-col no-padding text-center>
+                <img src="assets/icon/1J-1.png"/>
+                {{goodsInfo.firstReferrerScale}}%
+            </ion-col>
+            <ion-col no-padding text-center>
+                <img src="assets/icon/1J-1.png"/>
+                <img src="assets/icon/2J-2.png"/>
+                {{goodsInfo.secondReferrerScale}}%
+            </ion-col>
+            <ion-col no-padding text-center>
+                <img src="assets/icon/1J-1.png"/>
+                <img src="assets/icon/2J-2.png"/>
+                <img src="assets/icon/3J-3.png"/>
+                {{goodsInfo.thirdReferrerScale}}%
+            </ion-col>
+        </ion-row>
+        <ion-row class="rowBgcolor" *ngIf="pageType!=1" style="padding-left:5px;margin-top:3px;">
+            <ion-col no-padding style="padding:5px !important;" style="color:#999;">商家信息</ion-col>
+        </ion-row>
+        <ion-row class="rowBgcolor" *ngIf="pageType!=1 && shopData" style="margin-top:1px;padding:7px 0 7px 5px;">
+            <ion-col no-padding class="address">
+                <ion-row>
+                    <ion-col class="storeName">{{shopData.storeName}}({{shopData.city}})</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col class="shopAddr">{{shopAddr}}</ion-col>
+                </ion-row>
+            </ion-col>
+            <ion-col *ngIf="shopData.servicePhone!=null && shopData.servicePhone!=''" no-padding class="callPhone">
+                <img (click)="callPhone()" src="assets/images/tel.png"/>
+            </ion-col>
+        </ion-row>
+        <!-- <ion-row class="rowBgcolor" style="margin-top:3px;">
+            <ion-col width-50 style="padding-left:2.5%;">
+                <span style="color:#ccc;">{{goodsInfo.drawNum}}/{{goodsInfo.curNum}}</span>
+            </ion-col>
+            <ion-col width-50 text-right style="padding-right:2.5%;">
+                <span style="color:red;">剩余{{goodsInfo.drawNum-goodsInfo.curNum}}人</span>
+            </ion-col>
+        </ion-row>
+        <ion-row style="background-color: #fff;height: 10px;">
+            <ion-row class="counter">
+                <div [style.width]="goodsInfo.curNum/goodsInfo.drawNum*100+'%'" id="divWidth">
+                </div>
+            </ion-row>
+        </ion-row> -->
+        <!-- <ion-row class="rowBgcolor" style="height:15px;"></ion-row> -->
+    </ion-grid>
+    <ion-grid no-padding *ngIf="goodsInfo" style="margin:3px 0 0 0;">
+        <ion-row class="rowBgcolor goodsInfoTitle" style="padding-left:5px; " text-center>
+            <ion-col no-padding>商品详情</ion-col>
+        </ion-row>
+    </ion-grid>
+     <ion-grid no-margin no-padding *ngIf="goodsInfo" style="background:#fff;padding-bottom: 60px;">
+        <ion-row  *ngFor="let item of GoodDetails">
+            <ion-col *ngIf="item.type==1">
+               <p style="text-indent: 2rem;padding:5px 10px !important;margin: 0;color: #3a3a3a;line-height: 20px;">{{item.content}}</p>
+            </ion-col>
+            <ion-col no-padding *ngIf="item.type==2 && item.content!=null" style="font-size: 0;">
+                 <img style="width:100%;display: block;" src="{{item.content.substring(0,7)=='http://'?item.content+'-goodsdetail':item.content}}">
+            </ion-col>
+        </ion-row>
+       <ion-row *ngIf="GoodDetails.length==0">
+            <ion-col>
+               <p style="text-indent: 2rem;padding:5px 10px;margin: 0;color: #3a3a3a;line-height: 20px;">该商品暂无详细介绍</p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+
+<ion-footer class="buy_auction" *ngIf="goodsInfo">
+    <ion-grid no-padding *ngIf="pageType!=1">
+        <ion-row>
+            <ion-col no-padding class="store goStore">
+                 <button (click)="gotoShop(goodsInfo.storeId)">
+                      <img src="assets/images/store.png">
+                      <p>店铺</p>
+                </button>
+            </ion-col>
+            <ion-col no-padding class="collect" *ngIf='shopData'>
+                <button *ngIf="shopData.isCollect==0" (click)="addCollection()">
+                     <img src="assets/images/collect.png">
+                     <p>收藏</p>
+                </button>
+                <button *ngIf="shopData.isCollect==1" (click)="removeCollection()">
+                      <img src="assets/images/collect_y.png">
+                      <p>收藏</p>
+                </button>
+            </ion-col>
+            <ion-col no-padding class="store share">
+                 <button (click)="presentPopover2($event,goodsInfo)">
+                      <img src="assets/icon/share.png">
+                      <p>分享</p>
+                </button>
+            </ion-col>
+             <!-- 根据库存禁用直接购买 -->
+             <ion-col no-padding class="buy" *ngIf='goodsInfo.stock>0' >
+                  <button (click)="gotobuyGoods(goodsInfo,$event,1)" >直接购买</button>
+            </ion-col>
+            <ion-col no-padding class="buy" *ngIf='goodsInfo.stock==0'>
+                  <button [disabled]="true" (click)="gotobuyGoods(goodsInfo,$event,1)" >直接购买</button>
+            </ion-col>
+            <!-- 根据库存禁用斗拍 -->
+            <!-- <ion-col  no-padding class="auction" style="flex: 0 0 29%;max-width: 29%;" *ngIf='goodsInfo.stock>0' >
+                <button *ngIf="goodsInfo.isDraw==0" (click)="buying(goodsInfo.id,goodsInfo.drawPrice)">立即斗拍</button>
+                <button *ngIf="goodsInfo.isDraw==1" [disabled]="true">已斗拍</button>
+            </ion-col>
+            <ion-col no-padding class="auction" *ngIf='goodsInfo.stock==0' style="flex: 0 0 29%;max-width: 29%;">
+                <button [disabled]="true" *ngIf="goodsInfo.isDraw==0" (click)="buying(goodsInfo.id,goodsInfo.drawPrice)">立即斗拍</button>
+                <button *ngIf="goodsInfo.isDraw==1" [disabled]="true">已斗拍</button>
+            </ion-col> -->
+        </ion-row>
+    </ion-grid>
+    <ion-grid no-padding *ngIf="pageType==1">
+        <ion-row>
+            <ion-col no-padding class="img_shoppingCar">
+                <span>{{ShoppingCart.goodsNum}}</span>
+                <button (click)="gotoShoppingCart()">
+                    <img src="assets/images/shoppingCar.png"/>
+                </button>
+            </ion-col>
+            <ion-col no-padding class="price_total">
+                <ion-row class="total" *ngIf="ShoppingCart.goodsNum != 0">
+                    <ion-col text-right no-padding>
+                        <span>合计:</span><span>¥<mark>{{commonService.toNumber(ShoppingCart.goodsAllPrice)}}</mark></span>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="receive" *ngIf="ShoppingCart.goodsNum != 0">
+                    <ion-col text-right no-padding>
+                        <span>获赠:{{commonService.toNumber(ShoppingCart.goodsAllEp)}}EP</span>
+                        <span>优惠:¥{{commonService.toNumber(ShoppingCart.goodsAllMoney-ShoppingCart.goodsAllPrice)}}</span>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+            <ion-col no-padding class="balance">
+              <button *ngIf="ShoppingCart.goodsNum == 0" [disabled]="true">去结算</button>
+              <button *ngIf="ShoppingCart.goodsNum != 0" (click)="goPayForGoods()">去结算</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-footer>

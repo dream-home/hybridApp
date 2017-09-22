@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>店铺详情</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <!-- 轮播图片 -->
+    <ion-slides style="height:200px;" loop="true" pager="true">
+        <ion-slide *ngFor="let img of icons">
+            <img style="width:100%" class="slideImg"  src="{{img.path.substring(0,7)=='http://'?img.path+'-storedetail':img.path}}" imageViewer>
+        </ion-slide>
+    </ion-slides>
+    <ion-grid *ngIf='shopData' no-padding>
+        <ion-row>
+            <ion-col width-50>
+                店名：{{shopData.storeName}}
+            </ion-col>
+            <ion-col width-50>
+                主营：{{shopData.businessScope}}
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                地址：{{shopData.addr}}
+            </ion-col>
+        </ion-row>
+        <ion-row style="border-top:solid 1px #AFAFAF;border-bottom:solid 1px #AFAFAF;">
+            <ion-col padding-vertical style="background-color:#EFEFEF;">
+                <strong>店铺介绍</strong>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                {{shopData.detail}}
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

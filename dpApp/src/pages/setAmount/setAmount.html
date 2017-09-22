@@ -1,0 +1,86 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>设置金额</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="background:rgb(229, 229, 229);">
+	<ion-grid no-padding class="setAmount">
+		<ion-row class="amount">
+			<ion-col>
+				收款金额
+			</ion-col>
+			<ion-col style="height:28px;">
+    	    <span>¥</span>
+          <ion-input bindon-ngModel="payAmount" placeholder="0.00" type="number"></ion-input>
+			</ion-col>
+			<ion-col text-right>
+
+			</ion-col>
+		</ion-row>
+		<ion-row class="discountEP">
+			<ion-col>
+				EP优惠比例
+			</ion-col>
+			<ion-col>
+				<ion-input bindon-ngModel="discountEP" placeholder="请输入EP优惠比例" type="number"></ion-input>
+			</ion-col>
+			<ion-col text-right>
+				%
+			</ion-col>
+		</ion-row>
+    <ion-row class="prompt">
+        <ion-col><mark>*</mark>提示：设置EP优惠比例将不再参与以下EP和分销比例分成</ion-col>
+    </ion-row>
+		<ion-row class="sendEP">
+			<ion-col>
+				赠送EP
+			</ion-col>
+			<ion-col>
+				<ion-input bindon-ngModel="businessSendEp" placeholder="请输入赠送EP比例" type="number"></ion-input>
+			</ion-col>
+			<ion-col text-right>
+				%
+			</ion-col>
+		</ion-row>
+		<ion-row class="distributionOne">
+			<ion-col>
+				一级分销
+			</ion-col>
+			<ion-col>
+				<ion-input bindon-ngModel="firstReferrerScale" placeholder="请输入一级分销比例" type="number"></ion-input>
+			</ion-col>
+			<ion-col text-right>
+				%
+			</ion-col>
+		</ion-row>
+		<ion-row class="distributionTwo">
+			<ion-col>
+				二级分销
+			</ion-col>
+			<ion-col>
+				<ion-input bindon-ngModel="secondReferrerScale" placeholder="请输入二级分销比例" type="number"></ion-input>
+			</ion-col>
+			<ion-col text-right>
+				%
+			</ion-col>
+		</ion-row>
+		<ion-row class="distributionThree">
+			<ion-col>
+				三级分销
+			</ion-col>
+			<ion-col>
+				<ion-input bindon-ngModel="thirdReferrerScale" placeholder="请输入三级分销比例" type="number"></ion-input>
+			</ion-col>
+			<ion-col text-right>
+				%
+			</ion-col>
+		</ion-row>
+		<button ion-button (click)="getQrcode()">确定</button>
+	</ion-grid>
+</ion-content>

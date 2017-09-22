@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="yanbao">
+    <ion-buttons start>
+      <button ion-button icon-only (click)="goToBackPage()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title center>用户登录</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid class="weixinLogo">
+        <ion-row>
+            <ion-col text-center>
+                <img class="userImg" src="assets/images/dp.png"/>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <p text-center>即将登录斗拍，请确认是本人操作</p>
+    <ion-grid class="loginButton">
+        <ion-row *ngIf="ishasewx">
+            <ion-col text-center>
+                <button (click)="weiXinLogin()" ion-button>微信登录</button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center>
+                <button (click)="goToOtherLoginPage()" ion-button color="light">其他登录</button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center>
+                <button (click)="showAgreement()" ion-button small clear>用户协议</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

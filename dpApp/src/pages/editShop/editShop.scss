@@ -1,0 +1,136 @@
+page-editShop {
+    ion-grid{
+        border-bottom:5px #e5e5e5 solid;
+    }
+    .storeImg{
+
+    }
+    .storeName,.storePhone,.storeAddr,.serviceTelephone{
+        border-bottom:1px #e5e5e5 solid;
+        ion-col{
+            padding:5px 5px 5px 10px;
+            span{
+                float:left;
+                height:30px;
+                line-height: 30px;
+                mark{
+                    background:none;
+                    color:red;
+                }
+            }
+            ion-input{
+                float:left;
+                width:225px;
+                height:30px;
+                line-height: 30px;
+                margin-left:15px;
+                input{
+                    margin:0 !important;
+                    height:30px;
+                    line-height: 30px;
+                }
+            }
+        }
+    }
+    .storeInfo{
+        border-bottom:1px #e5e5e5 solid;
+        ion-col{
+            padding:5px 5px 5px 10px;
+            span{
+                float:left;
+                height:30px;
+                line-height: 30px;
+                mark{
+                    background:none;
+                    color:red;
+                }
+            }
+            ion-input{
+                float:left;
+                width:225px;
+                height:30px;
+                line-height: 30px;
+                margin-left:15px;
+                input{
+                    margin:0 !important;
+                    height:30px;
+                    line-height: 30px;
+                }
+            }
+        }
+    }
+    .storeArea{
+        ion-col{
+            border-bottom:1px #e5e5e5 solid;
+            padding:5px 5px 5px 10px;
+            span{
+                float:left;
+                height:30px;
+                line-height: 30px;
+                mark{
+                    background:none;
+                    color:red;
+                }
+            }
+            ion-input{
+                float:left;
+                width:225px;
+                height:30px;
+                line-height: 30px;
+                margin-left:15px;
+                input{
+                    margin:0 !important;
+                    height:30px;
+                    line-height: 30px;
+                }
+            }
+            div{
+                float:left;
+                height:30px;
+                line-height: 30px;
+                margin:0 0 0 15px !important;
+                padding:0 !important;
+                color:#999;
+                width:225px;
+            }
+            .mark2{
+                float:right;
+                height:30px;
+                line-height: 30px;
+                background:none;
+                color:#999;
+                position: absolute;
+                right:5px;
+            }
+        }
+    }
+    .uploadAptitude{
+        border-bottom:1px #e5e5e5 solid;
+        ion-col{
+            padding:5px 5px 5px 10px;
+            span:nth-child(1){
+                float:left;
+                height:30px;
+                line-height: 30px;
+                mark{
+                    background:none;
+                    color:red;
+                }
+            }
+            span:nth-child(2){
+                float:left;
+                height:30px;
+                line-height: 30px;
+                margin-left:15px;
+                color:#999;
+            }
+            .mark2{
+                float:right;
+                height:30px;
+                line-height: 30px;
+                background:none;
+                color:#999;
+            }
+        }
+    }
+}

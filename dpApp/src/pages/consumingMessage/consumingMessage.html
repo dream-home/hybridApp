@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>消费记录</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="items==null || items.length==0" style="text-align:center;" class="nullPage">
+        <img src="assets/images/null.png">
+    </div>
+    <ion-list>
+        <button *ngFor="let itm of items" ion-item (click)="showConsumingPage(itm.id,itm.orderNo,itm.type,itm.detail)">
+             <h2 style=";font-size: 1.6rem;">{{itm.title}}
+                <p style="float:right;">
+                <span *ngIf="itm.status==0"  color="danger" >●</span>
+                {{commonService.dateFormatLong(itm.createTime,'yyyy-MM-dd HH:mm')}}
+                </p>
+             </h2>
+            <div style="color:#666; font-size: 1.4rem;overflow: hidden; text-overflow: ellipsis">
+                {{itm.detail}}
+            </div> 
+        </button>
+    </ion-list>
+    <ion-infinite-scroll *ngIf="showScroll" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

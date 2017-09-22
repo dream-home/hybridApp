@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>我的收藏</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="items==null || items.length==0" style="text-align:center;">
+        <img style="margin-top:30px;" src="assets/images/null.png">
+    </div>
+    <ion-list>
+        <ion-item *ngFor="let itm of items" (click)="gotoShop(itm.id)">
+            <ion-thumbnail item-left>
+                <img src="{{itm.icon.substring(0,7)=='http://'?itm.icon+'-storelist':itm.icon}}">
+            </ion-thumbnail>
+                <h2>{{itm.storeName}}</h2>
+            <button ion-button clear item-right (click)="remove(itm.id,$event)">取消收藏</button>
+        </ion-item>
+    </ion-list>
+    <ion-infinite-scroll *ngIf="showScroll" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

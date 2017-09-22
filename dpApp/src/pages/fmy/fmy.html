@@ -1,0 +1,286 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+
+        <ion-title center>我的</ion-title>
+      <!--   <ion-buttons end>
+          <button ion-button clear (click)="gotoSysSettingPage()" >
+             <span style=" font-size: 20px;color:#fff; ">
+                  <ion-icon name="settings"></ion-icon> 
+              </span>
+          </button>
+        </ion-buttons> -->
+    </ion-toolbar>
+</ion-header>
+<ion-content style="background:#e5e5e5;">
+    <ion-grid *ngIf="!commonService.token" no-padding class="fmyTitle">
+
+         <ion-row>
+            <ion-col text-right width-25>
+                <img style="width:70px;height:70px; margin-bottom:5px;" src="assets/images/login.png" (click)="goToLoginPage()"/>
+            </ion-col>
+             <ion-col text-right width-75 style="padding-left:5px; ">
+
+            </ion-col>
+
+        </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="commonService.token" no-padding  class="fmyTitle">
+        <ion-row>
+            <ion-col text-right width-25 >
+                <img style="width:70px;height:70px; margin-bottom:5px;" class="userImg" src="{{commonService.user.headImgUrl}}" (click)="gotoUserInfoPage()"/>
+            </ion-col>
+            <ion-col text-left width-75 style="padding-left:5px;">
+                <ion-row>
+                    <ion-col style="color:#FFF; margin-top:9px; font-size: 1.6rem;"  no-padding>
+                        {{commonService.user.nickName}}
+                        <div style="display: inline-block; background: #ffe400; color: #ee3b79; font-size: 14px;padding:0 3px; vertical-align:bottom; letter-spacing: 2px; border-radius: 3px;">
+                              <span *ngIf="commonService.user.grade==1"  style="display: block;width: 63px;">VIP会员</span>
+                              <span *ngIf="commonService.user.grade==0"  style="display: block;width: 53px;">普通<img src="assets/images/putong.png" style="height: 15px; width:auto;display: inline-block; vertical-align: top; margin-top: 1px;"></span>
+                              <span *ngIf="commonService.user.grade==2" style="display: block;width: 102px;">
+                                    <img src="assets/images/hehuoren1.png" style="height:15px;vertical-align: middle; width: auto;">初级合伙人
+                              </span>
+                              <span *ngIf="commonService.user.grade>10 && commonService.user.grade<20" style="display: block;width: 100px;">
+                                    <img src="assets/images/hehuoren1.png" style="height: 15px; width:auto;vertical-align: middle; display: inline-block;">{{commonService.user.grade-10}}级合伙人
+                              </span>
+                              <span *ngIf="commonService.user.grade>20 && commonService.user.grade<30" style="display: block;width:75px;">
+                                    <img src="assets/images/dongshi.png" style="height: 15px; width: auto;vertical-align: top; margin-top:2px;display: inline-block;">{{commonService.user.grade-20}}星董事
+                              </span>
+                        </div>
+
+                    </ion-col>
+                </ion-row>
+                <ion-row >
+                    <ion-col style="color:#FFF; margin-top: 5px;"  no-padding>
+                        UID:{{commonService.user.uid}}
+                        <span  (click)="gotoSysSettingPage()" style="float: right; margin-right: 20px;">
+                           账户管理 <b>&gt;</b>
+                        </span>
+                    </ion-col>
+                </ion-row>
+
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid no-padding text-center  class="tab_two">
+        <ion-row>
+            <ion-col class="myWallet" (click)="gotoIntegroWalletPage()">
+                <dl>
+                    <dt>
+                        <img src="assets/images/myWallet.png"/>
+                    </dt>
+                    <dd>我的钱包</dd>
+                </dl>
+            </ion-col>
+            <ion-col class="myWallet_balance" (click)="gotoMyScorePage()">
+                <dl>
+                    <dt>余额</dt>
+                    <dd style="color: #fe575f;">
+                        <span *ngIf="commonService.token">{{myScore}}</span>
+                        <span *ngIf="!commonService.token">--</span>
+                    </dd>
+                </dl>
+            </ion-col>
+           <ion-col class="myWallet_EP" (click)="gotoMyEPPage()">
+                <dl>
+                    <dt>EP</dt>
+                    <dd style="color: #30a119;">
+                        <span *ngIf="commonService.token">{{myEP}}</span>
+                        <span *ngIf="!commonService.token">--</span>
+                    </dd>
+                </dl>
+            </ion-col>
+            <ion-col class="myWallet_doudou" (click)="gotoMyDouDouPage()">
+                <dl>
+                    <dt>斗斗</dt>
+                    <dd style="color: #ffad1e;">
+                        <span *ngIf="commonService.token">{{doudou}}</span>
+                        <span *ngIf="!commonService.token">--</span>
+                    </dd>
+                </dl>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid no-padding text-center  class="myOrders">
+        <ion-row>
+            <ion-col class="myOrder" (click)="gotoMyOrderPage2()">
+                <dl>
+                    <dt>
+                        <img src="assets/images/myOrder.png"/>
+                    </dt>
+                    <dd>我的订单</dd>
+                </dl>
+            </ion-col>
+            <ion-col class="pendingPayment"  (click)="gotoMyOrderPage(0,'noprocess')">
+                <dl>
+                    <dt  style="position: relative;">
+                        <img src="assets/images/myOrder_pendingPayment.png"/>
+                         <span class="Pending_num" *ngIf="commonService.token!=null&&myPending>0" >{{myPending}}</span>
+                    </dt>
+                    <dd>待付款</dd>
+                </dl>
+            </ion-col>
+            <ion-col class="shipmentPending" (click)="gotoMyOrderPage(2,'anoprocess')">
+                <dl>
+                    <dt  style="position: relative;">
+                        <img src="assets/images/myOrder_shipmentPending.png"/>
+                        <span class="Pending_num" *ngIf="commonService.token!=null&&myPayed>0" >{{myPayed}}</span>
+                    </dt>
+                    <dd>待发货</dd>
+                </dl>
+            </ion-col>
+            <ion-col class="Shipped" (click)="gotoMyOrderPage(3,'Alreadyshipped')">
+                <dl>
+                    <dt>
+                        <img src="assets/images/myorder_Shipped.png"/>
+                    </dt>
+                    <dd>已发货</dd>
+                </dl>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid no-padding text-center  class="merchantOrders"  *ngIf="commonService.user.storeId!=null">
+        <ion-row>
+            <ion-col class="merchantOrder" (click)="gotoBusinessOrderPage2()">
+                <dl>
+                    <dt>
+                        <img src="assets/images/merchantOrder.png"/>
+                    </dt>
+                    <dd>商家订单</dd>
+                </dl>
+            </ion-col>
+            <ion-col class="merchant_pendingPayment"  (click)="gotoBusinessOrderPage(0,'pendingPayment')">
+                <dl>
+                    <dt  style="position: relative;">
+                        <img src="assets/images/merchantOrder_pendingPayment.png"/>
+                        <span class="Pending_num" *ngIf="commonService.token!=null&&myorderNum&&myorderNum.pending>0" >{{myorderNum.pending}}</span>
+                    </dt>
+                    <dd>未付款</dd>
+                </dl>
+            </ion-col>
+            <ion-col class="merchant_untreated" (click)="gotoBusinessOrderPage(2,'noprocess')">
+                <dl>
+                    <dt  style="position: relative;">
+                        <img src="assets/images/merchantOrder_untreated.png"/>
+                        <span class="Pending_num" *ngIf="commonService.token!=null&&myorderNum&&myorderNum.payed>0" >{{myorderNum.payed}}</span>
+                    </dt>
+                    <dd>未处理</dd>
+                </dl>
+            </ion-col>
+            <ion-col class="merchant_already" (click)="gotoBusinessOrderPage(3,'anoprocess')">
+                <dl>
+                    <dt>
+                        <img src="assets/images/merchantOrder_already.png"/>
+                    </dt>
+                    <dd>已处理</dd>
+                </dl>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <div class="hr_6"></div>
+    <ion-grid no-padding class="icon_col2">
+        <ion-row>
+            <ion-col text-center width-25  class="icon_wrap"  (click)="gotoScanPage()">
+                <dl>
+                    <dt>
+                        <img src="assets/icon/RichScan.png">
+                    </dt>
+                    <dd>扫一扫</dd>
+                </dl>
+
+            </ion-col>
+            <ion-col text-center width-25  class="icon_wrap"  (click)="gotoSetAmountPage()">
+                <dl>
+                    <dt>
+                        <img src="assets/icon/collect-money.png">
+                    </dt>
+                    <dd>我要收款</dd>
+                </dl>
+            </ion-col>
+
+            <ion-col text-center width-25  class="icon_wrap"  (click)="recharge()">
+                <dl >
+                    <dt>
+                        <img src="assets/icon/mychongzhi.png">
+                    </dt>
+                    <dd> 余额充值</dd>
+                </dl>
+            </ion-col>
+            <ion-col text-center width-25  class="icon_wrap"  (click)="gotoMyLeaguesPage()">
+                <dl>
+                    <dt>
+                        <img src="assets/icon/I-shop.png">
+                    </dt>
+                    <dd>我的店铺</dd>
+                </dl>
+            </ion-col>
+
+        </ion-row>
+        <ion-row>
+            <ion-col text-center width-25  class="icon_wrap" (click)="viewRecord(14)">
+                <dl >
+                    <dt>
+                        <img src="assets/icon/conversion.png">
+                    </dt>
+                    <dd>兑换记录</dd>
+                </dl>
+            </ion-col>
+            <ion-col text-center width-25  class="icon_wrap"  (click)="exchange()">
+             <dl>
+                   <dt>
+                       <img src="assets/icon/myduihuan.png">
+                   </dt>
+                   <dd>余额兑换</dd>
+               </dl>
+
+           </ion-col>
+            <ion-col text-center width-25  class="icon_wrap"  (click)="gotoMyCollectionPage()">
+                <dl>
+                    <dt>
+                        <img src="assets/icon/Shop-to-collect.png">
+                    </dt>
+                    <dd>店铺收藏</dd>
+                </dl>
+            </ion-col>
+
+             <ion-col text-center width-25  class="icon_wrap" (click)="gotoMyPartnerPage()">
+                <dl >
+                    <dt>
+                        <img src="assets/icon/partner.png" style="width:43%;">
+                    </dt>
+                    <dd>合伙人</dd>
+                </dl>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center width-25  class="icon_wrap" (click)="gotoShareFriendPage()">
+                <dl >
+                    <dt>
+                        <img src="assets/icon/invitation.png">
+                    </dt>
+                    <dd>邀请有惊喜</dd>
+                </dl>
+            </ion-col>
+            <ion-col text-center width-25  class="icon_wrap" (click)="gotoMyContactsPage()">
+                <dl >
+                    <dt>
+                        <img src="assets/icon/myrenmai.png">
+                    </dt>
+                    <dd>我的人脉</dd>
+                </dl>
+            </ion-col>
+            <ion-col text-center width-25  class="icon_wrap">
+                <!-- <dl (click)="gotoMyGoodsPage()">
+                    <dt>
+                        <img src="assets/icon/Winning.png">
+                    </dt>
+                    <dd>中奖商品</dd>
+                </dl> -->
+            </ion-col>
+             <ion-col text-center width-25  class="icon_wrap">
+
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</ion-content>

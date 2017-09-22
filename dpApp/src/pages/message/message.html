@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="yanbao">
+
+    <ion-title center>消息</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <button ion-item (click)="gotoConsumingPage()">
+             <img item-left src="assets/icon/xiaofei_jl.png" style="width:25px; height:25px;"/>
+            消费记录
+            <p *ngIf="datas" item-right>{{datas.expense}}条未读</p>
+        </button>
+        <!-- <button ion-item (click)="gotoBeatPage()">
+            <img item-left src="assets/icon/zhongpai_jl.png" style="width:25px; height:25px;"/>
+            中拍记录
+            <p *ngIf="datas" item-right>{{datas.win}}条未读</p>
+        </button> -->
+        <button ion-item (click)="gotoSystemPage()">
+            <img item-left src="assets/icon/xitong_xx.png" style="width:25px;height:25px;"/>
+            系统信息
+            <p *ngIf="datas" item-right>{{datas.system}}条未读</p>
+        </button>
+        <button ion-item (click)="gotoFeedBackPage()">
+            <img item-left src="assets/icon/feedBack.png" style="width:25px;height:25px;"/>
+            意见反馈
+        </button>
+        <!-- <button ion-item (click)="gotoBaiduMap()">
+            <img item-left src="assets/icon/feedBack.png" style="width:25px;height:25px;"/>
+            百度地图定位
+        </button> -->
+        <button *ngIf="commonService.isOpenDebug" ion-item (click)="gotoWedebug()" style="margin-top:1px;">
+           测试地址修改页面
+       </button>
+    </ion-list>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+</ion-content>

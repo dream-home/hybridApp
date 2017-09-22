@@ -1,0 +1,77 @@
+page-shopCode{
+    .income{
+        background:url('../assets/images/pack.png');
+        background-size:100% 100%;
+        height:120px;
+        ion-col{
+            height:80px;
+            margin:30px 0 10px 0;
+            text-align: center;
+            span:nth-child(1){
+                color:#fff;
+                display:block;
+            }
+            span:nth-child(2){
+                color:#fff;
+                display:block;
+                font-size:36px;
+            }
+        }
+    }
+    .incomeToolBar{
+        background:#fff;
+        margin-top:5px;
+        ion-col{
+            text-align:center;
+            padding:10px 5px !important;
+            img{
+                height:40px;
+            }
+            span{
+                display: block;
+            }
+        }
+        ion-col:nth-child(1){
+            span{
+                color:#ff651e;
+            }
+        }
+        ion-col:nth-child(2){
+            span{
+                color:#2bd57f;
+            }
+        }
+        ion-col:nth-child(3){
+            span{
+                color:#237bfe;
+            }
+        }
+    }
+    .serviceGuidance{
+        ion-col{
+            padding:5px 10px !important;
+            color:#ff651e;
+            font-size: 16px;
+        }
+    }
+    .collectionGuidance{
+        background:#fff;
+        ion-col{
+            padding:10px !important;
+            border-bottom:1px #dfdfdf solid;
+        }
+    }
+    .remindGuidance{
+        background:#fff;
+        ion-col{
+            padding:10px !important;
+            border-bottom:1px #dfdfdf solid;
+        }
+    }
+    .marketingGuidance{
+        background:#fff;
+        ion-col{
+            padding:10px !important;
+        }
+    }
+}

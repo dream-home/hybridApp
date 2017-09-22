@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="180" height="46" viewBox="0 0 180 46">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        font-size: 50px;
+      }
+
+      .cls-2 {
+        fill: red;
+        font-family: "NotoSansHans-Medium";
+      }
+
+      .cls-3 {
+        font-family: "Noto Sans S Chinese";
+        font-size: 40px;
+      }
+    </style>
+  </defs>
+  <text x="-2" y="42" class="cls-1"><tspan class="cls-1"><tspan class="cls-2">最佳<tspan class="cls-3">推荐</tspan></tspan></tspan></text>
+</svg>

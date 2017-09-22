@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>系统信息</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid no-padding *ngIf="datas">
+        <ion-row>
+            <ion-col text-center padding-vertical>
+                <strong>{{datas.title}}</strong>
+            </ion-col>
+        </ion-row>
+        <ion-row style="border-bottom:solid 1px #AFAFAF;" >
+            <ion-col *ngIf="datas.createTime!=null" text-center>
+                <span style="color:#AFAFAF">{{commonService.dateFormatLong(datas.createTime,'yyyy-MM-dd HH:mm')}}
+                </span>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col *ngIf="datas.detail!=null" id="content" no-padding>
+                <div [innerHTML]="assembleHTML(datas.detail)"></div>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="7==datas.type || 9==datas.type " >
+            <ion-col text-right >
+                <button ion-button small clear (click)="viewOrder(datas.title,datas.orderNo)" >查看订单</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

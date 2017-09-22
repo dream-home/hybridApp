@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>中拍信息</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col padding>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center padding-vertical>
+                <img style="width:65%;" src="assets/images/title.png">
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="datas">
+            <ion-col class="jpbj" text-center padding-vertical>
+                <h1 *ngIf="datas.isWinner==0">{{datas.score}}积分</h1>
+                <h1 *ngIf="datas.isWinner==1">特等奖：{{datas.score}}积分</h1>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center padding-vertical>
+                <button (click)="openMyGoodsPage()" ion-button clear small>我的商品</button>
+                <button (click)="showLukyInfoPage()" ion-button clear small>查看排行</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</ion-content>

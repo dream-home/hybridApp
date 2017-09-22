@@ -1,0 +1,19 @@
+page-marketingGuidance {
+    .firstStep,.secondStep,.thirdStep{
+        margin-top:5px;
+        background:#fff;
+        ion-col{
+            padding:5px 10px !important;
+        }
+    }
+    .firstStepImg,.secondStepImg,.thirdStepImg{
+        background:#fff;
+        margin-top:1px;
+        ion-col{
+            img{
+                width:100%;
+            }
+            padding:5px 10px !important;
+        }
+    }
+}

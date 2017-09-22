@@ -1,0 +1,68 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>我的余额</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="background:#e5e5e5;">
+    <ion-row class="myScore">
+        <ion-col>
+            <div>当前余额</div>
+            <div>{{score}}<mark>元</mark></div>
+        </ion-col>
+    </ion-row>
+    <ion-list class="scoreOperation">
+        <button ion-item (click)="recharge()">
+             <img item-left src="assets/icon/chongzhi_qb.png"/>
+              余额充值
+        </button>
+        <button ion-item (click)="exchange()">
+             <img item-left src="assets/icon/duihuan_qb.png"/>
+            余额兑换
+        </button>
+        <button ion-item (click)="gotoGiveScorePage()">
+             <img item-left src="assets/icon/sendScore.png"/>
+            好友互赠
+        </button>
+    </ion-list>
+    <ion-list class="transactionFlow">
+        <ion-row>
+            <ion-col class="transactionFlowTitle" text-center>
+                交易明细
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="items==null || items.length==0" class="noneImage">
+            <ion-col text-center no-padding>
+                <img src="assets/images/null2.png">
+            </ion-col>
+        </ion-row>
+        <ion-grid *ngFor="let itm of items" no-padding>
+            <ion-row class="transactionFlowInfo">
+                <ion-col>
+                    <ion-row class="transactionFlowRemark">
+                        <ion-col>{{itm.remark}}</ion-col>
+                    </ion-row>
+                    <ion-row class="transactionFlowContent">
+                        <ion-col *ngIf="12==itm.recordType || 14==itm.recordType || 21==itm.recordType" class="transactionFlowAmount">
+                            {{itm.score}}EP
+                        </ion-col>
+                        <ion-col *ngIf="12!=itm.recordType && 14!=itm.recordType && 21!=itm.recordType" class="transactionFlowAmount">
+                            {{itm.score}}余额
+                        </ion-col>
+                        <ion-col class="transactionFlowDate">
+                            {{commonService.dateFormatLong(itm.createTime,'yyyy-MM-dd HH:mm')}}
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-infinite-scroll *ngIf="showScroll" (ionInfinite)="doInfinite($event)">
+            <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+    </ion-list>
+</ion-content>

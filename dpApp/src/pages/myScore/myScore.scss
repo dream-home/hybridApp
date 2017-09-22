@@ -1,0 +1,52 @@
+page-myScore{
+    .myScore{
+        background:#fff;
+        ion-col{
+            padding:5px 5px 5px 12px;
+            div:nth-child(1){
+                color:#FF651E;
+                padding:10px 0;
+            }
+            div:nth-child(2){
+                color:#FF651E;
+                font-size: 20px;
+                mark{
+                    background:none;
+                    color:#FF651E;
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+    .scoreOperation{
+        margin:5px 0 0 0;
+        button{
+            border:0 !important;
+            img{
+                width:25px;
+                height:25px;
+            }
+        }
+    }
+    .noneImage{
+        background:#fff;
+        margin-top:1px;
+    }
+    .transactionFlow{
+        margin:5px 0 0 0;
+        .transactionFlowTitle{
+            background:#fff;
+            font-weight:bold;
+            padding:8px 5px;
+        }
+        .transactionFlowInfo{
+            background:#fff;
+            margin-top:2px;
+            .transactionFlowContent{
+                .transactionFlowDate{
+                    text-align: right;
+                }
+            }
+        }
+    }
+}

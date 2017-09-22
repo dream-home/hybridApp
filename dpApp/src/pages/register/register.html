@@ -1,0 +1,57 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+            <button ion-button icon-only (click)="goToBackPage()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title center>注册</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid class="register">
+        <ion-row class="invitationCode">
+            <ion-col>
+                <span>邀&nbsp;&nbsp;请&nbsp;&nbsp;码</span>
+                <ion-input type="text" bindon-ngModel="invitationCode" placeholder="输入邀请码"></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row class="nickName">
+            <ion-col>
+                <span>昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</span>
+                <ion-input type="text" bindon-ngModel="nickName" placeholder="输入昵称"></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row class="telPhone">
+            <ion-col>
+                <span>手机号码</span>
+                <ion-input type="text" bindon-ngModel="telPhone" maxlength="11"  placeholder="您的手机号码"></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row class="loginPwd">
+            <ion-col>
+                <span>登录密码</span>
+                <ion-input type="password" bindon-ngModel="loginPwd" maxlength="15" placeholder="输入6~15位密码"></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row class="loginPwd">
+            <ion-col>
+                <span>确认密码</span>
+                <ion-input type="password" bindon-ngModel="loginPwdagain" maxlength="15" placeholder="请再次确认登录密码"></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row class="msgCode">
+            <ion-col>
+                <span>验&nbsp;&nbsp;证&nbsp;&nbsp;码</span>
+                <ion-input type="text" bindon-ngModel="msgCode" placeholder="填写手机收到的验证码"></ion-input>
+                <mark (click)="sendMsgCode()">获取验证码</mark>
+            </ion-col>
+        </ion-row>
+        <ion-row class="btn_submit">
+            <ion-col>
+                <button (click)="submitRegistr()" ion-button>确定</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

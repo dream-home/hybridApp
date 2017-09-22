@@ -1,0 +1,124 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>余额兑换</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="background:#e5e5e5;">
+    <div *ngIf="!payPanel">
+        <ion-list no-padding no-margin *ngIf="!payPanel">
+            <ion-row class="scoreNum">
+                <ion-col>
+                    <span>余额</span>
+                    <span>¥{{total}}</span>
+                </ion-col>
+            </ion-row>
+            <ion-row class="scoreExchang">
+                <ion-col>
+                    <span>兑换余额</span>
+                    <ion-input (keyup)="showTrueScore()" maxlength="20" bindon-ngModel="score" placeholder="输入余额{{commonService.params.exchangeMin}}~{{commonService.params.exchangeMax}}" type="number" clearInput no-padding style="border:0;"></ion-input>
+                </ion-col>
+            </ion-row>
+            <ion-row class="actuallyObtain">
+                <ion-col>
+                    <span>实际获得</span>
+                    <input [disabled]="true" bindon-ngModel="trueScore" placeholder="实际获得" type="number" style="border:0;background:#fff;">
+                </ion-col>
+            </ion-row>
+            <ion-row class="prompt">
+                <ion-col>
+                    <span>提示：将扣除{{commonService.toDecimal(fee*100)}}%的兑换手续费</span>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="bankName" *ngIf="flage">
+                <ion-col>
+                    <span>姓名</span>
+                    <ion-input maxlength="20" bindon-ngModel="username" placeholder="请输入姓名" type="text" clearInput no-padding style="border:0;"></ion-input>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="bankName" *ngIf="!flage">
+                <ion-col>
+                    <span>姓名</span>
+                    <span>{{username}}</span>
+                </ion-col>
+            </ion-row>
+            <ion-row *ngIf="commonService.params.exchangeWay=='3'" class="prompt">
+                <ion-col>
+                    <span style="color:red;">余额将兑换到您绑定的微信,请确认您的姓名和微信绑定的真实姓名一致。否则兑换不成功</span>
+                </ion-col>
+            </ion-row>
+            <div *ngIf="commonService.params.exchangeWay=='1'||commonService.params.exchangeWay=='2'">
+                <ion-row class="bankNamePrompt" >
+                    <ion-col>
+                        <span *ngIf="flage">姓名请填写准确的真实信息，保存后将不可更改！</span>
+                        <span *ngIf="!flage">请填写“{{username}}”名下的银行卡！</span>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="choiceBank">
+                    <ion-col>
+                        <span>银行</span>
+                        <ion-select bindon-ngModel="banks" okText="确认" cancelText="取消" placeholder="请选择银行">
+                            <ion-option *ngFor="let opt of commonService.user.bankList;let i=index" value="{{[opt.id,opt.name]}}">{{opt.name}}</ion-option>
+                        </ion-select>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="cardNumber">
+                    <ion-col>
+                        <span>银行卡号</span>
+                        <ion-input maxlength="19" bindon-ngModel="idcarNumber" placeholder="输入银行卡号" type="text" clearInput no-padding style="border:0;"></ion-input>
+                    </ion-col>
+                </ion-row>
+            </div>
+
+            <ion-row class="btnSubmit">
+                <ion-col text-center>
+                    <button (click)="submitData()" [disabled]="btnisDisable">确定</button>
+                </ion-col>
+            </ion-row>
+            <ion-row class="btnCancel">
+                <ion-col text-center>
+                    <button (click)="goToBackPage()">取消</button>
+                </ion-col>
+            </ion-row>
+        </ion-list>
+    </div>
+    <ion-grid no-padding no-margin *ngIf="payPanel">
+        <ion-row>
+            <ion-col text-center>
+                <h3>请输入6位支付密码</h3>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center>
+                <span color="yanbao">需要支付余额：¥{{score}}</span>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-list no-padding no-margin>
+                    <ion-item>
+                        <ion-label fixed>
+                            支付密码
+                        </ion-label>
+                        <ion-input maxlength="6" clearInput="true" bindon-ngModel="payPwd" placeholder="输入6位数" type="password"></ion-input>
+                    </ion-item>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-50 text-right>
+                <button [disabled]="payPwd==null || payPwd.length<6 || isDisable" style="height:32px;margin-right:20px;" (click)="submitPay()" ion-button>确定</button>
+            </ion-col>
+            <ion-col width-50>
+                <button style="height:32px;margin-left:20px;"  ion-button (click)="cancel()" color="light">取消</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

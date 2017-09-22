@@ -1,0 +1,95 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>我的人脉</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid *ngIf="info" style="background-color: #fff; margin-top:5px;" >
+        <ion-row class="tab_divs">
+            <ion-col width-33 text-left>
+                <div class="tab_div1">
+                    <h1>{{info.firthCount}}</h1>
+                    <span>一度人脉</span>
+                </div>
+            </ion-col>
+            <ion-col width-33 text-center>
+                <div class="tab_div2">
+                    <h1>{{info.secondCount}}</h1>
+                    <span>二度人脉</span>
+                </div>
+               <!--  2度人脉<span style="color:#AFAFAF">({{info.secondCount}})</span> -->
+            </ion-col>
+            <ion-col width-33 text-right>
+                <div class="tab_div3">
+                    <h1>{{info.thirdCount}}</h1>
+                    <span>三度人脉</span>
+                </div>
+               <!--  3度人脉<span style="color:#AFAFAF">({{info.thirdCount}})</span> -->
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-list *ngIf="info" no-padding no-margin no-lines>
+        <ion-list-header text-center style="background-color: #fff;margin:5px 0;">
+            <h2>我的推荐人</h2>
+        </ion-list-header>
+        <ion-item style="background-color:#fff;">
+            <ion-thumbnail item-left>
+                <img src="{{info.headImgUrl}}">
+            </ion-thumbnail>
+            <h2>{{info.nickName}}</h2>
+            <p>uid:{{info.uid}}</p>
+            <button (click)="giveScore(info.uid)" ion-button clear item-right small>赠送金额</button>
+        </ion-item>
+    </ion-list>
+    <ion-list no-padding no-margin>
+        <!-- <ion-list-header text-center style="padding-top:10px;">
+            <h2>推荐会员<span style="color:AFAFAF;">({{totalSize}})</span></h2>
+        </ion-list-header> -->
+        <ion-list-header text-center style="background-color: #fff;margin-top:5px;">
+            <h2>一度人脉</h2>
+        </ion-list-header> 
+        <ion-item *ngFor="let itm of items" style="padding-left: 8px;">
+            <ion-thumbnail item-left style="position: relative; margin-right: 8px;">
+                <img src="{{itm.headImgUrl}}" >
+                 <div style="background: #ffe400; color: #ee3b79; font-size: 10px;padding:3px 0; vertical-align:bottom;border-radius: 3px; position: absolute;z-index: 4;top: 0;right:0;">
+                              <span *ngIf="itm.grade==1" style="padding:0 3px;">VIP会员</span>
+                              <span *ngIf="itm.grade==0" style="padding:0 3px;">普通<img src="assets/images/putong.png" style="height: 10px; width:auto;display: inline; vertical-align: top; margin-top: 1px;"></span>
+                              <span  *ngIf="itm.grade==2">
+                                    <img src="assets/images/hehuoren1.png" style="width:10px;vertical-align: middle; height: auto;display: inline;">初级合伙人
+                              </span>
+                              <span *ngIf="itm.grade>10 && itm.grade<20">
+                                    <img src="assets/images/hehuoren1.png" style="width:10px;vertical-align: middle; height: auto;display: inline;">{{itm.grade-10}}级合伙人
+                              </span>
+                              <span *ngIf="itm.grade>20 && itm.grade<30" style="padding:0 3px;">
+                                    <img src="assets/images/dongshi.png" style="height: 10px; width: auto;vertical-align: top; margin-top:2px;display: inline-block;">{{itm.grade-20}}星董事
+                              </span>   
+                 </div>
+            </ion-thumbnail>
+            <div>
+                <h2 style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                    <span *ngIf="itm.groupType=='A'" style="color:#fe575f;">(1)</span>
+                    <span *ngIf="itm.groupType=='B'" style="color:#30a119;">(2)</span>
+                    <span *ngIf="itm.groupType=='C'" style="color:#BF3EFF;">(3)</span>
+                    {{itm.nickName}}({{itm.uid}})
+                    <span *ngIf="!itm.isComplete" class="isComplete">资料未完善</span>
+                </h2>
+                <div>
+                    <span style="font-size: 13px; color: #666;margin-top: 11px;vertical-align: top;display: inline-block;">注册时间:{{commonService.dateFormatLong(itm.createTime,'yyyy-MM-dd HH:mm')}}</span>
+                    <button (click)="giveScore(itm.uid)" ion-button clear small no-padding style="float:right;">赠送金额</button>
+                </div>
+                
+                
+            </div>
+        </ion-item>
+    </ion-list>
+    <ion-infinite-scroll *ngIf="showScroll" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

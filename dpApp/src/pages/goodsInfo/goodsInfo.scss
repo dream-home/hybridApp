@@ -1,0 +1,17 @@
+page-goodsInfo {
+    .payPanel{
+        background-color: yellow;
+        color: red;
+    }
+
+    .infowarp p{
+    	text-indent: 2rem;
+    	margin:5px 10px;
+        width:100%;
+    }
+    .infowarp p img{
+     display: block;  width: 100%;
+       margin-left:-10px;
+    }
+    .infowarp img{ display: block;  width: 100%; margin: 0 auto; }
+}

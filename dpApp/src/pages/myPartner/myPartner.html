@@ -1,0 +1,197 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>合伙人</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="background:#e5e5e5;">
+    <ion-grid *ngIf="mypartnerInfo && !showPay && !isShowPayPw">
+        <ion-row center>
+            <ion-col width-33>
+                <img class="userImg"  src="{{commonService.user.headImgUrl}}" />
+            </ion-col>
+            <ion-col width-66 no-padding>
+                <ion-row>
+                    <ion-col>
+                        <font color="##DE14CD" style="font-weight:bold">{{mypartnerInfo.gradeRemark}}</font>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col width-50 text-center>
+                        <font color="#00cc00">EP消费额度累计:</font>
+                    </ion-col>
+                    <ion-col  width-50 text-center>
+                        <font color="#ff6511" >剩余领取次数:</font>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                     <ion-col width-50 text-center>
+                        <font color="#00cc00">{{mypartnerInfo.consumeEP}}</font>
+                    </ion-col>
+                    <ion-col  width-50 text-center>
+                        <font color="#ff6511">{{mypartnerInfo.remainSign}}</font>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col text-right>
+                        <button ion-button small *ngIf="mypartnerInfo.btnstate==1" (click)="showConfirm()">加入合伙人</button>
+                        <!-- <button ion-button small *ngIf="mypartnerInfo.btnstate==4" (click)="JoinParten()">续费</button> -->
+                        <button ion-button small *ngIf="mypartnerInfo.btnstate==2&&mypartnerInfo.isSignIn==false" (click)="signedIn()">签到</button>
+                        <button ion-button small *ngIf="mypartnerInfo.btnstate==2&&mypartnerInfo.isSignIn==true" [disabled]="true">已签到</button>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-row center>
+            <ion-col width-33 text-center style="border:solid 1px #ECECEC;border-right:none;border-bottom:none;">
+                销售一部({{mypartnerInfo.groupChildCountA}})
+            </ion-col>
+            <ion-col width-33 text-center style="border:solid 1px #ECECEC;border-right:none;border-bottom:none">
+                销售二部({{mypartnerInfo.groupChildCountB}})
+            </ion-col>
+            <ion-col width-33 text-center style="border:solid 1px #ECECEC;border-bottom:none;">
+                销售三部({{mypartnerInfo.groupChildCountC}})
+            </ion-col>
+        </ion-row>
+
+        <ion-row center *ngIf="mypartnerInfo.gradeRemark != '普通会员'">
+            <ion-col width-33 text-center style="border:solid 1px #ECECEC;border-right:none;">
+                {{mypartnerInfo.performanceOne}}EP
+            </ion-col>
+            <ion-col width-33 text-center style="border:solid 1px #ECECEC;border-right:none;">
+                {{mypartnerInfo.performanceTwo}}EP
+            </ion-col>
+            <ion-col width-33 text-center style="border:solid 1px #ECECEC;">
+                {{mypartnerInfo.performanceThree}}EP
+            </ion-col>
+        </ion-row>
+        <ion-row center *ngIf="mypartnerInfo.gradeRemark == '普通会员'">
+            <ion-col text-center style="border:solid 1px #ECECEC;">
+                当前会员等级无权查看销售业绩，请申请加入合伙人!
+            </ion-col>
+        </ion-row>
+        <ion-row style="height:10px;">
+
+        </ion-row>
+        <ion-row center style="padding:10px;" *ngIf="mypartnerInfo.gradeRemark != '普通会员'">
+            <ion-col width-50 text-left>
+                本次结算奖金总和:{{mypartnerInfo.award}}
+            </ion-col>
+        </ion-row>
+        <ion-row style="height:1px; background:#ECECEC;border-bottom:solid 1px #ddd;" *ngIf="mypartnerInfo.gradeRemark != '普通会员'">
+
+        </ion-row>
+        <ion-row center style="margin:5px;" *ngIf="mypartnerInfo.gradeRemark != '普通会员'">
+            <ion-col width-20 text-center>
+                次数
+            </ion-col>
+            <ion-col width-55 text-center>
+                日期
+            </ion-col>
+            <ion-col width-25 text-center>
+                领取数量
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-list no-padding *ngIf="!showPay && !isShowPayPw">
+        <div style="text-align:center;">
+            <img *ngIf="signlist==null || signlist.lenght==0" src="assets/images/null.png">
+        </div>
+        <ion-item *ngFor="let itm of signlist" no-padding>
+            <ion-row center no-padding class="receiveNum">
+                <ion-col width-20 text-center no-padding>
+                    {{itm.signNo}}
+                </ion-col>
+                <ion-col width-60 text-center no-padding>
+                    {{commonService.dateFormatLong(itm.signDate,'yyyy-MM-dd HH:mm')}}
+                </ion-col>
+                <ion-col width-20 text-center no-padding>
+                    {{itm.signScore}}余额
+                </ion-col>
+            </ion-row>
+        </ion-item>
+    </ion-list>
+    <ion-grid class="payForPanel" *ngIf="showPay && !isShowPayPw">
+        <ion-row class="panelTitle">
+            <ion-col >加入合伙人需要支付¥{{payScore}}</ion-col>
+        </ion-row>
+        <ion-row style="border-top:5px #e5e5e5 solid;">
+            <ion-col class="EPDeductible">
+                <span>EP抵扣（共{{myEP}}EP 可用{{commonService.toDecimal(discountEPNum)}}EP）</span>
+                <ion-toggle *ngIf="myEP<=0 || discountEPNum<=0" [disabled]="true"  checked="false"></ion-toggle>
+                <ion-toggle *ngIf="myEP>0 && discountEPNum>0"  bindon-ngModel="isdiscountEP" checked="false"></ion-toggle>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="isdiscountEP"  class="input_EPDeductible">
+            <ion-col>
+                <ion-input type="number" bindon-ngModel="discountEP" placeholder="请输入EP抵扣数量"></ion-input>
+            </ion-col>
+        </ion-row>
+        <!-- 选择支付方式 -->
+        <ion-list radio-group class="payWay">
+            <ion-row>
+              <ion-col><span style="color:#000">选择支付方式</span><span>（还需支付¥{{commonService.toDecimal(payScore-(isdiscountEP?discountEP:0))}}）</span></ion-col>
+            </ion-row>
+            <ion-item>
+                <ion-label style="border:0;">余额支付( ¥{{myScore}} )</ion-label>
+                <ion-radio (click)="changeSource(3)" checked="true" value="3"></ion-radio>
+            </ion-item>
+            <ion-item  >
+                <ion-label style="border:0;">微信支付</ion-label>
+                <ion-radio *ngIf="(payScore-(isdiscountEP?discountEP:0))<=0" [disabled]="true" value="2"></ion-radio>
+                <ion-radio *ngIf="(payScore-(isdiscountEP?discountEP:0))>0" [disabled]="false" (click)="changeSource(2)" value="2"></ion-radio>
+            </ion-item>
+            <ion-item style="border-bottom:0;">
+                <ion-label style="border:0;">支付宝支付</ion-label>
+                <ion-radio *ngIf="(payScore-(isdiscountEP?discountEP:0))<=0" [disabled]="true"  value="1"></ion-radio>
+                <ion-radio *ngIf="(payScore-(isdiscountEP?discountEP:0))>0" [disabled]="false" (click)="changeSource(1)" value="1"></ion-radio>
+            </ion-item>
+        </ion-list>
+        <ion-row class="submit">
+            <ion-col>
+                <button (click)="submitPay()" [disabled]="submitDisabled">确定</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <!--支付界面-->
+    <ion-grid *ngIf="isShowPayPw && !showPay">
+        <ion-row>
+            <ion-col text-center>
+                <h3>请输入6位支付密码</h3>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center>
+                <span color="yanbao">需要支付：{{commonService.toDecimal(payScore-(isdiscountEP?discountEP:0))}}元</span>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-list no-padding no-margin>
+                    <ion-item>
+                        <ion-label fixed>
+                            支付密码
+                        </ion-label>
+                        <ion-input maxlength="6" clearInput="true" bindon-ngModel="payPwd" placeholder="输入6位数" type="password"></ion-input>
+                    </ion-item>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-50 text-right>
+                <button [disabled]="payPwd==null || payPwd.length<6 || isDisable" style="height:32px;margin-right:20px;" id="okBtn" (click)="partnerPay()" ion-button>确定</button>
+            </ion-col>
+            <ion-col width-50>
+                <button style="height:32px;margin-left:20px;"  ion-button (click)="goToBackPage()" color="light">取消</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-infinite-scroll *ngIf="showScroll" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

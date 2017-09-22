@@ -1,0 +1,40 @@
+page-giveScore {
+    .inputPwd{
+        width: 240px;
+        height: 40px;
+        font-size: 20px;
+        border: solid 1px #AFAFAF;
+        background-size: 240px 40px;
+        text-indent:10px;
+        letter-spacing: 20px;
+        border-radius: 5px;
+    }
+
+    button{
+        height: 28px;
+    }
+    .giveUser{
+        padding:10px 0 10px 15px;
+        background:#fff;
+        margin-top:5px;
+        border-bottom:1px #ccc solid;
+        ion-input{
+            width:150px;
+            display: inline-block;
+            input{
+                margin:0 !important;
+            }
+        }
+    }
+    .giveScore{
+        padding:10px 0 10px 15px;
+        background:#fff;
+        ion-input{
+            width:200px;
+            display: inline-block;
+            input{
+                margin:0 !important;
+            }
+        }
+    }
+}

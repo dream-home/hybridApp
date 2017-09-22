@@ -1,0 +1,59 @@
+page-sysSetting {
+    .scroll-content{background:#e5e5e5;}
+    .gotoUserInfo{
+        ion-icon{
+            font-size: 22px;
+            float:left;
+            width:18px;
+            margin-top:-1px;
+        }
+        span{
+            float:left;
+            margin-left:5px;
+        }
+    }
+    .deliveryAddress{
+        margin-top:1px;
+        ion-icon{
+            font-size: 22px;
+            float:left;
+            width:18px;
+            margin-top:-1px;
+        }
+        span{
+            float:left;
+            margin-left:5px;
+        }
+    }
+    .aboutUs{
+        ion-icon{
+            font-size: 22px;
+            float:left;
+            width:18px;
+            margin-top:-1px;
+        }
+        span{
+            float:left;
+            margin-left:5px;
+        }
+    }
+    .exitbtn{
+         background: #fff;
+         color: #FF651E;
+         width: 90%;
+         height: 40px;
+         line-height: 40px;
+         border-radius: 0;
+         margin: 0 auto;
+         font-weight: 500;
+    }
+    .list-ios > .item-block:first-child{
+        border-top:none;
+    }
+    .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block{
+        border-bottom:none;
+    }
+    .list-ios .item-block .item-inner{
+        border-bottom:none;
+    }
+}

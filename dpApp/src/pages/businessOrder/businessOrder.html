@@ -1,0 +1,129 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>商家订单</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-segment mode="md" [(ngModel)]="order">
+        <ion-segment-button value="process" (ionSelect)="selected(1)">
+            全部
+        </ion-segment-button>
+        <ion-segment-button value="pendingPayment" (ionSelect)="selected(0)">
+            未付款
+        </ion-segment-button>
+        <ion-segment-button value="noprocess" (ionSelect)="selected(2)" style="position: relative;">
+            未处理
+            <span class="Pending_num" *ngIf="Pending_num>0"> {{Pending_num}} </span>
+        </ion-segment-button>
+        <ion-segment-button value="anoprocess" (ionSelect)="selected(3)">
+            已处理
+        </ion-segment-button>
+    </ion-segment>
+
+    <div [ngSwitch]="order" class="list_product">
+
+      <ion-list *ngSwitchCase="'process'"  no-lines>
+          <div *ngIf="items.length==0">
+            <img src="assets/images/null.png" style="margin:20% auto; display: block;">
+          </div>
+          <div *ngFor="let itm of items">
+            <ion-item  (click)="viewOrderInfo(itm.orderNo)" >
+                <ion-avatar item-left>
+                    <img  src="{{itm.icon}}" style="border-radius:0;">
+                </ion-avatar>
+                <h3 class="goods_Name">
+                    <span *ngIf="itm.status==0" style="color:#BF3EFF;">[未付款]</span>
+                    <span *ngIf="itm.status==2" style="color:#f7689e;">[未处理]</span>
+                    <span *ngIf="itm.status==3" style="color:#03bb03;">[已处理]</span>
+
+                   <span *ngIf="itm.orderType==3">{{itm.storeName}}</span>
+                   <span *ngIf="itm.orderType!=3">{{itm.goodsName}}</span>
+                </h3>
+                <ion-grid style="font-size:1.4rem; color:#666;" no-padding no-margin>
+                    <ion-row>
+                        <ion-col>
+                              <!-- <span *ngIf="itm.orderType==3">总价：¥{{itm.price}}</span>
+                              <span *ngIf="itm.orderType!=3">总价：¥{{itm.price*itm.num}}</span> -->
+                        </ion-col>
+                        <ion-col text-right>
+                            <span>{{commonService.dateFormatLong(itm.createTime,'yy-MM-dd HH:mm')}}</span>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+                <p item-right> <ion-icon name="arrow-forward"  style="color:#ccc; "></ion-icon></p>
+            </ion-item>
+          </div>
+      </ion-list>
+      <ion-list *ngSwitchCase="'pendingPayment'"  no-lines>
+          <div *ngIf="items.length==0">
+            <img src="assets/images/null.png" style="margin:20% auto; display: block;">
+          </div>
+          <ion-item *ngFor="let itm of items" (click)="viewOrderInfo(itm.orderNo)">
+              <ion-avatar item-left>
+                  <img  src="{{itm.icon}}" style="border-radius:0;">
+              </ion-avatar>
+               <h3 class="goods_Name">
+                    <span *ngIf="itm.orderType==3">{{itm.storeName}}</span>
+                    <span *ngIf="itm.orderType!=3">{{itm.goodsName}}</span>
+              </h3>
+             <p>
+                  <!-- <span *ngIf="itm.orderType==3">总价：¥{{itm.price}}</span>
+                  <span *ngIf="itm.orderType!=3">总价：¥{{itm.price*itm.num}}</span> -->
+                  <span style="float:right;">{{commonService.dateFormatLong(itm.createTime,'yy-MM-dd HH:mm')}}</span>
+              </p>
+              <p item-right> <ion-icon name="arrow-forward"  style="color:#ccc; "></ion-icon></p>
+          </ion-item>
+      </ion-list>
+      <ion-list *ngSwitchCase="'noprocess'"  no-lines>
+          <div *ngIf="items.length==0">
+              <img src="assets/images/null.png" style="margin:20% auto; display: block;">
+          </div>
+          <ion-item *ngFor="let itm of items" (click)="viewOrderInfo(itm.orderNo)">
+              <ion-avatar item-left>
+                  <img   src="{{itm.icon}}" style="border-radius:0;">
+              </ion-avatar>
+              <h3 class="goods_Name">
+                    <span *ngIf="itm.orderType==3">{{itm.storeName}}</span>
+                    <span *ngIf="itm.orderType!=3">{{itm.goodsName}}</span>
+              </h3>
+              <p>
+
+                  <!-- <span *ngIf="itm.orderType==3">总价：¥{{itm.price}}</span>
+                  <span *ngIf="itm.orderType!=3">总价：¥{{itm.price*itm.num}}</span> -->
+                  <span style="float:right;">{{commonService.dateFormatLong(itm.createTime,'yy-MM-dd HH:mm')}}</span>
+              </p>
+              <p item-right> <ion-icon name="arrow-forward"  style="color:#ccc; "></ion-icon></p>
+          </ion-item>
+      </ion-list>
+
+      <ion-list *ngSwitchCase="'anoprocess'"  no-lines>
+          <div *ngIf="items.length==0">
+            <img src="assets/images/null.png" style="margin:20% auto; display: block;">
+          </div>
+          <ion-item *ngFor="let itm of items" (click)="viewOrderInfo(itm.orderNo)">
+              <ion-avatar item-left>
+                  <img  src="{{itm.icon}}" style="border-radius:0;">
+              </ion-avatar>
+               <h3 class="goods_Name">
+                    <span *ngIf="itm.orderType==3">{{itm.storeName}}</span>
+                    <span *ngIf="itm.orderType!=3">{{itm.goodsName}}</span>
+              </h3>
+             <p>
+                  <!-- <span *ngIf="itm.orderType==3">总价：¥{{itm.price}}</span>
+                  <span *ngIf="itm.orderType!=3">总价：¥{{itm.price*itm.num}}</span> -->
+                  <span style="float:right;">{{commonService.dateFormatLong(itm.createTime,'yy-MM-dd HH:mm')}}</span>
+              </p>
+              <p item-right> <ion-icon name="arrow-forward"  style="color:#ccc; "></ion-icon></p>
+          </ion-item>
+      </ion-list>
+    </div>
+    <ion-infinite-scroll *ngIf="showScroll" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

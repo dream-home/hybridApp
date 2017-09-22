@@ -1,0 +1,250 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>确认订单</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="background:rgb(229, 229, 229)">
+  <div *ngIf="!isShowPayPw">
+      <ion-list no-margin class="payInfo">
+        <ion-row class="receivingInformation">
+            <ion-col style="color:#999;">收货信息</ion-col>
+        </ion-row>
+        <ion-row class="nullAddress" (click)="gotoDeliveryAddress(1)" *ngIf="MyUserAddr==null || MyUserAddr==''">
+            <ion-col>
+                <span>您还没有设置收货地址哦！</span>
+                <mark>〉</mark>
+            </ion-col>
+        </ion-row>
+        <ion-grid no-padding *ngIf="MyUserAddr!=null && MyUserAddr!=''">
+            <ion-row class="addressTatol" (click)="gotoDeliveryAddress(1)">
+                <ion-col class="addressInfo" text-left width-90>
+                    <ion-row class="name_phone">
+                        <ion-col>
+                            <span>{{MyUserAddr.receiveName}}</span><span>{{MyUserAddr.receivePhone}}</span>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row class="detailedAddress">
+                        <ion-col>{{MyUserAddr.province+MyUserAddr.city+MyUserAddr.county+MyUserAddr.addr}}</ion-col>
+                    </ion-row>
+                </ion-col>
+                <ion-col class="addressBtn" text-right width-10>
+                    <mark>〉</mark>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <!-- <ion-item no-padding style="border-top:none;">
+            <ion-label fixed>
+                联系人
+            </ion-label>
+            <ion-input maxlength="20" bindon-ngModel="userData.name"  placeholder="会员姓名" type="text"></ion-input>
+        </ion-item>
+        <ion-item no-padding>
+            <ion-label fixed>
+                联系电话
+            </ion-label>
+            <ion-input maxlength="11" bindon-ngModel="userData.phone"  placeholder="电话" type="text"></ion-input>
+        </ion-item>
+        <ion-item no-padding>
+            <ion-label fixed>
+                所在省份
+            </ion-label>
+            <ion-select #item1 [(ngModel)]="province" (ionChange)="selectProvi(item1)" okText="确认" cancelText="取消">
+              <ion-option *ngFor="let itms of provinces" value="{{itms.value}}">{{itms.text}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item no-padding>
+            <ion-label fixed>
+                所在城市
+            </ion-label>
+            <ion-select #item2 [(ngModel)]="city"  okText="确认" (ionChange)="selectCity(item2)" cancelText="取消">
+              <ion-option *ngFor="let itms of citys" value="{{itms.value}}">{{itms.text}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item no-padding>
+            <ion-label fixed>
+                所在区域
+            </ion-label>
+            <ion-select #item3 [(ngModel)]="county" okText="确认" (ionChange)="selectCounty(item3)" cancelText="取消">
+              <ion-option *ngFor="let itms of countys" value="{{itms.value}}">{{itms.text}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item no-padding style="border-bottom:none;">
+            <ion-label fixed>
+                具体地址
+            </ion-label>
+            <ion-input maxlength="20"  bindon-ngModel="userData.addr" placeholder="具体地址" type="text"></ion-input>
+        </ion-item> -->
+      </ion-list>
+      <!-- 选择支付方式 -->
+      <ion-list radio-group class="payWay">
+          <ion-row>
+            <ion-col>选择支付方式</ion-col>
+          </ion-row>
+          <ion-item *ngIf="type == '1004'">
+              <ion-label style="border:0;">EP支付( {{myEP}} )
+                  <span *ngIf="commonService.toDecimal(ShoppingCart.goodsAllPrice)>myEP">EP不足</span>
+              </ion-label>
+              <ion-radio checked="true"></ion-radio>
+          </ion-item>
+          <ion-item *ngIf="onePayWay && type != '1004'">
+              <ion-label style="border:0;">余额支付( ¥{{myScore}} )</ion-label>
+              <ion-radio (click)="changeSource(3)" checked="true" value="3"></ion-radio>
+          </ion-item>
+          <ion-item *ngIf="!onePayWay && type != '1004'">
+              <ion-label style="border:0;">余额支付( ¥{{myScore}} )</ion-label>
+              <ion-radio (click)="changeSource(3)" checked="true" value="3"></ion-radio>
+          </ion-item>
+          <ion-item *ngIf="onePayWay && type != '1004'">
+              <ion-label style="border:0;">微信支付</ion-label>
+              <ion-radio (click)="changeSource(2)" value="2" [disabled]="true"></ion-radio>
+          </ion-item>
+          <ion-item *ngIf="!onePayWay && type != '1004'">
+              <ion-label style="border:0;">微信支付</ion-label>
+              <ion-radio (click)="changeSource(2)" value="2"></ion-radio>
+          </ion-item>
+          <ion-item *ngIf="onePayWay && type != '1004'">
+              <ion-label style="border:0;">支付宝支付</ion-label>
+              <ion-radio (click)="changeSource(1)" value="1" [disabled]="true"></ion-radio>
+          </ion-item>
+          <ion-item *ngIf="!onePayWay && type != '1004'">
+              <ion-label style="border:0;">支付宝支付</ion-label>
+              <ion-radio (click)="changeSource(1)" value="1"></ion-radio>
+          </ion-item>
+          <!-- <ion-item *ngIf="type == '1004'">
+              <ion-label style="border:0;">EP支付</ion-label>
+              <ion-radio checked="true"></ion-radio>
+          </ion-item>
+          <ion-item *ngIf="type != '1004'">
+              <ion-label style="border:0;">余额支付( ¥{{myScore}} )</ion-label>
+              <ion-radio (click)="changeSource(3)" checked="true" value="3"></ion-radio>
+          </ion-item>
+          <ion-item *ngIf="type != '1004'">
+              <ion-label style="border:0;">微信支付</ion-label>
+              <ion-radio (click)="changeSource(2)" value="2"></ion-radio>
+          </ion-item>
+          <ion-item style="border-bottom:0;" *ngIf="type != '1004'">
+              <ion-label style="border:0;">支付宝支付</ion-label>
+              <ion-radio (click)="changeSource(1)" value="1"></ion-radio>
+          </ion-item> -->
+      </ion-list>
+      <!-- EP抵用券 -->
+      <ion-row *ngIf="ShoppingCart.discountEP>0" class="discountEP">
+          <ion-col *ngIf="discountBoolean">可用{{commonService.toDecimal(ShoppingCart.discountEP)}}EP券抵用{{commonService.toDecimal(ShoppingCart.discountEP)}}元(&nbsp;EP余额&nbsp;{{myEP}}&nbsp;)</ion-col>
+          <ion-col *ngIf="!discountBoolean" style="color:#ccc;">可用{{commonService.toDecimal(ShoppingCart.discountEP)}}EP券抵用{{commonService.toDecimal(ShoppingCart.discountEP)}}元(&nbsp;EP余额&nbsp;{{myEP}}&nbsp;)</ion-col>
+          <ion-col>
+              <ion-radio class="ionRadio" *ngIf="discountBoolean && myEP!=0" (click)="epDiscount()" checked="{{discountBoolean}}"></ion-radio>
+              <ion-radio class="ionRadio1" *ngIf="!discountBoolean && myEP!=0" (click)="epDiscount()" checked="{{discountBoolean}}"></ion-radio>
+              <ion-radio class="ionRadio1" *ngIf="myEP==0" checked="false"></ion-radio>
+          </ion-col>
+      </ion-row>
+      <ion-row class="goodsIf">
+        <ion-col style="color:#999;">商品详情</ion-col>
+      </ion-row>
+      <div *ngFor="let itm of myShopGoods; let iIndex = index" style="margin-bottom:1px;">
+        <ion-row *ngIf="itm.num!=0" class="goodsInfoCont">
+            <ion-col class="goodsInfoCont_img">
+                <img  src="{{itm.icon.substring(0,7)=='http://'?itm.icon+'-goodslist':itm.icon}}"/>
+            </ion-col>
+            <ion-col class="goodsInfoCont_name">
+                <span *ngIf="type == '1003'">{{itm.goodsName}}</span>
+                <span *ngIf="type != '1003'">{{itm.name}}</span>
+            </ion-col>
+            <ion-col class="goodsInfoCont_price">
+                <ion-row class="goodsInfoCont_pri">
+                    <ion-col no-padding>
+                      <span *ngIf="type != '1003' && type != '1004'">¥{{itm.price}}</span>
+                      <span *ngIf="type != '1003' && type == '1004'">{{itm.price}}EP</span>
+                      <span *ngIf="type != '1004' && type == '1003'">¥{{itm.price-itm.score}}</span>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="goodsInfoCont_num">
+                    <ion-col style="padding:2px 0;">
+                        <div class="num" *ngIf="type != '1003'">
+                            <button class="numRemove" (click)="numRemove($event,iIndex)">
+                                <img src="assets/images/delGoods.png"/>
+                            </button>
+                            <span (click)="stopPropagation($event,this)">
+                                <input type="number" bindon-ngModel="itm.num" [disabled]="true"/>
+                            </span>
+                            <button class="numAdd" (click)="numAdd($event,iIndex)">
+                                <img src="assets/images/addGoods.png"/>
+                            </button>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+      </div>
+  </div>
+  <!--支付界面-->
+    <ion-grid *ngIf="isShowPayPw">
+        <ion-row>
+            <ion-col text-center>
+                <h3>请输入6位支付密码</h3>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="this.type == '1004'">
+            <ion-col text-center>
+                <span color="yanbao">需要支付：{{commonService.toDecimal(ShoppingCart.goodsAllPrice)}}EP</span>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="this.type != '1004'">
+            <ion-col text-center>
+                <span color="yanbao">需要支付：{{commonService.toDecimal(ShoppingCart.goodsAllPrice-epDiscountNum)}}元</span>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-list no-padding no-margin>
+                    <ion-item>
+                        <ion-label fixed>
+                            支付密码
+                        </ion-label>
+                        <ion-input maxlength="6" clearInput="true" bindon-ngModel="payPwd" placeholder="输入6位数" type="password"></ion-input>
+                    </ion-item>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-50 text-right>
+                <button [disabled]="payPwd==null || payPwd.length<6 || isDisable" style="height:32px;margin-right:20px;" id="okBtn" (click)="carPay()" ion-button>确定</button>
+            </ion-col>
+            <ion-col width-50>
+                <button style="height:32px;margin-left:20px;"  ion-button (click)="goToBackPage()" color="light">取消</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+
+<ion-footer class="buy_auction" *ngIf="myShopGoods && !isShowPayPw">
+    <ion-grid no-padding>
+        <ion-row>
+            <ion-col no-padding class="price_total">
+                <ion-row class="total" *ngIf="ShoppingCart.goodsNum != 0 && type!=1003">
+                    <ion-col text-right no-padding *ngIf="type!=1004">
+                        <span>合计:</span><span>¥<mark>{{commonService.toDecimal(ShoppingCart.goodsAllPrice-epDiscountNum)}}</mark></span>
+                    </ion-col>
+                    <ion-col text-right no-padding *ngIf="type==1004" style="margin-top:12px;">
+                        <span>合计:</span><span><mark>{{commonService.toDecimal(ShoppingCart.goodsAllPrice)}}</mark>EP</span>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="receive" *ngIf="ShoppingCart.goodsNum != 0 && type!=1003 && type!=1004">
+                    <ion-col text-right no-padding>
+                        <span *ngIf="!discountBoolean">获赠:{{commonService.toDecimal(ShoppingCart.goodsAllEp)}}EP</span>
+                        <span>优惠:¥{{commonService.toDecimal(ShoppingCart.goodsAllMoney-ShoppingCart.goodsAllPrice)}}<span *ngIf="discountBoolean">EP优惠:{{commonService.toDecimal(epDiscountNum)}}</span></span>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+            <ion-col no-padding class="balance">
+                <button *ngIf="ShoppingCart.goodsNum == 0" [disabled]="true">提交订单</button>
+                <button (click)="carPay()" [disabled]="submitDisabled">提交订单</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-footer>

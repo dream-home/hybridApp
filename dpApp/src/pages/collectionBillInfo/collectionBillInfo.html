@@ -1,0 +1,114 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>收款账单详情</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content style="background:rgb(229, 229, 229);">
+    <ion-grid no-padding *ngIf="details!=null">
+        <ion-row class="collectionAmount">
+            <ion-col no-padding>
+                <ion-row class="collectionImg">
+                    <ion-col>
+                        <img src="{{storeIcon}}"/>
+                        <span>{{storeName}}</span>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="collectionSum">
+                    <ion-col>
+                      +{{commonService.toNumber(details.payment)}}
+                      <mark style="background:none;">元</mark>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-row class="goodsIf">
+            <span>商品信息：</span>
+            <div class="goodsIfWay">{{details.source}}</div>
+            <div class="goodsIfAmount">¥{{commonService.toNumber(details.payment)}}</div>
+        </ion-row>
+        <ion-row class="marketingSetTitle">
+            <ion-col no-padding>营销分成</ion-col>
+        </ion-row>
+        <ion-row class="marketingSet">
+            <ion-list class="marketingInfo">
+                <ion-row class="discountEP"> 
+                  <ion-col>
+                    EP抵扣比例
+                  </ion-col>
+                  <ion-col>
+                    <input type="number" bindon-ngModel="details.discountEP"  [disabled]="true">
+                  </ion-col>
+                  <ion-col text-right>%</ion-col>
+                </ion-row>
+                <ion-row class="sendEP">
+                  <ion-col>
+                    EP赠送比例
+                  </ion-col>
+                  <ion-col>
+                    <input type="number" bindon-ngModel="details.businessSendEp" [disabled]="true">
+                  </ion-col>
+                  <ion-col text-right>%</ion-col>
+                </ion-row>
+                <ion-row class="distributionOne">
+                  <ion-col>
+                    一级分销比例
+                  </ion-col>
+                  <ion-col>
+                    <input type="number" bindon-ngModel="details.firstReferrerScale" [disabled]="true">
+                  </ion-col>
+                  <ion-col text-right>%</ion-col>
+                </ion-row>
+                <ion-row class="distributionTwo">
+                  <ion-col>
+                    二级分销比例
+                  </ion-col>
+                  <ion-col>
+                    <input type="number" bindon-ngModel="details.secondReferrerScale"  [disabled]="true">
+                  </ion-col>
+                  <ion-col text-right>%</ion-col>
+                </ion-row>
+                <ion-row class="distributionTwo">
+                  <ion-col>
+                    三级分销比例
+                  </ion-col>
+                  <ion-col>
+                    <input type="number" bindon-ngModel="details.thirdReferrerScale"  [disabled]="true">
+                  </ion-col>
+                  <ion-col text-right>%</ion-col>
+                </ion-row>
+            </ion-list>
+        </ion-row>
+        <ion-row class="actualCollection">
+            <ion-col no-padding>实际收款</ion-col>
+            <ion-col no-padding>¥{{commonService.toNumber(details.confirmScore)}}</ion-col>
+        </ion-row>
+        <ion-row class="createTime">
+            <ion-col no-padding>创建时间</ion-col>
+            <ion-col no-padding>{{commonService.dateFormatLong(details.createTime,'yyyy-MM-dd HH:mm')}}</ion-col>
+        </ion-row>
+        <ion-row class="orderNo">
+            <ion-col no-padding>交易单号</ion-col>
+            <ion-col no-padding>{{details.orderNo}}</ion-col>
+        </ion-row>
+        <ion-row class="orderFrom">
+            <ion-col no-padding>订单来源</ion-col>
+            <ion-col no-padding>{{details.source}}</ion-col>
+        </ion-row>
+        <ion-row class="orderStatus">
+            <ion-col no-padding>订单状态</ion-col>
+            <ion-col no-padding>{{details.status}}</ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<!-- <ion-footer *ngIf="orderStatus != 1">
+    <ion-row class="confirmCollection">
+        <ion-col no-padding>
+            <button (click)="gotoPayMent()">确认收款</button>
+        </ion-col>
+    </ion-row>
+</ion-footer> -->

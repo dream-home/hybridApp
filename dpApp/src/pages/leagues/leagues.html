@@ -1,0 +1,66 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+            <button ion-button style="font-size:15px;" (click)="findCity()">
+                {{areaName}}
+                <ion-icon name="arrow-down"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-searchbar [(ngModel)]="shopName" placeholder="店铺名" center></ion-searchbar>
+        <ion-buttons end>
+            <button style="font-size:15px;"  ion-button (click)="gotoSearchPage()">
+                搜索
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="background:#e5e5e5;">
+
+<ion-list no-lines class="shops_list">
+    <div *ngIf="items=='' || items==null" class="nullOfThing">
+        <img src="assets/images/null.png" />
+    </div>
+    <div *ngFor="let itm of items" (click)="gotoShop(itm.id)" class="goodsPlate">
+        <div class="storeImg">
+            <img src="{{itm.icon}}" style="width:100%;"/>
+        </div>
+        <div class="storeName">{{itm.storeName}}</div>
+        <ion-row class="storeCont" >
+            <ion-col text-left no-padding>累计销售{{itm.sumSaleCount}}</ion-col>
+            <ion-col text-right no-padding *ngIf="itm.distance!='0'">
+                <span>{{itm.distanceRank}}</span>
+            </ion-col>
+        </ion-row>
+    </div>
+    <!-- <ion-item *ngFor="let itm of items" (click)="gotoShop(itm.id)" >
+        <ion-thumbnail item-left>
+           <img   src="{{itm.icon}}"/>
+        </ion-thumbnail>
+        <h2 class="storeName">{{itm.storeName}}</h2>
+        <span>数码</span>
+        <div  class="addrs">
+            <span class="addrs_span">
+            <img src="assets/images/addr.png" style="width:1rem;vertical-align: top;">
+            {{itm.province}}&nbsp;&nbsp;{{itm.city}}
+            </span>
+           <button ion-button clear no-margin *ngIf="itm.isCollect==1" (click)="removeCollection(itm.id,$event);itm.isCollect=0" >
+            <ion-icon name="heart"></ion-icon>&nbsp;&nbsp;取消收藏
+            </button>
+            <button ion-button clear no-margin *ngIf="itm.isCollect==0" (click)="addCollection(itm.id,$event);itm.isCollect=1" >
+                <ion-icon name="heart-outline"></ion-icon>&nbsp;&nbsp;收藏店铺
+            </button>
+        </div>
+         [disabled]="true"
+    </ion-item> -->
+</ion-list>
+
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-infinite-scroll *ngIf="showScroll" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

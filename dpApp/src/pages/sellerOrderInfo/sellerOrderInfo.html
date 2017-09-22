@@ -1,0 +1,166 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>订单详情</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+
+    <div *ngIf="info">
+        <ion-grid>
+            <ion-row>
+                <ion-col no-padding style="padding:5px !important;" width-50>订单明细</ion-col>
+                <ion-col no-padding style="padding:5px !important;" width-50 text-right>
+                    <span *ngIf="info.status==0" style="color:#BF3EFF;">未付款</span>
+                    <span *ngIf="info.status==2" style="color:#f7689e;">未处理</span>
+                    <span *ngIf="info.status==3" style="color:#03bb03;">已处理</span>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-list no-margin>
+            <button ion-item  (click)="gotoShop(info.storeId)">
+                <img item-left src="{{info.storeIcon}}" style="width:36px; height: auto;"/>
+                {{info.storeName}}
+            </button>
+        </ion-list>
+
+        <ion-grid style=" background: #fff;"  *ngIf="info.orderType=='3'">
+            <ion-row *ngFor="let orderitm of info.cartList">
+                <ion-col width-50>{{orderitm.goodsName}}</ion-col>
+                <ion-col width-25 text-center>x{{orderitm.num}}</ion-col>
+                <ion-col width-25 text-center>¥{{orderitm.price}}</ion-col>
+            </ion-row>
+
+            <ion-row >
+                <ion-col width-50></ion-col>
+                <ion-col width-25 text-center>订单总价</ion-col>
+                <ion-col width-25 text-center>
+                    <span style="color:#f10214;">¥{{info.price}}</span>
+                </ion-col>
+            </ion-row>
+
+        </ion-grid>
+      <!--   <ion-list  style=" background: #fff;"  *ngIf="info.orderType=='3'" no-padding no-margin>
+                <ion-item  style="min-height: 0;">
+                     <span style="color:#f10214; float: right;">总价：¥{{info.price}}</span>
+                </ion-item>
+        </ion-list> -->
+        <ion-grid style="background: #fff;" *ngIf="info.orderType!='3'">
+            <ion-row >
+                <ion-col width-50>{{info.goodsName}}</ion-col>
+                <ion-col width-25 text-center>x{{info.num}}</ion-col>
+                <ion-col width-25 text-center>¥{{info.price}}</ion-col>
+            </ion-row>
+
+            <ion-row >
+                <ion-col width-50></ion-col>
+                <ion-col width-25 text-center>订单总价</ion-col>
+                <ion-col width-25 text-center>
+                    <span style="color:#f10214;">¥{{info.price*info.num}}</span>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <!-- <ion-list  style=" background: #fff;"  *ngIf="info.orderType!='3'" no-padding no-margin>
+                <ion-item  style="min-height: 0;">
+                     <span style="color:#f10214; float: right;">总价：¥{{info.price*info.num}}</span>
+                </ion-item>
+        </ion-list> -->
+
+        <ion-grid no-padding  *ngIf="info.status=='3'||info.status=='2'" style="background:#fff;border-bottom:1px solid #dfdfdf;border-top:1px solid #dfdfdf;">
+              <ion-row style="padding-left:5px;border-bottom:1px solid #dfdfdf;line-height: 25px; background:#f4f4f4;">
+                  <ion-col nomargin  style="padding:5px !important;">支付明细</ion-col>
+              </ion-row>
+              <ion-row style="padding: 5px;" *ngIf="info.discountEP>0">
+                  <ion-col width-75 >EP券抵用</ion-col>
+                  <ion-col width-25 text-center>-{{info.discountEP}}</ion-col>
+              </ion-row>
+               <ion-row style="padding: 5px;" *ngIf="info.orderType=='3'">
+                  <ion-col width-75>实际付款</ion-col>
+                  <ion-col width-25 text-center style="color:#f10214;">
+                    ¥{{commonService.toNumber(info.price*1-info.discountEP)}}
+                  </ion-col>
+              </ion-row>
+              <ion-row style="padding: 5px;" *ngIf="info.orderType!='3'">
+                  <ion-col width-75>实际付款</ion-col>
+                  <ion-col width-25 text-center style="color:#f10214;">
+                      ¥{{commonService.toNumber(info.price*info.num-info.discountEP)}}
+                  </ion-col>
+              </ion-row>
+        </ion-grid>
+
+        <ion-grid *ngIf="info.status!=0">
+            <ion-row>
+                <ion-col no-padding style="padding:5px !important;">{{info.status==3?'物流信息':'请填写物流信息'}}</ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-list *ngIf="info && info.status!=0"  no-margin class="info_input">
+            <ion-item>
+                <ion-label fixed>
+                    <span style="color:red;">*</span>
+                    快递公司：
+                </ion-label>
+                <ion-input [disabled]="info.status==3" maxlength="20" bindon-ngModel="info.expressName" placeholder="输入快递公司" type="text"  style="color:#999;"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>
+                    <span style="color:red;">*</span>
+                    快递单号：
+                </ion-label>
+                <ion-input [disabled]="info.status==3" maxlength="20" bindon-ngModel="info.expressNo" placeholder="输入快递单号" type="text"  style="color:#999;"></ion-input>
+            </ion-item>
+             <ion-item *ngIf="info.status==3">
+                   发货时间：<span *ngIf="info.updateTime!='' && info.updateTime!=null" style="color:#999;">{{commonService.dateFormatLong(info.updateTime,'yyyy-MM-dd HH:mm')}}</span>
+            </ion-item>
+        </ion-list>
+        <ion-grid>
+            <ion-row>
+                <ion-col no-padding style="padding:5px !important;">收货信息</ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-list no-margin no-padding *ngIf="info" class="info_getgoods" >
+            <ion-item >
+               <span>收&nbsp;货&nbsp;人：{{info.userName}}</span>
+            </ion-item>
+            <ion-item >
+               <span>联系电话：{{info.phone}}</span>
+            </ion-item>
+            <ion-item>
+              <span>收货地址：</span><span style="overflow: auto;white-space: normal;">{{info.addr}} </span>
+            </ion-item>
+        </ion-list>
+        <ion-grid>
+            <ion-row>
+                <ion-col no-padding style="padding:5px !important;">订单信息</ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-list no-margin no-padding *ngIf="info" class="info_getgoods">
+            <ion-item >
+               <span>订单编号：{{info.orderNo}}</span>
+            </ion-item>
+            <ion-item >
+               下单时间：<span *ngIf="info.createTime!='' && info.createTime!=null">{{commonService.dateFormatLong(info.createTime,'yyyy-MM-dd HH:mm')}}</span>
+            </ion-item>
+            <ion-item>
+                <span>支付方式：</span>
+                <span *ngIf="(40>info.payWay&&info.payWay>=30)||info.payWay==3">余额支付</span>
+                <span *ngIf="(20>info.payWay&&info.payWay>=10)||info.payWay==1">支付宝支付</span>
+                <span *ngIf="(30>info.payWay&&info.payWay>=20)||info.payWay==2">微信支付</span>
+            </ion-item>
+        </ion-list>
+        <div style="height:60px;"></div>
+    </div>
+</ion-content>
+<ion-footer *ngIf="info&&info.status==2">
+    <ion-toolbar no-padding no-margin  >
+        <div  >
+        <button ion-button full no-margin (click)="delivery()">确认发货</button>
+        </div>
+    </ion-toolbar>
+</ion-footer>

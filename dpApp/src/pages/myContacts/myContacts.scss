@@ -1,0 +1,48 @@
+page-myContacts {
+	.scroll-content{
+		background-color:#EFEFEF;
+	}
+	.tab_divs div{
+		width: 90px;
+		height: 90px;
+		border-radius: 90px;
+		overflow: hidden; 
+		color: #fff;
+		text-align: center;
+		display: inline-block;
+	}
+	.tab_div1{
+		background-color: #60aeff;
+	}
+	.tab_div2{
+		background-color: #0fd8db;
+	}
+	.tab_div3{
+		background-color: #eead00;
+	}
+	.tab_divs div h1{
+		margin:17px 0 0 0;
+	}
+	.tab_divs div span{
+		
+		font-size: 16px;
+		font-weight: 500;
+	}
+	
+	.isComplete{
+		display: inline-block;color: #fff;font-size: 12px; padding:3px 5px; border-radius: 3px;
+		 /*background: linear-gradient(#f14500, #FF651E,#eead00);*/
+		  background: linear-gradient(to right, rgba(241,69,0,1), rgba(255,101,30,0.7),rgba(238,173,0,0.7));
+	}
+
+	.item-ios ion-thumbnail {
+		  min-width: 80px;
+		  min-height: 80px;
+		}
+
+		.item-ios ion-thumbnail ion-img,
+		.item-ios ion-thumbnail img {
+		  width: 80px;
+		  height: 80px; 
+		}
+}

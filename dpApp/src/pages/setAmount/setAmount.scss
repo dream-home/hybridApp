@@ -1,0 +1,101 @@
+page-setAmount{
+	.setAmount{
+		margin-top:15px;
+		ion-row{
+			background:#fff;
+		}
+		.amount{
+			padding:5px 0 !important;
+			ion-col{
+					line-height: 18px;
+			}
+			span{
+				// display:inline-block;
+				margin-top:1px;
+				float:left;
+			}
+			ion-input{
+					// display: none;
+					height:24px;
+					width:160px;
+					float:left;
+					line-height: 24px;
+			    margin:-3px 0 0 3px !important;
+					input{
+					    font-size: 20px;
+					    float: left;
+					    position: absolute;
+					}
+			}
+		}
+		.prompt{
+				font-size: 12px;
+				margin-top:5px;
+				ion-col{
+						padding:3px 5px 3px 15px !important;
+						mark{
+								color:red;
+								background:none;
+						}
+				}
+		}
+		.discountEP{
+			padding:5px 0 !important;
+			margin-top:5px;
+		}
+		.sendEP{
+			padding:5px 0 !important;
+			margin-top:5px;
+			border-bottom:1px #ccc solid;
+		}
+		.distributionOne{
+			padding:5px 0 !important;
+			border-bottom:1px #ccc solid;
+		}
+		.distributionTwo{
+			padding:5px 0 !important;
+			border-bottom:1px #ccc solid;
+		}
+		.distributionThree{
+			padding:5px 0 !important;
+		}
+		.amount,.discountEP,.sendEP,.distributionOne,.distributionTwo,.distributionThree{
+			ion-col:nth-child(1){
+				text-align:left;
+				max-width:30%;
+				padding:5px 5px 5px 15px !important;
+			}
+			ion-col:nth-child(2){
+				max-width:60%;
+				padding:5px !important;
+				input{
+					border:0;
+					font-size: 16px;
+				}
+			}
+			ion-col:nth-child(3){
+				text-align:center;
+				max-width:10%;
+				padding:5px !important;
+			}
+		}
+		.amount{
+				ion-col:nth-child(2){
+						input{
+							margin:0 !important;
+						}
+				}
+		}
+		.discountEP,.sendEP,.distributionOne,.distributionTwo,.distributionThree{
+				ion-col:nth-child(2){
+						input{
+							margin:2px 0 0 0 !important;
+						}
+				}
+		}
+		button{
+			margin:30px auto 0 auto;
+			width:95%;
+		}
+	}
+}

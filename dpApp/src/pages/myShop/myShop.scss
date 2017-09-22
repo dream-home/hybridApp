@@ -1,0 +1,30 @@
+page-myShop {
+    .showGoods{
+        background-color:#EFEFEF;
+        padding: 0px 0px 5px 0;
+        margin-bottom:40px;
+    }
+    .goodsInfo{
+        border-top: 1px solid #DFDFDF;
+        border-bottom: 1px solid #DFDFDF;
+        margin-bottom: 5px;
+        background-color: #FFFFFF;
+    }
+    ion-footer{
+        height:40px;
+    }
+    .shopCode{
+        background:#FF651E;
+        height:40px;
+        button{
+            border:0;
+            width:100%;
+            height:40px;
+            text-align:center;
+            line-height:40px;
+            color:#fff;
+            background:none;
+            font-size:16px;
+        }
+    }
+}

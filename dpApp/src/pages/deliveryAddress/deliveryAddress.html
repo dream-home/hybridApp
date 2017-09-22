@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>我的收货地址</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid class="addressInfo">
+        <ion-row class="nullAddress" *ngIf="userAddress==null || userAddress==''">
+            <ion-col>
+                <img src="assets/images/nullAddress.png"/>
+            </ion-col>
+        </ion-row>
+        <div *ngIf="userAddress!=null || userAddress!=''">
+            <div class="addressInfoContent" *ngFor="let itms of userAddress;let iIndex = index" (click)="editAddress($event,itms)">
+                <ion-row class="name_phone">
+                    <ion-col text-left>{{itms.receiveName}}</ion-col>
+                    <ion-col text-right>{{itms.receivePhone}}</ion-col>
+                </ion-row>
+                <ion-row class="detailedAddress">
+                    <ion-col>{{itms.province+itms.city+itms.county+itms.addr}}</ion-col>
+                </ion-row>
+                <ion-row class="addressOperation">
+                    <ion-col text-left>
+                        <ion-checkbox *ngIf="fromId==0&&itms.isDefault==0" checked="false" (click)="addDefault(itms.id)"></ion-checkbox>
+                        <ion-checkbox *ngIf="fromId==0&&itms.isDefault==1" checked="true" (click)="addDefault(itms.id)"></ion-checkbox>
+                        <span *ngIf="fromId==0">设为默认地址</span>
+                    </ion-col>
+                    <ion-col text-right>
+                        <button *ngIf="fromId==0" (click)="removeAddress($event,itms.id)">删除</button>
+                        <button *ngIf="fromId==1" (click)="gotoeditAddress($event,itms)">编辑</button>
+                    </ion-col>
+                </ion-row>
+            </div>
+        </div>
+    </ion-grid>
+</ion-content>
+
+<ion-footer>
+    <ion-row class="addAddress">
+        <ion-col>
+            <button (click)="gotoAddAddress()">新增收货地址</button>
+        </ion-col>
+    </ion-row>
+</ion-footer>

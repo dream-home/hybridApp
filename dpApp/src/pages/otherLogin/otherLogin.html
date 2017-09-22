@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="yanbao">
+    <ion-buttons start>
+      <button ion-button icon-only (click)="goToBackPage()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title center>用户登录</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid class="weixinLogo">
+        <ion-row>
+            <ion-col text-center>
+                <img class="userImg" src="assets/images/dp.png"/>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-list no-margin>
+        <ion-item>
+            <ion-label >用户名</ion-label>
+            <ion-input maxlength="11" type="text" bindon-ngModel="loginName" placeholder="手机号/UID" clearInput></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label >密&nbsp;&nbsp; 码</ion-label>
+            <ion-input maxlength="15" type="password" bindon-ngModel="password" placeholder="输入密码" clearInput></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>验证码</ion-label>
+            <ion-input maxlength="4" type="text" bindon-ngModel="picCode" placeholder="输入验证码"></ion-input>
+            <img src="{{strImg}}" (click)="loadData()" style="height:35px;width:90px;" no-padding item-right ion-button clear>
+        </ion-item>
+    </ion-list>
+    <div padding text-right>
+      <button ion-button (click)="loginIn()" block>登录</button>
+      <!-- <button ion-button clear (click)="gotoRegisterPage()">注册</button> -->
+      <button ion-button clear (click)="alertPwd()">忘记密码?</button>
+    </div>
+</ion-content>

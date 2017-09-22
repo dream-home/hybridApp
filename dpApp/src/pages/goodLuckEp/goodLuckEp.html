@@ -1,0 +1,153 @@
+<ion-header>
+
+    <ion-toolbar color="yanbao">
+    	<ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>{{name}}</ion-title>
+    </ion-toolbar>
+	<div *ngIf="id==10001" style="width: 100%;color:#03bb03; font-size: 14px; font-weight: 500; padding: 5px; letter-spacing: 2px;">可消费EP：{{myEP}}
+    </div>
+    <!-- <div *ngIf="id!=10001" style="background: #fff; border-bottom: 1px solid #ececec;">
+        <ion-grid class="goodsInfo" *ngIf="datas!=null">
+            <ion-row>
+                <ion-col no-padding text-left width-33 style="border:solid 1px #ECECEC;border-left:none;border-bottom:none;border-top:none" (click)="filterData(1,0)">
+                    <span style="margin-left:10px;font-size:14px;color:#999999;text-align:center;">综合 <img style="height:10px; margin-left: 3px;" src="assets/images/updown.png" ></span>
+                </ion-col>
+                <ion-col no-padding text-center width-33 style="border:solid 1px #ECECEC;border-left:none;border-bottom:none;border-top:none" (click)="filterData(1,0)">
+                    <span style="font-size:14px;color:#999999">上架时间<img style="height:10px; margin-left: 3px;" src="assets/images/updown.png" ></span>
+                </ion-col>
+                <ion-col no-padding text-right width-33 (click)="filterData(0,1)">
+                    <span style="margin-right:10px;font-size:14px;color:#999999">价格<img style="height:10px; margin-left: 3px;" src="assets/images/updown.png" ></span>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div> -->
+</ion-header>
+
+<ion-content >
+
+    <!-- <div class="leftPanel" scrollY="true">
+        <button id="{{itm.id}}" [ngClass]="itm.id==id?'btn-selected':'btn-default'" color="light" small full ion-button *ngFor="let itm of buttons" (click)="showGoods(itm.id,this)">{{itm.name}}</button>
+    </div> -->
+
+        <div *ngIf="id!=10001">
+            <div>
+                <ion-grid class="goodsInfo" *ngIf="datas!=null">
+                    <ion-row>
+                        <ion-col no-padding text-left width-33 style="border:solid 1px #ECECEC;border-left:none;border-bottom:none;border-top:none" (click)="filterData(1,0)">
+                            <span style="margin-left:10px;font-size:14px;color:#999999;text-align:center;">综合 <img style="height:10px; margin-left: 3px;" src="assets/images/updown.png" ></span>
+                        </ion-col>
+                        <ion-col no-padding text-center width-33 style="border:solid 1px #ECECEC;border-left:none;border-bottom:none;border-top:none" (click)="filterData(1,0)">
+                            <span style="font-size:14px;color:#999999">上架时间<img style="height:10px; margin-left: 3px;" src="assets/images/updown.png" ></span>
+                        </ion-col>
+                        <ion-col no-padding text-right width-33 (click)="filterData(0,1)">
+                            <span style="margin-right:10px;font-size:14px;color:#999999">价格<img style="height:10px; margin-left: 3px;" src="assets/images/updown.png" ></span>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+            <div *ngIf="datas==null || datas.length==0" style="text-align:center;" class="nullPage">
+                <img src="assets/images/null.png">
+            </div>
+
+            <ion-grid no-padding no-margin class="goodsInfo" (click)="gotoGoodsInfo(d.id,10002)" *ngFor="let d of datas">
+                <ion-row no-padding style="border-bottom:1px solid #DFDFDF;">
+                    <ion-col text-center width-33>
+                        <img style="height:116px;margin-top:8px;" src="{{d.icon.substring(0,7)=='http://'?d.icon+'-goodslist':d.icon}}"/>
+                    </ion-col>
+                    <ion-col width-66 style="padding-left:5px;position:relative;">
+                        <div no-padding class="goodsFontColor" style="padding:5px 0 5px 0;">
+                            <span style="color:#000;font-size:16px;">{{d.name}}</span>
+                        </div>
+                         <div no-padding class="goodsFontColor">
+                            <span style="color:#f7689e;font-size:16px;">¥{{d.price}}</span>
+                            <span style="color:#666;font-size:10px; margin-left: 10px;">门市价：¥{{d.originalPrice}}</span>
+                        </div>
+                        <!-- <div no-padding class="goodsFontColor">
+                            <span style="color:#ff0000;font-size:14px;">斗拍价：{{commonService.toNumber(d.drawPrice)}}&nbsp;积分</span>
+                        </div> -->
+                        <ion-row>
+                            <ion-col style="padding:5px 0 0 0;">
+                                <span style="color:#03bb03;font-size:12px;">赠送：{{d.businessSendEp}}&nbsp;EP</span>
+                                &nbsp;&nbsp;
+                                <!-- <span style="color:#ff651e;font-size:12px;">斗拍人数：{{d.drawNum}}</span> -->
+                            </ion-col>
+                        </ion-row>
+                        <ion-row style="position:absolute;bottom:5px;right:5px;">
+                            <ion-col text-right *ngIf='d.stock==0' no-padding>
+                                <ion-chip color="danger">
+                                    <ion-label>已售罄</ion-label>
+                                </ion-chip>
+                            </ion-col>
+                            <ion-col text-right no-padding *ngIf='d.stock>0'>
+                                <!-- <button outline [disabled]="(d.drawNum-d.curNum)==0"  *ngIf="d.isDraw==0"
+                                 small ion-button>参与斗拍</button>
+                                <button outline *ngIf="d.isDraw==1" [disabled]="true" small ion-button>已斗拍</button> -->
+                                <button outline (click)="gotobuyGoods(d,$event,1)" small ion-button style="background:#ff651e;color:#fff;">直接购买</button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+
+        <div *ngIf="id==10001" style="background:#efefef;">
+<!--
+            <ion-grid no-padding no-margin  class="goodsInfo" (click)="gotoGoodsInfo(d.id,10001)" *ngFor="let d of datas">
+                <ion-row no-padding style="border-bottom:1px solid #DFDFDF;">
+                    <ion-col text-center width-33>
+                        <img style="height:116px;margin-top:8px;" src="{{d.icon.substring(0,7)=='http://'?d.icon+'-goodslist':d.icon}}"/>
+                    </ion-col>
+                    <ion-col width-66>
+                        <ion-col style="font-size:16px;padding:5px 0 5px 0;">
+                            <span>{{d.name}}</span>
+                        </ion-col>
+                        <ion-col no-padding class="goodsFontColor">
+                            <h3 style="color:#E7752C;font-size:16px;">¥{{d.price}}EP</h3>
+                        </ion-col>
+                        <ion-col text-right>
+                            <button outline (click)="EPbuyGoods(d,$event,1)" small ion-button>立即兑换</button>
+                        </ion-col>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+ -->
+            <ion-grid no-padding no-margin>
+                <ion-row wrap>
+                    <ion-col class="hotContent" no-padding width-33 (click)="gotoGoodsInfo(d.id,10001)" *ngFor="let d of datas">
+                        <ion-grid >
+                             <ion-row style="background:#fff;">
+                                <ion-card class="hotImg" style="margin:8px 8px 5px 8px; width: 100%;">
+                                    <img  src="{{d.icon}}">
+                                </ion-card>
+                            </ion-row>
+                            <ion-row no-margin style="background:#fff;">
+                                <ion-col  text-center style="padding:0 5px;">
+                                    <div style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis; color:#333; font-size: 12px;">
+                                        <span >{{d.name}}</span>
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row  no-margin style="background:#fff;">
+                                <ion-col text-left>
+                                    <span style="color:#03bb03;font-size:12px;">{{d.price}}EP </span>
+                                </ion-col>
+                                <ion-col text-right >
+                                    <button outline (click)="EPbuyGoods(d,$event,1)" small ion-button style="padding:2px 5px;margin: 0;height:auto; vertical-align: top; font-size: 12px;">兑换</button>
+                                </ion-col>
+                            </ion-row>
+
+                        </ion-grid>
+
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+        </div>
+    <ion-infinite-scroll *ngIf="showScroll" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

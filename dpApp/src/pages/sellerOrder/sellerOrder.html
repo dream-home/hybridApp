@@ -1,0 +1,137 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>我的订单</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-segment mode="md" [(ngModel)]="order">
+        <ion-segment-button value="process" (ionSelect)="selected(1)">
+            全部
+        </ion-segment-button>
+        <ion-segment-button value="noprocess" (ionSelect)="selected(0)">
+            待付款
+        </ion-segment-button>
+        <ion-segment-button value="anoprocess" (ionSelect)="selected(2)">
+            待发货
+        </ion-segment-button>
+         <ion-segment-button value="Alreadyshipped" (ionSelect)="selected(3)">
+            已发货
+        </ion-segment-button>
+    </ion-segment>
+
+    <div [ngSwitch]="order" class="list_product">
+
+      <ion-list *ngSwitchCase="'process'"  no-lines>
+          <div *ngIf="items.length==0">
+            <img src="assets/images/null.png" style="margin:20% auto; display: block;">
+          </div>
+          <ion-item *ngFor="let itm of items" (click)="viewOrderInfo(itm.orderNo)">
+              <ion-avatar item-left>
+                  <img src="{{itm.icon}}" style="border-radius:0;">
+              </ion-avatar>
+              <h3 class="goods_Name">
+                  <span *ngIf="itm.status==2" style="color:#f7689e;">[待发货]</span>
+                  <span *ngIf="itm.status==3" style="color:#03bb03;">[已发货]</span>
+                  <span *ngIf="itm.status==0" style="color:#BF3EFF;">[待付款]</span>
+
+                    <span *ngIf="itm.orderType==3">{{itm.storeName}}</span>
+                    <span *ngIf="itm.orderType!=3">{{itm.goodsName}}</span>
+
+              </h3>
+              <ion-grid style="font-size:1.4rem; color:#666;" no-padding no-margin>
+                  <ion-row>
+                      <ion-col>
+                            <!-- <span *ngIf="itm.orderType==3">总价：¥{{commonService.toDecimal(itm.price*1)}}
+                            </span>
+                            <span *ngIf="itm.orderType!=3&&itm.remark!='EP兑换'">总价：¥{{commonService.toDecimal(itm.price*itm.num)}}</span>
+                            <span *ngIf="itm.orderType!=3&&itm.remark=='EP兑换'">总价：¥{{commonService.toDecimal(itm.price)}}EP</span> -->
+
+                      </ion-col>
+                      <ion-col text-right>
+                          <span>{{commonService.dateFormatLong(itm.createTime,'yy-MM-dd HH:mm')}}</span>
+                      </ion-col>
+                  </ion-row>
+              </ion-grid>
+              <p item-right> <ion-icon name="arrow-forward"  style="color:#ccc; "></ion-icon></p>
+          </ion-item>
+      </ion-list>
+
+      <ion-list *ngSwitchCase="'noprocess'"  no-lines>
+          <div *ngIf="items.length==0">
+              <img src="assets/images/null.png" style="margin:20% auto; display: block;">
+          </div>
+          <ion-item *ngFor="let itm of items" (click)="viewOrderInfo(itm.orderNo)">
+              <ion-avatar item-left>
+                  <img src="{{itm.icon}}" style="border-radius:0;">
+              </ion-avatar>
+              <h3 class="goods_Name">
+                    <span *ngIf="itm.orderType==3">{{itm.storeName}}</span>
+                    <span *ngIf="itm.orderType!=3">{{itm.goodsName}}</span>
+              </h3>
+              <p>
+                 <!-- <span *ngIf="itm.orderType==3">总价：¥{{commonService.toDecimal(itm.price*1)}}</span>
+                 <span *ngIf="itm.orderType!=3&&itm.remark!='EP兑换'">总价：¥{{commonService.toDecimal(itm.price*itm.num)}}</span>
+                 <span *ngIf="itm.orderType!=3&&itm.remark=='EP兑换'">总价：¥{{commonService.toDecimal(itm.price)}}EP</span> -->
+                 <span *ngIf="itm.remark=='EP兑换'">EP</span>
+                  <span style="float:right;">{{commonService.dateFormatLong(itm.createTime,'yy-MM-dd HH:mm')}}</span>
+              </p>
+              <p item-right> <ion-icon name="arrow-forward"  style="color:#ccc; "></ion-icon></p>
+          </ion-item>
+      </ion-list>
+
+      <ion-list *ngSwitchCase="'anoprocess'"  no-lines>
+          <div *ngIf="items.length==0">
+            <img src="assets/images/null.png" style="margin:20% auto; display: block;">
+          </div>
+          <ion-item *ngFor="let itm of items" (click)="viewOrderInfo(itm.orderNo)">
+              <ion-avatar item-left>
+                  <img src="{{itm.icon}}"  style="border-radius:0;">
+              </ion-avatar>
+              <h3 class="goods_Name">
+                    <span *ngIf="itm.orderType==3">{{itm.storeName}}</span>
+                    <span *ngIf="itm.orderType!=3">{{itm.goodsName}}</span>
+              </h3>
+             <p>
+                  <!-- <span *ngIf="itm.orderType==3">总价：¥{{commonService.toDecimal(itm.price*1)}}</span>
+                  <span *ngIf="itm.orderType!=3&&itm.remark!='EP兑换'">总价：¥{{commonService.toDecimal(itm.price*itm.num)}}</span>
+                  <span *ngIf="itm.orderType!=3&&itm.remark=='EP兑换'">总价：¥{{commonService.toDecimal(itm.price)}}</span> -->
+                  <span *ngIf="itm.remark=='EP兑换'">EP</span>
+                  <span style="float:right;">{{commonService.dateFormatLong(itm.createTime,'yy-MM-dd HH:mm')}}</span>
+              </p>
+              <p item-right> <ion-icon name="arrow-forward"  style="color:#ccc; "></ion-icon></p>
+          </ion-item>
+      </ion-list>
+       <ion-list *ngSwitchCase="'Alreadyshipped'"  no-lines>
+          <div *ngIf="items.length==0" >
+            <img src="assets/images/null.png" style="margin:20% auto; display: block;">
+          </div>
+          <ion-item *ngFor="let itm of items" (click)="viewOrderInfo(itm.orderNo)">
+              <ion-avatar item-left large>
+                  <img src="{{itm.icon}}" style="border-radius:0;">
+              </ion-avatar>
+              <h3 class="goods_Name">
+                    <span *ngIf="itm.orderType==3">{{itm.storeName}}</span>
+                    <span *ngIf="itm.orderType!=3">{{itm.goodsName}}</span>
+              </h3>
+              <p>
+                    <!-- <span *ngIf="itm.orderType==3">总价：¥{{commonService.toDecimal(itm.price*1)}}</span>
+                    <span *ngIf="itm.orderType!=3&&itm.remark!='EP兑换'">总价：¥{{commonService.toDecimal(itm.price*itm.num)}}</span>
+                    <span *ngIf="itm.orderType!=3&&itm.remark=='EP兑换'">总价：¥{{commonService.toDecimal(itm.price)}}</span> -->
+                    <span *ngIf="itm.remark=='EP兑换'">EP</span>
+                    <span style="float:right;">{{commonService.dateFormatLong(itm.createTime,'yy-MM-dd HH:mm')}}</span>
+              </p>
+              <p item-right> <ion-icon name="arrow-forward"  style="color:#ccc; "></ion-icon></p>
+          </ion-item>
+
+      </ion-list>
+    </div>
+    <ion-infinite-scroll *ngIf="showScroll" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

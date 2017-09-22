@@ -1,0 +1,63 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>二维码收款账单</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content style="background:rgb(229, 229, 229);">
+    <div *ngIf="items==null || items.length==0" style="text-align:center;margin-top:30px;">
+      <img src="assets/images/null.png">
+    </div>
+    <ion-grid no-padding class="collectionBill" *ngFor="let itm of items;">
+        <ion-row (click)="gotoBillInfoPage(itm.orderNo)">
+            <ion-col>{{commonService.dateFormatLong(itm.createTime,'yyyy-MM-dd HH:mm')}}</ion-col>
+            <ion-col>
+                <img *ngIf="itm.source=='斗拍扫码'" src="assets/images/doupai.png"/>
+                <img *ngIf="itm.source=='微信扫码'" src="assets/images/wechat.png"/>
+                <img *ngIf="itm.source=='支付宝扫码'" src="assets/images/alipay.png"/>
+            </ion-col>
+            <ion-col>
+                <span>+{{commonService.toNumber(itm.payment)}}</span>
+                <span style="color:#999;">{{itm.source}}</span>
+            </ion-col>
+            <ion-col>
+                <span style="color:#999;">{{itm.status}}</span>
+                <span>{{commonService.toNumber(itm.confirmScore)}}</span>
+            </ion-col>
+        </ion-row>
+        <!-- <ion-row (click)="gotoBillInfoPage()">
+            <ion-col>2017-05-17 16:02</ion-col>
+            <ion-col><img src="assets/images/alipay.png"/></ion-col>
+            <ion-col>
+                <span>+100</span>
+                <span style="color:#999;">支付宝扫码</span>
+            </ion-col>
+            <ion-col>
+                <span style="color:#999;">已收款</span>
+                <span>+90.00</span>
+            </ion-col>
+        </ion-row>
+        <ion-row (click)="gotoBillInfoPage()">
+            <ion-col>2017-05-17 16:02</ion-col>
+            <ion-col><img src="assets/images/wechat.png"/></ion-col>
+            <ion-col>
+                <span>+100</span>
+                <span style="color:#999;">微信扫码</span>
+            </ion-col>
+            <ion-col>
+                <span style="color:#999;">已收款</span>
+                <span>+90.00</span>
+            </ion-col>
+        </ion-row> -->
+    </ion-grid>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-infinite-scroll *ngIf="showScroll" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

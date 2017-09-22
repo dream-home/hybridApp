@@ -1,0 +1,186 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button *ngIf="showBack" ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title *ngIf="shopData" center>{{shopData.storeName}}</ion-title>
+        <ion-buttons end *ngIf="shopData" class="collect" style="width:35%;">
+          <button (click)="presentPopover2($event,shopData)" text-center style="color:#fff;background: #FF651E;">
+            <img src="assets/icon/share1.png" style="width: 18px;">
+              <p style="margin:0; margin-top:2px; font-size: 1rem;">分享</p>
+          </button>
+          <button text-center class="addCollect" *ngIf="shopData.isCollect==0" (click)="addCollection(shopData.id)">
+              <img src="assets/images/collect_k.png">
+              <p>收藏</p>
+          </button>
+          <button text-center class="removeCollect" *ngIf="shopData.isCollect==1" (click)="removeCollection(shopData.id)">
+              <img src="assets/images/collect_w.png">
+              <p>已收藏</p>
+          </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <!-- 轮播图片 -->
+    <ion-row *ngIf="shopImages!=null">
+        <ion-slides pager="true" style="height:300px;" >
+            <ion-slide *ngFor="let img of shopImages">
+                <img style="width:100%" class="slideImg" *ngIf="img.path!=null && img.path!=''"  src="{{img.path}}" (click)="showImg(img.path)">
+            </ion-slide>
+        </ion-slides>
+    </ion-row>
+    <ion-row style="width:100%;height:300px;" *ngIf="shopImages == null">
+        <img style="width:100%;height:300px;" class="slideImg" src="assets/images/imgLoading.png">
+    </ion-row>
+    <ion-grid *ngIf='shopData' no-padding>
+        <ion-segment [(ngModel)]="pet" mode="md">
+            <ion-segment-button value="all">
+            全部商品
+            </ion-segment-button>
+            <ion-segment-button value="info">
+            店铺详情
+            </ion-segment-button>
+        </ion-segment>
+        <div *ngIf='shopData' [ngSwitch]="pet" no-padding style="background:#fff;">
+            <ion-list *ngSwitchCase="'all'" class="allShop">
+                <div class="showGoods" *ngIf="!showCodePanel">
+                    <ion-grid class="goodsInfo" no-padding *ngFor="let itm of items; let iIndex = index" (click)="showGoodsInfo(itm.id,1)">
+                        <ion-row style="border-bottom:1px solid #EFEFEF;">
+                            <ion-col text-center width-33>
+                                <img style="width:100%;"  src="{{itm.icon}}" />
+                            </ion-col>
+                            <ion-col width-66 style="padding-left:5px;" class="goodsIf">
+                                <div no-padding class="goodsFontColor goodsName">
+                                    {{itm.name}}
+                                </div>
+                                <div no-padding class="goodsFontColor goodsPrice">
+                                     <span style="color:#f7689e;font-size:16px;">¥{{itm.price}}</span>
+                                     <span style="color:#666;font-size:12px; margin-left: 10px;">门市价：¥{{itm.originalPrice}}</span>
+                                </div>
+                                <!-- <div no-padding class="goodsFontColor goodsAuction">
+                                    斗拍价：{{commonService.toNumber(itm.drawPrice)}}积分
+                                </div> -->
+                                <div no-padding class="goodsFontColor goodsSendEP">
+                                    <span style="color:#30a119;">赠送：{{itm.businessSendEp}}EP</span>
+                                    &nbsp;&nbsp;
+                                    <!-- <span style="color:#ff651e;">参与人数：{{itm.drawNum}}</span> -->
+                                </div>
+                                <div no-padding class="goodsFontColor">
+                                    <div class="num" *ngIf="myShopGoods[iIndex].num!=null && itm.stock>0">
+                                        <button class="numRemove" (click)="numRemove($event,iIndex)" *ngIf="myShopGoods[iIndex].num!=0">
+                                            <img src="assets/images/delGoods.png"/>
+                                        </button>
+                                        <span *ngIf="myShopGoods[iIndex].num!=0" (click)="stopPropagation($event,this)">
+                                            <input type="number" bindon-ngModel="myShopGoods[iIndex].num" [disabled]="true"/>
+                                        </span>
+                                        <button class="numAdd" (click)="numAdd($event,iIndex)">
+                                            <img src="assets/images/addGoods.png"/>
+                                        </button>
+                                    </div>
+                                    <ion-chip style="height:25px;float:right;margin-right:5px;" color="danger" *ngIf='itm.stock<=0'>
+                                        <img style="height:25px;" src="assets/images/sellOut.png">
+                                    </ion-chip>
+                                </div>
+                            </ion-col>
+                        </ion-row>
+                        <!-- <ion-row>
+                            <ion-col text-right *ngIf='itm.stock==0'>
+                                <ion-chip color="danger">
+                                    <ion-label>已售罄</ion-label>
+                                </ion-chip>
+                            </ion-col>
+                            <ion-col text-right *ngIf='itm.stock>0'>
+                                    <button outline small no-margin (click)="gotobuyGoods(itm.id,itm.price,$event)" ion-button icon-left>
+                                        直接购买
+                                    </button>
+                                    <button outline *ngIf="itm.isDraw==0" (click)="auction(itm.id,itm.drawPrice,$event)" small no-margin ion-button icon-left>
+                                        参与斗拍
+                                    </button>
+                                    <button outline *ngIf="itm.isDraw==1" [disabled]="true" small no-margin ion-button icon-left>
+                                        已斗拍
+                                    </button>
+                            </ion-col>
+                        </ion-row> -->
+                    </ion-grid>
+                </div>
+            </ion-list>
+            <ion-list *ngSwitchCase="'info'" style="padding:5px;">
+                <ion-row>
+                    <ion-col width-50 >
+                        <span>电话：{{shopData.phone}}</span>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col >
+                        地址：{{shopData.province+shopData.city+shopData.county+shopData.addr}}
+                    </ion-col>
+                </ion-row>
+                <p style="margin-top:10px;">{{shopData.detail}}</p>
+
+            </ion-list>
+        </div>
+
+    </ion-grid>
+    <!-- <ion-grid *ngIf='shopData' no-padding>
+        <ion-row style="border-bottom:solid 1px #DFDFDF;">
+            <ion-col padding-vertical text-center style="background-color:#EFEFEF;">
+                <strong>店铺介绍</strong>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                {{shopData.detail}}
+            </ion-col>
+        </ion-row>
+    </ion-grid> -->
+    <!-- <div *ngIf="showCodePanel">
+        <p color="danger">商家设置了邀请码，输入最新邀请码！</p>
+        <ion-list>
+            <ion-item>
+                <ion-label fixed>
+                    <span style="color:red;">*</span>
+                    邀请码
+                </ion-label>
+                <ion-input maxlength="6" bindon-ngModel="inviteCode" placeholder="输入邀请码" type="text"></ion-input>
+            </ion-item>
+        </ion-list>
+        <button (click)="submitCodeData()" no-margin ion-button full>进入</button>
+        <p>温馨提示：本应用提供一个商家促销的平台，对于商家商品质量，无法保障，请进入商家店铺会员小心操作，对于不良商家请会员，积极举报！</p>
+    </div> -->
+    <ion-infinite-scroll *ngIf="showScroll" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>
+
+<ion-footer class="buy_auction">
+    <ion-grid *ngIf="ShoppingCart != null" no-padding>
+        <ion-row>
+            <ion-col no-padding class="img_shoppingCar">
+                <span>{{ShoppingCart.goodsNum}}</span>
+                <button (click)="gotoShoppingCart()">
+                    <img src="assets/images/shoppingCar.png"/>
+                </button>
+            </ion-col>
+            <ion-col no-padding class="price_total">
+                <ion-row class="total" *ngIf="ShoppingCart.goodsNum != 0">
+                    <ion-col text-right no-padding>
+                        <span>合计:</span><span>¥<mark>{{commonService.toNumber(ShoppingCart.goodsAllPrice)}}</mark></span>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="receive" *ngIf="ShoppingCart.goodsNum != 0">
+                    <ion-col text-right no-padding>
+                        <span>获赠:{{commonService.toNumber(ShoppingCart.goodsAllEp)}}EP</span>
+                        <span>优惠:¥{{commonService.toNumber(ShoppingCart.goodsAllMoney-ShoppingCart.goodsAllPrice)}}</span>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+            <ion-col no-padding class="balance">
+              <button *ngIf="ShoppingCart.goodsNum == 0" [disabled]="true">去结算</button>
+              <button *ngIf="ShoppingCart.goodsNum != 0" (click)="goPayForGoods()">去结算</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-footer>

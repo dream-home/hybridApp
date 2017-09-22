@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>我的斗拍</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="items==null || items.length==0" class="nullPage">
+        <img src="assets/images/null.png">
+    </div>
+    <ion-list >
+        <button *ngFor="let itm of items" ion-item (click)="showLukyInfoPage(itm.issueId)" style="font-size:1.4rem;">
+          第{{itm.issueNo}}期：<span style="color:#f7689e;">{{itm.price}}积分</span>&nbsp;{{itm.goodsName}}
+        </button>
+    </ion-list>
+    <ion-infinite-scroll *ngIf="showScroll" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,63 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>我的斗斗</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="background:#e5e5e5;">
+    <ion-row class="myDouDou">
+        <ion-col>
+            <div>当前斗斗</div>
+            <div>
+                <span>{{doudou}}<mark>个</mark></span>
+                <button ion-button small *ngIf="doudouOb && doudouOb.isSignIn==false && doudou>commonService.params.minSignDouNum" (click)="doudouSignIn()">签到</button>
+                <button ion-button small *ngIf="doudouOb && doudouOb.isSignIn==true && doudou>commonService.params.minSignDouNum" [disabled]="true" >已签到</button>
+            </div>
+        </ion-col>
+    </ion-row>
+    <ion-list class="transactionFlow">
+        <ion-row>
+            <ion-col class="transactionFlowTitle" text-center>
+                <span>交易明细</span>
+                <span (click)="gotoAttendanceRecord()">签到记录&nbsp;〉</span>
+            </ion-col>
+        </ion-row>
+        <div *ngIf="items==null || items.length==0" style="background:#fff;position:absolute;width:100%;height:100%;">
+            <ion-row class="noneImage">
+                <ion-col text-center no-padding>
+                    <img src="assets/images/null2.png">
+                </ion-col>
+            </ion-row>
+            <ion-row class="joinPartner">
+                <ion-col text-center no-padding>
+                    <img src="assets/images/joinPartner.png">
+                </ion-col>
+            </ion-row>
+        </div>
+        <ion-grid *ngFor="let itm of items" no-padding>
+            <ion-row class="transactionFlowInfo">
+                <ion-col>
+                    <ion-row class="transactionFlowContent">
+                        <ion-col class="transactionFlowDate" text-left style="padding-left:10px;width:38%;max-width:38%;">
+                            {{commonService.dateFormatLong(itm.tradeDate,'yyyy-MM-dd HH:mm')}}
+                        </ion-col>
+                        <ion-col  class="transactionFlowAmount" text-left style="width:32%;max-width:32%;">
+                            {{itm.tradeTypeDesc}}
+                        </ion-col>
+                        <ion-col  class="transactionFlowAmount" text-right style="padding-right:10px;width:30%;max-width:30%;">
+                            {{itm.tradeAmount}} 斗斗
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-infinite-scroll *ngIf="showScroll" (ionInfinite)="doInfinite($event)">
+            <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+    </ion-list>
+</ion-content>

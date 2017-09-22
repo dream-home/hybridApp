@@ -1,0 +1,49 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>当前版本</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid class="weixinLogo">
+        <ion-row>
+            <ion-col text-center>
+                <img class="userImg" src="assets/images/dp.png"/>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="!isupdate || datas.isIOSPopup =='0' || datas.isIOSPopup =='0'" no-padding>
+        <ion-row >
+            <ion-col text-center padding-vertical>
+                已经是最新版本<br/><br/><br/>
+                版本号:v{{commonService.appVer}}
+            </ion-col>
+        </ion-row>
+
+
+    </ion-grid>
+    <ion-grid *ngIf="isupdate " no-padding>
+        <ion-row *ngIf="osType== 1 && datas.isIOSPopup =='1' ">
+            <ion-col  padding-vertical>
+                有新的版本需要更新,请及时更新<br/>
+                版本号:v{{datas.iosAppVersion}}<br/>
+                更新内容:v{{datas.iosAppDetail}}<br/><br/><br/>
+                <a href="{{datas.iosAppUrl}}" full ion-button>立即更新</a>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="osType==0 && datas.isAndroidPopup =='1' ">
+            <ion-col  padding-vertical>
+                有新的版本需要更新,请及时更新<br/>
+                版本号:v{{datas.androidAppVersion}}<br/>
+                更新内容:v{{datas.androidAppDetail}}<br/><br/><br/>
+                <a href="{{datas.androidAppUrl}}" full ion-button>立即更新</a>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+</ion-content>

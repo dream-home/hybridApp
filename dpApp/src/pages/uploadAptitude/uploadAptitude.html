@@ -1,0 +1,87 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>上传资质认证</ion-title>
+        <ion-buttons end>
+        <!--  <button [disabled]="isDisable" ion-button clear (click)="submitData()">
+              完成
+          </button>-->
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="background-color:#E5E5E5 ;">
+    <ion-grid style=" background-color: white;">
+        <ion-row style="border-bottom:solid 1px #DFDFDF;">
+            <ion-col style="color: darkgray; font-size: 10px;">
+            		 为了保障买卖双方的权益， 请提交同实名认证信息一致的证件照片， 通过证件认证后， 才能享受更多服务。
+            </ion-col>
+        </ion-row>
+        <ion-row style="border-bottom:solid 1px #DFDFDF;">
+            <ion-col>
+            		身份证
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-33>
+                <img (click)="uploadImg(0,'idimg')" src="{{subData.icons[0].path}}" style="width:100%;"/>
+            </ion-col>
+            <ion-col width-33>
+                <img (click)="uploadImg(1,'idimg')" src="{{subData.icons[1].path}}" style="width:100%;"/>
+            </ion-col>
+            <ion-col width-33>
+                <img (click)="uploadImg(2,'idimg')" src="{{subData.icons[2].path}}" style="width:100%;"/>
+            </ion-col>
+
+        </ion-row>
+        <ion-row >
+            <ion-col style="color: red; font-size: 10px;">
+            		提示：提交身份证正面清晰照片、身份证反面清晰照片、店主真人手持身份证清晰照片即可
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+        <div style="background:#E5E5E5;height:7px;"></div>
+    <ion-grid style="border-bottom:solid 1px #DFDFDF; background-color: white;">
+        <ion-row style="border-bottom:solid 1px #DFDFDF;">
+            <ion-col style="color: darkgray;font-size: 10px;">
+            	店内悬挂营业执照照片（包括《企业法人营业执照》或《个体工商户营业执照》或其他相关营业执照照片）要求可以看到证件的主体和商品主体一致，以此确定门店属于您
+            </ion-col>
+        </ion-row>
+        <ion-row style="border-bottom:solid 1px #DFDFDF;">
+            <ion-col>
+            		营业资质认证
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-33>
+                <img (click)="uploadImg(0,'licimg')" src="{{subData.licenseIcons[0].path}}" style="width:100%;"/>
+            </ion-col>
+            <ion-col width-33>
+                <img (click)="uploadImg(1,'licimg')" src="{{subData.licenseIcons[1].path}}" style="width:100%;"/>
+            </ion-col>
+            <ion-col width-33>
+                <img (click)="uploadImg(2,'licimg')" src="{{subData.licenseIcons[2].path}}" style="width:100%;"/>
+            </ion-col>
+
+        </ion-row>
+    </ion-grid>
+   <!-- <button ion-button outline item-right style="background-color: #FF651E; color: white; width: 99%;height:35px;" >
+	              		完成
+	</button>-->
+
+
+
+</ion-content>
+
+<ion-footer >
+    <ion-grid no-padding style="overflow-y:hidden;">
+    <button (click)="uploadImage()" ion-button outline item-right style="background-color: #FF651E; color: white; width: 99%;height:38px;" >
+	              		完成
+	</button>
+
+    </ion-grid>
+</ion-footer>

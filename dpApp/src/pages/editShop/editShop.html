@@ -1,0 +1,151 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>店铺编辑</ion-title>
+        <ion-buttons end>
+          <button [disabled]="isDisable" ion-button clear (click)="submitData()">
+              完成
+          </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid *ngIf="shopData">
+        <ion-row class="storeImg">
+            <ion-col>
+                商铺图片(<span color="yanbao">可添加4张</span>)
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-25 *ngIf="shopData.icons">
+                <img (click)="uploadImg(0)" src="{{shopData.icons[0].path}}" style="width:100%;"/>
+            </ion-col>
+            <ion-col width-25>
+                <img (click)="uploadImg(1)" src="{{shopData.icons[1].path}}" style="width:100%;"/>
+            </ion-col>
+            <ion-col width-25>
+                <img (click)="uploadImg(2)" src="{{shopData.icons[2].path}}" style="width:100%;"/>
+            </ion-col>
+            <ion-col width-25>
+                <img (click)="uploadImg(3)" src="{{shopData.icons[3].path}}" style="width:100%;"/>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-list *ngIf="shopData">
+        <ion-row class="storeName">
+            <ion-col>
+                <span><mark>*</mark>商铺名称</span>
+                <ion-input maxlength="20" bindon-ngModel="shopData.storeName" placeholder="输入商铺名称" type="text"></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row class="storePhone">
+            <ion-col>
+                <span><mark>*</mark>商家电话</span>
+                <ion-input [disabled]="true" bindon-ngModel="commonService.user.phone" type="text"></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row class="serviceTelephone">
+            <ion-col>
+                <span><mark>*</mark>客服电话</span>
+                <ion-input maxlength="20" bindon-ngModel="shopData.servicePhone" placeholder="客服电话" type="text"></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row class="uploadAptitude" *ngIf="idcardIcons" (click)="uploadAptitude()">
+            <ion-col>
+                <span><mark>*</mark>资质认证</span>
+                <span>资质认证</span>
+                <mark class="mark2">〉</mark>
+            </ion-col>
+        </ion-row>
+        <ion-row class="storeArea">
+            <ion-col>
+                <span *ngIf="shopData.latitude==null || shopData.longitude==null||shopData.latitude=='' || shopData.longitude==''"><mark>*</mark>选择区域</span>
+                <span *ngIf="shopData.latitude!=null && shopData.longitude!=''&&shopData.latitude!='' && shopData.longitude!=null"><mark>*</mark>店铺区域</span>
+                <ion-input *ngIf="shopData.latitude!=null && shopData.longitude!=''&&shopData.latitude!='' && shopData.longitude!=null" [disabled]="true" bindon-ngModel="areas" type="text"></ion-input>
+                <div (click)="gotoBaiduMap()" *ngIf="shopData.latitude==null || shopData.longitude==null||shopData.latitude=='' || shopData.longitude==''">
+                    {{(mapaddr==null||mapaddr =='')?'选择地区':mapaddr.province+mapaddr.city+mapaddr.county}}
+                </div>
+                <mark class="mark2" (click)="gotoBaiduMap()" *ngIf="shopData.latitude==null || shopData.longitude==null||shopData.latitude=='' || shopData.longitude==''">〉</mark>
+            </ion-col>
+        </ion-row>
+        <ion-row class="storeAddr">
+            <ion-col>
+                <span><mark>*</mark>详细地址</span>
+                <ion-input bindon-ngModel="shopData.addr" type="text"></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-item style="margin-left:-6px;">
+            <ion-label stacked style="font-size:14px;">
+                <span style="color:red;background:none;margin-right: -3px;">*</span>
+                商铺介绍
+            </ion-label>
+            <ion-textarea maxlength="300" rows="4" bindon-ngModel="shopData.detail" placeholder="输入商铺介绍" type="text" style="font-size:14px;"></ion-textarea>
+        </ion-item>
+        <!-- <ion-item>
+            <ion-label fixed>
+                <span style="color:red;">*</span>
+                商铺名称
+            </ion-label>
+            <ion-input maxlength="20" bindon-ngModel="shopData.storeName" placeholder="输入商铺名称" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                <span style="color:red;">*</span>
+                商家电话
+            </ion-label>
+            <ion-input [disabled]="true" bindon-ngModel="commonService.user.phone" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                <span style="color:red;">*</span>
+                所属区域
+            </ion-label>
+            <ion-input *ngIf="shopData.latitude!=null && shopData.longitude!=''&&shopData.latitude!='' && shopData.longitude!=null" [disabled]="true" bindon-ngModel="areas" type="text"></ion-input>
+            <button (click)="gotoBaiduMap()" *ngIf="shopData.latitude==null || shopData.longitude==null||shopData.latitude=='' || shopData.longitude==''" ion-button outline item-right style="background-color: #FF651E; color: white; width: 230px;height:35px" >
+                  {{(mapaddr==null||mapaddr =='')?'选择地区':mapaddr.province+mapaddr.city+mapaddr.county}}
+            </button>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                <span style="color:red;">*</span>
+                商铺地址
+            </ion-label>
+            <ion-input [disabled]="true" bindon-ngModel="shopData.addr" type="text"></ion-input>
+        </ion-item>
+         <ion-item>
+            <ion-label fixed>
+                <span style="color:red;">*</span>
+            		客服电话
+            </ion-label>
+            <ion-input maxlength="20" bindon-ngModel="shopData.servicePhone" placeholder="客服电话" type="text"></ion-input>
+        </ion-item>
+        <ion-item   *ngIf="idcardIcons" (click)="uploadAptitude()">
+	            <ion-label fixed>
+	            	<span style="color:red;">*</span>
+	                资质认证
+	            </ion-label>
+	            <button ion-button outline item-right style="background-color: #FF651E; color: white; width: 230px;height:35px" >
+	              		上传资质认证
+	            </button>
+        </ion-item>
+        <ion-item *ngIf="false">
+            <ion-label fixed>
+                商铺邀请码
+            </ion-label>
+            <ion-input maxlength="6" bindon-ngModel="shopData.inviteCode" placeholder="输入6位邀请码" type="text"></ion-input>
+            <span item-right>选填</span>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>
+                <span style="color:red;">*</span>
+                商铺介绍
+            </ion-label>
+            <ion-textarea maxlength="300" rows="4"  bindon-ngModel="shopData.detail" placeholder="输入商铺介绍" type="text"></ion-textarea>
+        </ion-item> -->
+    </ion-list>
+</ion-content>

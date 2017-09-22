@@ -1,0 +1,126 @@
+page-findCity {
+    ion-grid{
+        padding:0;
+    }
+    a{text-decoration:none;outline:none;}
+    .currentLocation{
+        background:#e5e5e5;
+        color:#999;
+        height:35px;
+        line-height: 25px;
+        ion-col:nth-child(1){
+            padding:5px 5px 5px 7px;
+            mark{
+                background:none;
+                color:#000;
+            }
+        }
+    }
+    .selectCounties{
+        .location{
+            padding:5px 5px 5px 7px;
+            img{
+                height:20px;
+                float: left;
+                margin-top:2px;
+            }
+            span{
+                height:25px;
+                line-height: 25px;
+                float: left;
+                margin-left:5px;
+            }
+        }
+        .counties{
+            padding:0 5px 8px 5px;
+            button{
+                background:none;
+                border:1px #999 solid;
+                border-radius:3px;
+                color:#999;
+                padding:3px 8px;
+                margin-right:8px;
+                margin-top:8px;
+            }
+        }
+    }
+    .hotCity{
+        background:#e5e5e5;
+        height:35px;
+        line-height: 25px;
+        ion-col{
+            padding:5px 5px 5px 7px;
+        }
+    }
+    .hotCityList{
+        ion-col:nth-child(1){
+            padding:5px 0;
+            .hotCityList1,.hotCityList2,.hotCityList3{
+                text-align: center;
+                button{
+                    width:70px;
+                    border:1px #ccc solid;
+                    border-radius: 3px;
+                    padding:8px 12px;
+                    background:none;
+                }
+            }
+        }
+    }
+    .container{
+        width:100%;
+        .city-list{
+            p{
+                margin:0 0 0 10px !important;
+                height:40px;
+                line-height: 40px;
+                border-bottom:1px #e5e5e5 solid;
+            }
+        }
+        .city-letter{
+            background:#e5e5e5;
+            width:100%;
+            display: inline-block;
+            height:30px;
+            line-height: 30px;
+            padding-left:10px;
+            color:#999;
+            font-size: 16px;
+        }
+    }
+    /*显示点击是哪个字母*/
+    .showLetter{
+        position: fixed;
+        color:#fff;
+        width: 50px;
+        height:50px;
+        top:50%;
+        left: 50%;
+        margin-left:-20px;
+        line-height: 50px;
+        background: #FF651E;
+        text-align: center;
+        font-size: 30px;
+        opacity: 0;
+        font-weight: bold;
+    }
+    /*城市弹层*/
+    .letter{width:25px;position:fixed;top:15%;right:0;text-align:center;opacity:0.7;z-index:999;}
+    .letter ul{list-style-type:none;margin:0 !important;padding:0 !important;}
+    .letter ul li{height:17px;width:20px;margin:0 5px 0 0 !important;}
+    .letter ul li a{text-decoration:none;color:#FF651E;font-size: 12px;width:20px;display: block;height:17px;line-height: 17px;}
+    .noscroll{
+        overflow: hidden;
+    }
+
+    .none{display:none;}
+    .loan_jm1{width:94%;margin:0 auto;}
+    .loan_jm_spa1{width:39%;height:40px;line-height:40px;font-size:1em;color:#666;display:block;float:left;}
+    .loan_jm_l1{margin-top:10px;margin-bottom:15px;height:40px;}
+    .wbk_srn{width:57%;height:40px;border:1px solid #ccc;background:#FFF;float:left;padding-left:3%;line-height:40px;color:#ADADAD;
+    font-size:1.1em; background-size:45%;background-position:center;background:#fff;}
+    .wbk_srn b{width:30px;height:40px;border:1px solid #ccc;background:#FFF;float:left;padding-left:3%;line-height:40px;color:#ADADAD;
+    font-size:1.1em;}
+
+    .UISelect{margin-top:5px}
+}

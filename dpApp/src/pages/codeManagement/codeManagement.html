@@ -1,0 +1,101 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>二维码管理</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content style="background:rgb(229, 229, 229);">
+    <ion-grid no-padding>
+        <ion-row class="collectionAmount">
+            <ion-col no-padding>
+                <ion-row class="collectionImg">
+                    <ion-col>
+                        <img src="{{icon}}"/>
+                        <span>{{storeName}}</span>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-row class="myCode">
+            <ion-col no-padding (click)="gotoMyCodePage()">
+                <div>我的收款码<mark>〉</mark></div>
+            </ion-col>
+        </ion-row>
+        <ion-row class="marketingSet">
+            <ion-col no-padding>
+                <div>营销分成设置</div>
+            </ion-col>
+            <ion-col no-padding>
+                <button (click)="marketingSet()" *ngIf="marketingShow == false">设置</button>
+                <button (click)="marketingSave()" *ngIf="marketingShow == true">保存</button>
+            </ion-col>
+        </ion-row>
+        <ion-list class="marketingInfo" *ngIf="marketingShow == true">
+            <ion-row class="discountEP">
+              <ion-col>
+                EP优惠比例
+              </ion-col>
+              <ion-col>
+                <ion-input bindon-ngModel="discountEP" placeholder="请输入EP优惠比例" type="number"></ion-input>
+              </ion-col>
+              <ion-col text-right>%</ion-col>
+            </ion-row>
+            <ion-row class="prompt">
+                <ion-col><mark>*</mark>提示：设置EP优惠比例将不再参与以下EP和分销比例分成</ion-col>
+            </ion-row>
+            <ion-row class="sendEP">
+              <ion-col>
+                EP赠送比例
+              </ion-col>
+              <ion-col>
+                <ion-input bindon-ngModel="businessSendEp" placeholder="请输入赠送EP比例" type="number"></ion-input>
+              </ion-col>
+              <ion-col text-right>%</ion-col>
+            </ion-row>
+            <ion-row class="distributionOne">
+              <ion-col>
+                一级分销比例
+              </ion-col>
+              <ion-col>
+                <ion-input bindon-ngModel="firstReferrerScale" placeholder="请输入一级分销比例" type="number"></ion-input>
+              </ion-col>
+              <ion-col text-right>%</ion-col>
+            </ion-row>
+            <ion-row class="distributionTwo">
+              <ion-col>
+                二级分销比例
+              </ion-col>
+              <ion-col>
+                <ion-input bindon-ngModel="secondReferrerScale" placeholder="请输入二级分销比例" type="number"></ion-input>
+              </ion-col>
+              <ion-col text-right>%</ion-col>
+            </ion-row>
+            <ion-row class="distributionThree">
+              <ion-col>
+                三级分销比例
+              </ion-col>
+              <ion-col>
+                <ion-input bindon-ngModel="thirdReferrerScale" placeholder="请输入三级分销比例" type="number"></ion-input>
+              </ion-col>
+              <ion-col text-right>%</ion-col>
+            </ion-row>
+        </ion-list>
+        <!-- <ion-row class="collectionSet">
+            <ion-col no-padding>
+                <div>收款设置</div>
+            </ion-col>
+        </ion-row>
+        <ion-row class="automaticReceipt">
+            <ion-col no-padding>
+                <div>自动收款设置</div>
+            </ion-col>
+            <ion-col no-padding>
+                <ion-toggle checked="false"></ion-toggle>
+            </ion-col>
+        </ion-row> -->
+    </ion-grid>
+</ion-content>

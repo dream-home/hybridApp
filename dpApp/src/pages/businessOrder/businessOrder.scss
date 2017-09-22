@@ -1,0 +1,45 @@
+page-businessOrder {
+
+	.goods_Name{overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+	 ion-segment{ background:#fff;}
+	.scroll-content{ background:#f4f4f4;}
+	.list_product ion-item{margin:6px 0;}
+
+	.Pending_num{ 
+        display: inline-block;
+        background:#fe575f; 
+        color: #fff; 
+        position: absolute;
+        top: 8px;
+        padding: 1px 6px;
+        font-size: 12px;
+        line-height: 16px;
+        border-radius: 10px;
+    } 
+
+    @media screen and (min-width: 300px) {
+	   .Pending_num{ 
+	        left:75%;
+	    }
+	}
+	@media screen and (min-width: 350px) {
+	   .Pending_num{  
+	        left:75%;
+	    }
+	}
+	@media screen and (min-width: 370px) {
+	   .Pending_num{ 
+	        left:72%;
+	    }
+	}
+	@media screen and (min-width: 380px) {
+	   .Pending_num{ 
+	        left:72%;
+	    }
+	}
+	@media screen and (min-width: 400px) {
+	   .Pending_num{ 
+	        left:70%;
+	    }
+	}
+}

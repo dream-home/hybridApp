@@ -1,0 +1,103 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>消费详情</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid *ngIf="datas">
+        <ion-row style="border-bottom:solid 1px #AFAFAF;">
+            <ion-col width-33>
+                <img style="width:100px;" src="{{datas.icon}}">
+            </ion-col>
+            <ion-col width-66 *ngIf="this.type == 10" class="goods_info">
+                <strong style="font-size:15px;">{{datas.goodsName}}</strong>
+                 <!-- <div *ngIf="datas.issueNo != null && datas.issueNo != ''">
+                            第{{datas.issueNo}}期
+                 </div> -->
+                 <div>数量：{{datas.num}}件</div>
+                 <div>需要支付：{{datas.price}}EP</div>
+
+                <!-- <ion-grid >
+                    <ion-row >
+                        <ion-col>
+                            <strong style="font-size:15px;">{{datas.goodsName}}</strong>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col *ngIf="datas.issueNo != null && datas.issueNo != ''">
+                            第{{datas.issueNo}}期
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            需要支付：{{datas.price}}EP
+                        </ion-col>
+                    </ion-row>
+                </ion-grid> -->
+            </ion-col>
+            <ion-col width-66 *ngIf="this.type != 10" class="goods_info">
+              <strong style="font-size:15px;">{{datas.goodsName}}</strong>
+               <!-- <div *ngIf="datas.issueNo != null && datas.issueNo != ''">
+                            第{{datas.issueNo}}期
+               </div> -->
+               <div>商品价格：¥{{datas.price}}</div>
+               <div>数量：{{datas.num}}件</div>
+               <div>支付：{{score}}</div>
+               <!--  <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <strong style="font-size:15px;">{{datas.goodsName}}</strong>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col *ngIf="datas.issueNo != null && datas.issueNo != ''">
+                            第{{datas.issueNo}}期
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            商品价格：{{datas.price}}积分
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            支付：{{score}}
+                        </ion-col>
+                    </ion-row>
+                </ion-grid> -->
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <span *ngIf="datas.storeName!=null && datas.storeName != ''">商家店铺：{{datas.storeName}}</span>
+                <span *ngIf="datas.storeName==null || datas.storeName == ''">商家店铺：斗拍商城</span>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                订单编号：{{datas.orderNo}}
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                下单时间：{{commonService.dateFormatLong(datas.createTime,'yyyy-MM-dd HH:mm')}}
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                成交时间：{{commonService.dateFormatLong(datas.createTime,'yyyy-MM-dd HH:mm')}}
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="3==type">
+            <ion-col text-right>
+                <button ion-button small clear (click)="viewOrderInfo(datas.orderNo)" >查看订单</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

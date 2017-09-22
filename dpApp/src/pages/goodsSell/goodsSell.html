@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>委托出售</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid no-padding *ngIf="goodsInfo">
+        <ion-row>
+            <ion-col no-padding text-center>
+                <img src="{{imgUrl}}{{goodsInfo.icon}}" />
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center>
+                <h3>{{goodsInfo.name}}</h3>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-50>
+                <span>价格：{{goodsInfo.price}}积分</span>
+            </ion-col>
+            <ion-col width-50 text-right>
+                <span>斗拍价格：{{goodsInfo.drawPrice}}积分</span>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <strong>出售成功可获得积分：</strong>
+                <strong style="color:red">{{score}}积分</strong>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center>
+                <button (click)="sellGoods()" style="width:98%;" ion-button>出售</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

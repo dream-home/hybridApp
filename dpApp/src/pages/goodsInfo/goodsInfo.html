@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="yanbao">
+    <ion-buttons start>
+      <button ion-button icon-only (click)="goToHomePage()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title center>商品详情</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <div>
+        <ion-grid no-padding>
+            <ion-row>
+                <ion-slides loop="true" pager="true">
+                    <ion-slide *ngFor="let img of goodsInfo.icons">
+                        <div>
+                            <img style="width:100%" class="slideImg" src="{{img.path}}" (click)="showImg(img.path)" >
+                        </div>
+                    </ion-slide>
+                </ion-slides>
+            </ion-row>
+            <ion-row>
+                <ion-col text-center>
+                    <strong>{{goodsInfo.name}}</strong>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col style="goodsFontColor" style="padding-left:10px;">
+                    价格：<span style="font-weight:bold;font-size:18px; color:#E7752C;">{{goodsInfo.price}}EP</span>
+                </ion-col>
+                <ion-col text-right>
+                    <button small outline ion-button (click)="EPbuyGoods(goodsInfo,$event,1)" >立即兑换</button>
+                </ion-col>
+            </ion-row>
+
+        </ion-grid>
+        <div style="background-color:#EFEFEF;border-top:1px solid #DFDFDF">
+        </div>
+        <div  no-padding>
+            <ion-grid no-padding>
+                <ion-row>
+                    <ion-col>
+                        <strong color="danger">商品详情：</strong>
+                        <div  [innerHTML] = "assembleHTML(goodsInfo.detail)" class="infowarp"></div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </div>
+</ion-content>

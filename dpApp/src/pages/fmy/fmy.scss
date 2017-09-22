@@ -1,0 +1,152 @@
+page-fmy {
+    .fmyTitle{
+        background: url('../assets/images/pack.png');
+        filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+        -moz-background-size:100% 100%;
+        background-size:100% 100%;
+        border-bottom: 1px solid #afafaf;
+        img{
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+        }
+        .editButton{
+            background:#ffd4c1;
+            height:25px;
+            font-size:1.2rem;
+            margin:0 -15px 0 0;
+        }
+        .loginPng{
+            width:80px;
+            height:80px;
+            border-radius:80px;
+            margin:0 10px 10px 20px;
+        }
+    }
+    .scroll-content{ background: #f4f4f4; }
+
+    .Pending_num{
+        display: inline-block;
+        background:#fe575f;
+        color: #fff;
+        position: absolute;
+        left: 55%;
+        top:5px;
+        padding: 1px 6px;
+        font-size: 12px;
+        line-height: 16px;
+        border-radius: 10px;
+    }
+
+    .tab_two{margin-bottom:6px; background: #fff; padding:2px 0;border-bottom:1px solid #dfdfdf;}
+    .tab_two dl dt,.tab_two dl dd{padding-bottom:5px;}
+    .tab_two dl dt{padding-top:5px; color: #333; position: relative;}
+    .tab_two dl dd{font-size: 1.6rem; font-weight: 500;}
+
+    .icon_col{ background: #fff; border-top:1px solid #dfdfdf;border-bottom:1px solid #dfdfdf;}
+    .icon_col img{width:47%; height:auto; display:inline-block;}
+    dl,dt,dd{margin:0; padding:0;}
+    .icon_col dl{ margin:10px 0; color:#333;}
+    .hr_6{height: 6px;}
+
+    .icon_col2{background: #fff;border-bottom:1px solid #dfdfdf; }
+    .icon_col2 dl{ padding:15px 0; color:#333;}
+    .icon_col2 img{width: 35%; }
+    .icon_col2 ion-row .icon_wrap{border-right: 1px solid #dfdfdf; border-bottom:1px solid #dfdfdf; }
+    .icon_col2 ion-row .icon_wrap:last-child{border-right:none;}
+
+    .circle{letter-spacing: normal;display: inline-block; background: #ee3b79; color: #fff; vertical-align: top;
+        margin:2px 2px 0 0;
+            width:16px; height: 16px; border-radius: 16px; line-height: 16px; text-align: center;font-size: 12px; }
+    .myWallet{
+        width:25%;
+        max-width:25%;
+        dt{
+            height:30px;
+            line-height:30px;
+            padding:8px 0 0 0;
+            img{
+                width:auto;
+                height:30px;
+            }
+        }
+        dd{
+            color: #fe575f;
+            font-size:12px !important;
+            color:#000;
+            height:21px;
+            line-height:21px;
+        }
+    }
+    .myWallet_balance{
+        border-left:1px #30a119 solid !important;
+    }
+    .myWallet_balance,.myWallet_EP,.myWallet_doudou{
+        width:25%;
+        max-width:25%;
+        border-left:1px solid #dfdfdf;
+        dl{
+            dt{
+                color:#999;
+                padding-top:8px;
+            }
+            dd{
+                font-size:12px;
+                height:21px;
+                line-height:21px;
+            }
+        }
+    }
+    .myOrders{
+        background:#fff;
+    }
+    .merchantOrders{
+        background:#fff;
+        margin-top:6px;
+    }
+    .myOrder,.merchantOrder{
+        width:25%;
+        max-width:25%;
+        dt{
+             padding-top:8px;
+            img{
+                width:auto;
+                height:30px;
+            }
+        }
+        dd{
+            color: #fe575f;
+            font-size:12px !important;
+            color:#000;
+            height:21px;
+            line-height:21px;
+        }
+    }
+    .pendingPayment{
+        border-left:1px #00cccc solid !important;
+    }
+    .merchant_pendingPayment{
+        border-left:1px #ffad1e solid !important;
+    }
+    .pendingPayment,.shipmentPending,.Shipped,.merchant_pendingPayment,.merchant_untreated,.merchant_already{
+        width:25%;
+        max-width:25%;
+        border-left:1px #dfdfdf solid;
+        dl{
+            dt{
+                padding-top:8px;
+                img{
+                    width:auto;
+                    height:30px;
+                }
+            }
+            dd{
+                color: #999 !important;
+                font-size:12px !important;
+                color:#000;
+                height:21px;
+                line-height:21px;
+            }
+        }
+    }
+}

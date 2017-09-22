@@ -1,0 +1,43 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>测试地址页面</ion-title>
+        <ion-buttons end>
+          <button ion-button clear (click)="submit()">
+              完成
+          </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="content">
+  <ion-label>当前连接地址为</ion-label>
+  <ion-label>{{commonService.baseUrl}}</ion-label>
+  <ion-list radio-group [(ngModel)]="serverips" >
+      <ion-item *ngFor="let itm of serverIPs">
+        <ion-label>{{itm.servername}}{{itm.serverip}}</ion-label>
+        <ion-radio (click)="rediobtn(itm.serverip)" value="{{itm.serverip}}" checked></ion-radio>
+      </ion-item>
+  </ion-list>
+  <ion-label>选择的服务器地址为</ion-label>
+  <ion-label>{{serverips}}</ion-label>
+  <ion-label>手动输入ip地址（不用带http://如：192.168.1.1）</ion-label>
+  <ion-input type="text" bindon-ngModel="httpserverip" placeholder="请输入服务器地址" clearInput></ion-input>
+  <ion-label>手动输入端口号（如8080）</ion-label>
+  <ion-input type="text" bindon-ngModel="httpserverport" placeholder="请输入端口号" clearInput></ion-input>
+  <ion-label style="margin-top:50px">支付宝当前连接地址为</ion-label>
+  <ion-label>{{commonService.alipay}}</ion-label>
+  <ion-list radio-group [(ngModel)]="alipayips" >
+      <ion-item *ngFor="let itm of alipayIPs">
+        <ion-label>{{itm.servername}}{{itm.serverip}}</ion-label>
+        <ion-radio (click)="rediobtnalipay(itm.serverip)" value="{{itm.serverip}}" checked></ion-radio>
+      </ion-item>
+  </ion-list>
+  <ion-label>选择的支付宝地址为</ion-label>
+  <ion-label>{{alipayips}}</ion-label>
+</ion-content>

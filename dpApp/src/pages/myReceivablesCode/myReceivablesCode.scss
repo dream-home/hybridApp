@@ -1,0 +1,36 @@
+page-myReceivablesCode{
+    .storeInfo{
+        background:#fff;
+        padding:5px 10px;
+    }
+    .storeName{
+        margin-top:1px;
+        background:#fff;
+        ion-col{
+            padding:10px !important;
+        }
+    }
+    .storeAddr{
+        background:#fff;
+        ion-col{
+            padding:10px !important;
+        }
+    }
+    .welcomeUse{
+        background: #fff;
+        margin-top:5px;
+        ion-col{
+            padding:5px 10px;
+            color:#000;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bolder;
+        }
+    }
+    .storeCode{
+        background: #fff;
+        ion-col{
+            padding:20px 0 !important;
+        }
+    }
+}

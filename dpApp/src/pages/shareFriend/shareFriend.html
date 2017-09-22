@@ -1,0 +1,80 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>分享好友</ion-title>
+        <ion-buttons end>
+          <button ion-button icon-only (click)="presentPopover($event)">
+            <ion-icon name="share"></ion-icon>
+          </button>
+        </ion-buttons>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+    <ion-grid style="height:100%;background: linear-gradient(to bottom, #FF651E 0%,#ee761e 30%,#f3941e 100%);">
+        <!-- <ion-row>
+           <ion-col style="color:#fff; font-size: 1.5rem; font-family: 'Microsoft Yahei'; letter-spacing: 2px;"
+            text-center (click)="gotoMyContactsPage()">
+              点击查看我的人脉网
+           </ion-col>
+       </ion-row> -->
+       <ion-row>
+           <ion-col style="color:#fff; font-size:2rem; font-family: 'Microsoft Yahei'; letter-spacing: 2px; padding:10px 5px;" text-center>
+            全球分享型移动电商平台
+           </ion-col>
+       </ion-row>
+       <ion-row>
+           <ion-col no-padding style="color:#fff; font-size:1.6rem; font-family: 'Microsoft Yahei'; letter-spacing: 2px;" text-center>
+                一个会帮你赚钱的商城<br/>只要分享，就能赚钱！
+           </ion-col>
+       </ion-row>
+        <ion-row>
+            <ion-col padding-vertical text-center>
+                <div style="width:45%; padding:8px; margin: 0 auto; position: relative;">
+                     <img src="{{info}}" style="width:100%;">
+                     <span style="display: block;position: absolute;top: 0; left: 0; width: 10px; height: 10px;
+                     border-top:2px solid #fff;border-left:2px solid #fff; z-index: 2;"></span>
+                      <span style="display: block;position: absolute;top: 0; right: 0; width: 10px; height:10px;
+                     border-top:2px solid #fff;border-right:2px solid #fff; z-index: 2;"></span>
+
+                      <span style="display: block;position: absolute;bottom:0; left: 0; width:10px; height:10px;
+                     border-bottom:2px solid #fff;border-left:2px solid #fff; z-index: 2;"></span>
+                      <span style="display: block;position: absolute;bottom:0; right:0; width:10px; height:10px;
+                     border-bottom:2px solid #fff;border-right:2px solid #fff; z-index: 2;"></span>
+                </div>
+
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col no-padding style="color: #ffea77;font-size: 1.4rem;font-family: 'Microsoft Yahei';" text-center>
+                成为“斗拍”合伙人<br>与平台共享收益
+            </ion-col>
+        </ion-row>
+        <ion-list radio-group>
+            <ion-list-header text-center>
+                <span style="color:#fff; font-size:1.4rem; font-family: 'Microsoft Yahei';">分享好友，有惊喜呦！</span>
+            </ion-list-header>
+            <ion-item style="font-size:1.2rem;">
+                <ion-label>邀请二维码一</ion-label>
+                <ion-radio (click)="changeCode(1)" checked="true" value="1"></ion-radio>
+            </ion-item>
+            <ion-item style="font-size:1.2rem;">
+                <ion-label>邀请二维码二</ion-label>
+                <ion-radio (click)="changeCode(2)" value="2"></ion-radio>
+            </ion-item>
+            <ion-item style="font-size:1.2rem;">
+                <ion-label>邀请二维码三</ion-label>
+                <ion-radio (click)="changeCode(3)" value="3"></ion-radio>
+            </ion-item>
+        </ion-list>
+
+    </ion-grid>
+</ion-content>
+<ion-footer>
+
+</ion-footer>

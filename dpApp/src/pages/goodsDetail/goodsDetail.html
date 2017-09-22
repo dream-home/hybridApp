@@ -1,0 +1,69 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>商品详情</ion-title>
+        <ion-buttons end>
+          <button [disabled]="isDisable" ion-button clear (click)="submitData()">
+              完成
+          </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div text-center  *ngIf="show==1" (click)="showRoHide()">
+        <img src="assets/images/add.png" style="width:90%;margin-top:20%;" >
+        <p> <ion-icon name="add-circle"></ion-icon>点此添加丰富的内容介绍你的产品</p>
+    </div>
+
+   <ion-grid no-margin no-padding >
+        <ion-row  *ngFor="let item of GoodDetails;let i=index ">
+            <ion-col *ngIf="item.type==1" style="padding:6px; ">
+                <div  style="border:1px solid #ddd; position: relative;" >
+                  <!--  <ion-textarea bindon-ngModel="item.content" placeholder="输入商品描述" type="text" style="height:7rem;" clearInput="true"></ion-textarea> -->
+                    <textarea bindon-ngModel="item.content" placeholder="输入商品描述" type="text" style="width: 100%;min-height: 7rem;max-width: 100%; border:none;"></textarea>
+                   <div text-right class="buttons">
+                       <button ion-button outline no-margin small (click)="deleteItem(i,1)"><ion-icon name="trash"></ion-icon>&nbsp;删除</button><!--
+                        --><button ion-button outline no-margin small *ngIf="i>0" (click)="upTop(i)"><ion-icon name="arrow-round-up"></ion-icon>&nbsp;上移</button><!--
+                        --><button ion-button outline no-margin small (click)="afterAdd(i)"><ion-icon name="create"></ion-icon>&nbsp;插入文字</button><!--
+                         --><button ion-button outline no-margin small (click)="addImages(i)"><ion-icon name="camera"></ion-icon>&nbsp;插入图片</button>
+                   </div>
+                </div>
+            </ion-col>
+            <ion-col *ngIf="item.type==2&&item.content!=null" style="padding:6px;">
+                <div  style="border:1px solid #ddd; position: relative;" >
+                   <!-- <img src="{{item.content.substring(0,7)=='http://'?item.content+'-goodsdetail':item.content}}" style="width:100%;"> -->
+                   <img src="{{item.content.substring(0,7)=='http://'?item.content:item.content}}" style="width:100%;">
+                   <div text-right class="buttons">
+                       <button ion-button outline no-margin small (click)="deleteItem(i,2)"><ion-icon name="trash"></ion-icon>&nbsp;删除</button><!--
+                        --><button ion-button outline no-margin small *ngIf="i>0" (click)="upTop(i)"><ion-icon name="arrow-round-up"></ion-icon>&nbsp;上移</button><!--
+                        --><button ion-button outline no-margin small (click)="afterAdd(i)"><ion-icon name="create"></ion-icon>&nbsp;插入文字</button><!--
+                         --><button ion-button outline no-margin small (click)="addImages(i)"><ion-icon name="camera"></ion-icon>&nbsp;插入图片</button>
+                   </div>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+   <!--  <input type="file" style=" visibility: hidden;"/> -->
+    <div style="height:60px;"></div>
+</ion-content>
+
+<ion-footer *ngIf="show!=1">
+    <ion-grid style="background: #fff;">
+        <ion-row>
+            <ion-col text-right>
+                <button ion-button outline no-margin small color="dark" (click)="addWord()"><ion-icon name="create"></ion-icon>&nbsp;添加文字</button>
+            </ion-col>
+             <ion-col text-right>
+                <button  ion-button outline no-margin small (click)="addImages(-1)"><ion-icon name="camera"></ion-icon>&nbsp;添加图片</button>
+            </ion-col>
+             <ion-col text-center>
+                <button  ion-button clear no-margin small style="color:#000;" (click)="goToBackPage()">取消</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-footer>

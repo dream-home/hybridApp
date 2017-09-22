@@ -1,0 +1,57 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>完善信息</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content background="background:#f4f4f4">
+<div *ngIf="userInfo!=null&&userInfo!=''">
+    <ion-list class="addrs" *ngIf="userInfo.areaId==null || userInfo.areaId==''">
+          <div class="addrs_info">地址信息</div>
+          <button ion-item (click)="gotoSelectAddressPage(1)" class="addrs_province">
+                <span>省份</span>
+                <span *ngIf="userAddress.province==''">请选择</span>
+                <span>{{userAddress.province}}</span>
+           </button>
+          <button ion-item (click)="gotoSelectAddressPage(2)" class="addrs_city">
+                <span>城市</span>
+                <span *ngIf="userAddress.city==''">请选择</span>
+                <span>{{userAddress.city}}</span>
+            </button>
+          <button ion-item (click)="gotoSelectAddressPage(3)" class="addrs_country">
+                <span>区县</span>
+                <span *ngIf="userAddress.county==''">请选择</span>
+                <span>{{userAddress.county}}</span>
+          </button>
+    </ion-list>
+    <ion-list  *ngIf="userInfo.phone==null || userInfo.phone=='' ">
+        <div class="bindTel">绑定手机</div>
+        <ion-item class="telPhone">
+            <ion-label>手机</ion-label>
+            <ion-input type="text" placeholder="请输入手机号码" bindon-ngModel="phone"></ion-input>
+            <button ion-button outline small item-right (click)="getSmsCode()">验证码</button>
+        </ion-item>
+        <ion-item class="telCode">
+            <ion-label>短信验证码</ion-label>
+            <ion-input type="number" placeholder="请输入短信验证码" bindon-ngModel="smsCode"></ion-input>
+        </ion-item>
+    </ion-list>
+    <ion-list *ngIf="userInfo.isSetPassword==0 || userInfo.isSetPayPwd==0 ">
+        <div class="password">密码管理</div>
+        <ion-item  *ngIf="userInfo.isSetPassword==0" class="loginPwd">
+            <ion-label>登录密码</ion-label>
+            <ion-input type="password" placeholder="请输入登录密码" bindon-ngModel="loginPassword"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="userInfo.isSetPayPwd==0" class="payPwd">
+            <ion-label>支付密码</ion-label>
+            <ion-input type="password" placeholder="请输入6位支付密码" bindon-ngModel="payPassword"></ion-input>
+        </ion-item>
+    </ion-list>
+   <button ion-button full style="width: 90%; margin:20px auto;" (click)="saveInfo()">保存</button>
+</div>
+</ion-content>

@@ -1,0 +1,62 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>新建收货地址</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row class="addressName">
+            <ion-col text-left width-20>姓名</ion-col>
+            <ion-col text-right width-80>
+                <ion-input type="text" bindon-ngModel="addressName" placeholder="最少两个字"></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row class="addressPhone">
+            <ion-col text-left width-20>电话</ion-col>
+            <ion-col text-right width-80>
+                <ion-input type="text" bindon-ngModel="addressPhone" maxlength="11"  placeholder="最少7位数"></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row class="addressProvince">
+            <ion-col width-20>省份</ion-col>
+            <ion-col width-80 text-right>
+                <ion-select #item1 [(ngModel)]="province" (ionChange)="selectProvi(item1)" okText="确认" cancelText="取消">
+                    <ion-option *ngFor="let itm of provinces" value="{{itm.value}}">{{itm.text}}</ion-option>
+                </ion-select>
+            </ion-col>
+        </ion-row>
+        <ion-row class="addressCity">
+            <ion-col width-20>城市</ion-col>
+            <ion-col width-80 text-right>
+                <ion-select #item2 [(ngModel)]="city"  okText="确认" (ionChange)="selectCity(item2)" cancelText="取消">
+                    <ion-option *ngFor="let itm of citys" value="{{itm.value}}">{{itm.text}}</ion-option>
+                </ion-select>
+            </ion-col>
+        </ion-row>
+        <ion-row class="addressCountry">
+            <ion-col width-20>区/县</ion-col>
+            <ion-col width-80 text-right>
+                <ion-select #item3 [(ngModel)]="county" okText="确认" (ionChange)="selectCounty(item3)" cancelText="取消">
+                    <ion-option *ngFor="let itm of countys" value="{{itm.value}}">{{itm.text}}</ion-option>
+                </ion-select>
+            </ion-col>
+        </ion-row>
+        <ion-row class="addressCont">
+            <ion-col text-left width-20>地址</ion-col>
+            <ion-col text-right width-80 style="font-size:12px;">
+                <ion-input maxlength=15 type="text" bindon-ngModel="addressInfo"  placeholder="5-15个字，且不能全为数字"></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row class="saveAddress">
+            <ion-col text-center>
+                <button (click)="saveAddress()">保存</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

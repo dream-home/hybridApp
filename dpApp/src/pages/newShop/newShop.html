@@ -1,0 +1,176 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>创建店铺</ion-title>
+        <ion-buttons end>
+          <button [disabled]="isDisable" *ngIf="accept" ion-button clear (click)="submitData()">
+              完成
+          </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="background:#e5e5e5;">
+    <div style="height:300px;">
+        <img (click)="uploadImg()" style="height:100%;width:100%;" src="{{imgStr}}">
+    </div>
+    <ion-list>
+        <ion-row class="storeName">
+            <ion-col width-25>
+                <span><mark>*</mark>店铺名称</span>
+            </ion-col>
+            <ion-col width-75>
+                <ion-input maxlength="20" bindon-ngModel="shopData.storeName" placeholder="输入商铺名称" type="text"></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row class="storePhone">
+            <ion-col width-25>
+                <span><mark>*</mark>商家电话</span>
+            </ion-col>
+            <ion-col width-75>
+                <ion-input [disabled]="true" bindon-ngModel="commonService.user.phone" placeholder="未绑定" type="text" *ngIf="commonService.user.phone!= null || commonService.user.phone!=''"></ion-input>
+                <div *ngIf="commonService.user.phone== null || commonService.user.phone==''" (click)="bindMobile()">
+                    <span>去绑定电话</span><mark>〉</mark>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row class="choiceArea">
+            <ion-col width-25>
+                <span><mark>*</mark>选择地区</span>
+            </ion-col>
+            <ion-col width-75 (click)="gotoBaiduMap()">
+                <div>
+                    {{(mapaddr==null||mapaddr =='')?'选择地区':mapaddr.province+mapaddr.city+mapaddr.county}}
+                    <mark>〉</mark>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row class="storeAddr">
+            <ion-col width-25>
+                <span><mark>*</mark>店铺地址</span>
+            </ion-col>
+            <ion-col width-75>
+                <ion-input bindon-ngModel="shopData.addr" maxlength="50" placeholder="输入店铺地址" type="text"></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row class="uploadAptitude">
+            <ion-col width-25>
+                <span><mark>*</mark>资质认证</span>
+            </ion-col>
+            <ion-col width-75 (click)="uploadAptitude()">
+                <div>
+                    上传资质认证<mark>〉</mark>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-item style="margin-left:-6px;">
+            <ion-label stacked style="font-size:14px;">
+                <span style="color:red;background:none;margin-right: -3px;">*</span>
+                商铺介绍
+            </ion-label>
+            <ion-textarea maxlength="300" rows="4" bindon-ngModel="shopData.detail" placeholder="输入商铺介绍" type="text" style="font-size:14px;"></ion-textarea>
+        </ion-item>
+        <ion-row class="storeAgreement">
+            <ion-col>
+                <ion-checkbox [(ngModel)]="accept" ></ion-checkbox>
+                <span>阅读并接受<mark (click)="showAgreement()">《联盟商家协议》</mark></span>
+            </ion-col>
+        </ion-row>
+        <!-- <ion-item>
+            <ion-label fixed>
+                <span style="color:red;">*</span>
+                商铺名称
+            </ion-label>
+            <ion-input maxlength="20" bindon-ngModel="shopData.storeName" placeholder="输入商铺名称" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                <span style="color:red;">*</span>
+                商家电话
+            </ion-label>
+            <ion-input [disabled]="true" bindon-ngModel="commonService.user.phone" placeholder="未绑定" type="text"></ion-input>
+            <button *ngIf="commonService.user.phone== null || commonService.user.phone==''" item-right clear ion-button (click)="bindMobile()">去绑定</button>
+        </ion-item>
+         <ion-item>
+            <ion-label fixed>
+                <span style="color:red;">*</span>
+            客服电话
+            </ion-label>
+            <ion-input maxlength="20" bindon-ngModel="shopData.servicePhone" placeholder="客服电话" type="text"></ion-input>
+        </ion-item>
+        <ion-item (click)="gotoBaiduMap()">
+	            <ion-label fixed>
+	            	<span style="color:red;">*</span>
+	                选择地区
+	            </ion-label>
+	            <button  ion-button outline item-right style="background-color: #FF651E; color: white; width: 230px;height:35px" >
+	              		{{(mapaddr==null||mapaddr =='')?'选择地区':mapaddr.province+mapaddr.city+mapaddr.county}}
+	            </button>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                省份
+            </ion-label>
+            <ion-select #item1 [(ngModel)]="province" (ionChange)="selectProvi(item1)" okText="确认" cancelText="取消">
+              <ion-option *ngFor="let itm of provinces" value="{{itm.value}}">{{itm.text}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                城市
+            </ion-label>
+            <ion-select #item2 [(ngModel)]="city"  okText="确认" (ionChange)="selectCity(item2)" cancelText="取消">
+              <ion-option *ngFor="let itm of citys" value="{{itm.value}}">{{itm.text}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                区域
+            </ion-label>
+            <ion-select #item3 [(ngModel)]="county" okText="确认" (ionChange)="selectCounty(item3)" cancelText="取消">
+              <ion-option *ngFor="let itm of countys" value="{{itm.value}}">{{itm.text}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                <span style="color:red;">*</span>
+                商铺地址
+            </ion-label>
+            <ion-input bindon-ngModel="shopData.addr" maxlength="50" placeholder="输入商铺地址" type="text"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="false">
+            <ion-label fixed>
+                商铺邀请码
+            </ion-label>
+            <ion-input maxlength="6" bindon-ngModel="shopData.inviteCode" placeholder="输入邀请码" type="text"></ion-input>
+            <span item-right>选填</span>
+        </ion-item>
+        <ion-item (click)="uploadAptitude()">
+	            <ion-label fixed>
+	            	<span style="color:red;">*</span>
+	                资质认证
+	            </ion-label>
+	            <button ion-button outline item-right style="background-color: #FF651E; color: white; width: 230px;height:35px" >
+	              		上传资质认证
+	            </button>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>
+                <span style="color:red;">*</span>
+                商铺介绍
+            </ion-label>
+            <ion-textarea maxlength="300" rows="8" bindon-ngModel="shopData.detail" placeholder="输入商铺介绍" type="text"></ion-textarea>
+        </ion-item>
+        <ion-item>
+            <ion-label style="font-size:1.6rem;">
+                <span>阅读并接受</span>
+            </ion-label>
+            <button item-right no-margin clear ion-button (click)="showAgreement()">《联盟商家协议》</button>
+            <ion-checkbox [(ngModel)]="accept" ></ion-checkbox>
+        </ion-item> -->
+    </ion-list>
+</ion-content>

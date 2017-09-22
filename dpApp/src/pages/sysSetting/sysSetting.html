@@ -1,0 +1,102 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>设置</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content no-padding style="background:#e5e5e5;">
+    <ion-list  style="margin-bottom: 8px;">
+        <button ion-item (click)="gotoUserInfoPage()" class="gotoUserInfo">
+           <ion-icon name="ios-lock-outline"></ion-icon>
+           <span>账户安全</span>
+        </button>
+        <button ion-item (click)="gotoDeliveryAddress(0)" class="deliveryAddress">
+           <ion-icon name="list"></ion-icon>
+           <span>收货地址管理</span>
+        </button>
+     </ion-list>
+    <ion-list >
+        <button ion-item (click)="openAbout()" class="aboutUs">
+            <ion-icon name="ios-information-circle-outline"></ion-icon>
+            <span>关于我们</span>
+        </button>
+         <button ion-item *ngIf="osType==1" (click)="checkUpdate()" style="margin-top:1px;">
+            当前版本
+            <span style="font-size:13px;" *ngIf="isupdate && updateData.isIOSPopup =='1'" item-right color="danger">●</span>
+            <span style="font-size:13px; color:#666" *ngIf="isupdate && updateData.isIOSPopup =='1'" item-right>有新的版本更新</span>
+            <span style="font-size:12px; color:#999" *ngIf="!isupdate || updateData.isIOSPopup =='0'" item-right>已经是最新版</span>
+        </button>
+        <button ion-item *ngIf="osType==0" (click)="checkUpdate()" style="margin-top:1px;">
+            当前版本
+            <span style="font-size:13px;" *ngIf="isupdate && updateData.isAndroidPopup =='1'" item-right color="danger">●</span>
+            <span style="font-size:13px; color:#666" *ngIf="isupdate && updateData.isAndroidPopup =='1'" item-right>有新的版本更新</span>
+            <span style="font-size:12px; color:#999" *ngIf="!isupdate || updateData.isAndroidPopup =='0'" item-right>已经是最新版</span>
+        </button>
+
+    </ion-list>
+    <div *ngIf="commonService.token" text-center>
+        <button (click)="exitLogin()" ion-button class="exitbtn">退出登录</button>
+    </div>
+   <!--  <ion-list>
+
+        <button ion-item *ngIf="!commonService.user.phone" (click)="settingMobile()">
+            手机号
+            <span color="danger" item-right >未绑定</span>
+        </button>
+        <button ion-item *ngIf="commonService.user.phone">
+            手机号
+            <span color="secondary" item-right>已绑定</span>
+        </button>
+
+        <button ion-item>
+            微信号
+            <span color="secondary" item-right>已绑定</span>
+        </button>
+
+        <button ion-item (click)="settingLoginPw()" *ngIf="commonService.user.isSetPassword=='0'">
+            登录密码
+            <span color="danger" item-right>未设置</span>
+        </button>
+        <button ion-item (click)="settingLoginPw()" *ngIf="commonService.user.isSetPassword=='1'">
+            登录密码
+            <span color="secondary" item-right>已设置</span>
+        </button>
+
+        <button ion-item (click)="settingPayPw()" *ngIf="commonService.user.isSetPayPwd=='0'">
+            支付密码
+            <span color="danger" item-right>未设置</span>
+        </button>
+        <button ion-item (click)="settingPayPw()" *ngIf="commonService.user.isSetPayPwd=='1'">
+            支付密码
+            <span color="secondary" item-right>已设置</span>
+        </button>
+        <button ion-item *ngIf="osType==1" (click)="checkUpdate()">
+            当前版本
+            <span style="font-size:13px;" *ngIf="isupdate && updateData.isIOSPopup =='1'" item-right color="danger">●</span>
+            <span style="font-size:13px; color:#666" *ngIf="isupdate && updateData.isIOSPopup =='1'" item-right>有新的版本更新</span>
+            <span style="font-size:12px; color:#999" *ngIf="!isupdate || updateData.isIOSPopup =='0'" item-right>已经是最新版</span>
+        </button>
+        <button ion-item *ngIf="osType==0" (click)="checkUpdate()">
+            当前版本
+            <span style="font-size:13px;" *ngIf="isupdate && updateData.isAndroidPopup =='1'" item-right color="danger">●</span>
+            <span style="font-size:13px; color:#666" *ngIf="isupdate && updateData.isAndroidPopup =='1'" item-right>有新的版本更新</span>
+            <span style="font-size:12px; color:#999" *ngIf="!isupdate || updateData.isAndroidPopup =='0'" item-right>已经是最新版</span>
+        </button>
+        <button ion-item (click)="openAbout()">
+            关于我们
+        </button>
+        <button *ngIf="commonService.isOpenDebug" ion-item (click)="gotoWedebug()">
+            测试地址修改页面
+        </button>
+
+        <div *ngIf="commonService.token" padding>
+            <button (click)="exitLogin()" full ion-button>退出登陆</button>
+        </div>
+
+    </ion-list> -->
+</ion-content>

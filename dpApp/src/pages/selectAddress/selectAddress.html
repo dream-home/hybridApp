@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>地区选择</ion-title>
+      
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-list *ngIf="flag==1">
+		  <button ion-item *ngFor="let item of provinces" (click)="findCitys(item.value,item.text)">
+		    	{{ item.text }}
+		  </button>  
+	</ion-list>
+	<ion-list *ngIf="flag==2">
+		  <button ion-item *ngFor="let item of citys" (click)="findCountys(item.value,item.text)">
+		    	{{ item.text }}
+		  </button>  
+	</ion-list>
+	<ion-list *ngIf="flag==3">
+		  <button ion-item *ngFor="let item of countys" (click)="sureCounty(item.value,item.text)">
+		    	{{ item.text }}
+		  </button>  
+	</ion-list>
+</ion-content>

@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>斗拍排行榜</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid no-padding >
+        <div *ngIf="isNull" class="nullPage">
+            <img src="assets/images/null.png">
+        </div>
+        <ion-row *ngFor="let itm of datas;let idx=index" style="border-bottom:1px solid #EFEFEF;padding:5px 0 5px 0;">
+            <ion-col width-10 text-center>
+                {{idx+1}}
+            </ion-col>
+            <ion-col width-30 text-center>
+                {{itm.nickName}}
+            </ion-col>
+            <ion-col width-30 text-center>
+                {{itm.score}}积分
+            </ion-col>
+            <ion-col width-30 text-right>
+                <span color="yanbao" *ngIf="itm.isWinner == 1">金牌得主</span>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

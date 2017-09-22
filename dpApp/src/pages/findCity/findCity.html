@@ -1,0 +1,129 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>城市选择</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <!-- <ion-item no-padding>
+        <span>&nbsp;&nbsp;当前：<span *ngIf="tcn!=null && tcn !=''" (click)="selectVal(tcn,'')">{{tcn}}&nbsp;&nbsp;</span>{{cityName}}</span>
+        <button *ngIf="cityName!='全国'" item-right ion-button small clear style="color:#AFAFAF;" (click)="selectCity()">
+            选择县区
+            <ion-icon name="arrow-down"></ion-icon>
+        </button>
+    </ion-item>
+    <ion-grid no-padding no-margin style="background:#EFEFEF;">
+        <ion-row wrap>
+            <button ion-button small outline *ngFor="let itm of countys" (click)="selectVal(itm.text,cityName)">{{itm.text}}</button>
+        </ion-row>
+    </ion-grid>
+    <ion-item no-padding>
+        <ion-label fixed>&nbsp;&nbsp;选择省份</ion-label>
+        <ion-select [(ngModel)]="province" (ionChange)="selectProvi()" okText="确认" cancelText="取消">
+            <ion-option *ngFor="let itm of provinces" value="{{itm.value}}">{{itm.text}}</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-grid no-padding no-margin style="background:#EFEFEF;">
+        <ion-row wrap>
+            <button ion-button small outline *ngFor="let itm of citys" (click)="selectVal(itm.text,'')">{{itm.text}}</button>
+        </ion-row>
+    </ion-grid>
+    <button ion-button small outline (click)="selectVal('全国','')">
+        全国
+    </button> -->
+    <ion-grid>
+        <ion-row class="currentLocation">
+            <ion-col text-left>当前：<mark>{{cityName}}</mark></ion-col>
+            <ion-col text-right>
+                <span (click)="showCountry()" *ngIf="showCounties==false">选择区/县▼</span>
+                <span (click)="showCountry()" *ngIf="showCounties==true">选择区/县▲</span>
+            </ion-col>
+        </ion-row>
+        <ion-row class="selectCounties">
+            <ion-col class="location" *ngIf="showCounties==false">
+                <img src="assets/images/addr.png"/>
+                <span *ngIf="mapDataStatus=='complete'" (click)="selectVal(mapData.city,'isSendLocation')">{{mapData.city}}</span>
+                <span *ngIf="mapDataStatus!='complete'">当前没有定位到城市</span>
+            </ion-col>
+            <ion-col class="counties" *ngIf="showCounties==true">
+                <button *ngFor="let itm of countys" (click)="selectVal(itm.text,'')">{{itm.text}}</button>
+            </ion-col>
+        </ion-row>
+        <ion-row class="hotCity" id="Hot">
+            <ion-col>热门城市</ion-col>
+        </ion-row>
+        <ion-row class="hotCityList">
+            <ion-col no-padding>
+                <ion-row class="hotCityList1">
+                    <ion-col width-33><button (click)="selectVal('全国','')">全国</button></ion-col>
+                    <ion-col width-33><button (click)="selectVal('北京市','')">北京市</button></ion-col>
+                    <ion-col width-33><button (click)="selectVal('上海市','')">上海市</button></ion-col>
+                </ion-row>
+                <ion-row class="hotCityList2">
+                    <ion-col width-33><button (click)="selectVal('广州市','')">广州市</button></ion-col>
+                    <ion-col width-33><button (click)="selectVal('成都市','')">成都市</button></ion-col>
+                    <ion-col width-33><button (click)="selectVal('深圳市','')">深圳市</button></ion-col>
+                </ion-row>
+                <ion-row class="hotCityList3">
+                    <ion-col width-33><button (click)="selectVal('杭州市','')">杭州市</button></ion-col>
+                    <ion-col width-33><button (click)="selectVal('武汉市','')">武汉市</button></ion-col>
+                    <ion-col width-33><button (click)="selectVal('南京市','')">南京市</button></ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+        <div class="container">
+          <div class="city">
+            <div class="city-list" *ngFor="let ctys of countrys; let cIndex = index">
+                <span class="city-letter" id="{{idxs[cIndex]}}1">{{idxs[cIndex]}}</span>
+                <p *ngFor="let cty of ctys" (click)="selectVal(cty.text,'')">{{cty.text}}</p>
+                <p *ngIf="ctys.length==0" style="color:#999;">没有城市可选</p>
+            </div>
+          </div>
+        </div>
+
+    </ion-grid>
+
+
+</ion-content>
+
+<ion-footer>
+  <!--城市索引查询-->
+  <div class="letter">
+      <ul id="letter">
+        <li><a href="#Hot">热</a></li>
+        <li><a href="#A1">A</a></li>
+        <li><a href="#B1">B</a></li>
+        <li><a href="#C1">C</a></li>
+        <li><a href="#D1">D</a></li>
+        <li><a href="#E1">E</a></li>
+        <li><a href="#F1">F</a></li>
+        <li><a href="#G1">G</a></li>
+        <li><a href="#H1">H</a></li>
+        <li><a href="#I1">I</a></li>
+        <li><a href="#J1">J</a></li>
+        <li><a href="#K1">K</a></li>
+        <li><a href="#L1">L</a></li>
+        <li><a href="#M1">M</a></li>
+        <li><a href="#N1">N</a></li>
+        <li><a href="#O1">O</a></li>
+        <li><a href="#P1">P</a></li>
+        <li><a href="#Q1">Q</a></li>
+        <li><a href="#R1">R</a></li>
+        <li><a href="#S1">S</a></li>
+        <li><a href="#T1">T</a></li>
+        <li><a href="#U1">U</a></li>
+        <li><a href="#V1">V</a></li>
+        <li><a href="#W1">W</a></li>
+        <li><a href="#X1">X</a></li>
+        <li><a href="#Y1">Y</a></li>
+        <li><a href="#Z1">Z</a></li>
+      </ul>
+  </div>
+  <!--显示点击的是哪一个字母-->
+  <div id="showLetter" class="showLetter"><span>A</span></div>
+</ion-footer>

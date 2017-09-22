@@ -1,0 +1,55 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>账单记录</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <button ion-item (click)="viewRecord(0)">
+            <img item-left src="assets/icon/chongzhi.png" style="width:25px; height: auto;"/>
+            充值记录
+        </button>
+        <!-- <button ion-item (click)="viewRecord(1)">
+            <ion-icon name="swap" item-left></ion-icon>
+            兑换记录
+        </button> -->
+        <button ion-item (click)="viewRecord(2)">
+            <img item-left src="assets/icon/huozeng.png" style="width:25px; height:25px;"/>
+            获赠记录
+        </button>
+        <!-- <button ion-item (click)="viewRecord(3)">
+             <img item-left src="assets/icon/doupai.png" style="width:25px; height:25px;"/>
+            斗拍消费
+        </button>
+        <button ion-item (click)="viewRecord(5)">
+             <img item-left src="assets/icon/weituo.png" style="width:25px;height:25px;"/>
+            委托出售
+        </button> -->
+        <button ion-item (click)="viewRecord(6)">
+             <img item-left src="assets/icon/goumai.png" style="width:25px;height:25px;"/>
+            购买记录
+        </button>
+        <button ion-item (click)="viewRecord(7)">
+             <img item-left src="assets/icon/tuikuan.png" style="width:25px;height:25px;"/>
+            退款记录
+        </button>
+        <button ion-item (click)="viewRecord(14)">
+             <img item-left src="assets/icon/EP.png" style="width:25px;height:25px;"/>
+            EP兑换记录
+        </button>
+        <button ion-item (click)="viewRecord(-1)">
+             <img item-left src="assets/icon/liushui.png" style="width:25px;height:25px;"/>
+            流水记录
+        </button>
+        <button ion-item (click)="viewRecord(19)">
+             <img item-left src="assets/icon/shoukuan.png" style="width:25px;height:25px;"/>
+            收款账单
+        </button>
+    </ion-list>
+</ion-content>

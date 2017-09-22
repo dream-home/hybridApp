@@ -1,0 +1,38 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>签到记录</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="background:#e5e5e5;">
+    <ion-grid class="signRecord" no-padding>
+        <ion-list *ngIf="itemLength!=0">
+            <!-- <ion-row class="signRecordHead">
+                <ion-col>本月签到记录</ion-col>
+            </ion-row> -->
+            <ion-row *ngFor="let itm of items" class="signRecordCont">
+                <ion-col text-left>{{commonService.dateFormatLong(itm.tradeDate,'yyyy-MM-dd')}}</ion-col>
+                <ion-col text-center>{{itm.tradeTypeDesc}}</ion-col>
+                <ion-col text-right>+ {{itm.tradeAmount}} EP</ion-col>
+            </ion-row>
+        </ion-list>
+        <ion-list *ngIf="itemLength==0" class="nullSignRecord">
+            <!-- <ion-row class="signRecordHead">
+                <ion-col>本月签到记录</ion-col>
+            </ion-row> -->
+            <ion-row class="noneImage">
+                <ion-col text-center no-padding>
+                    <img src="assets/images/nullOfSign.png">
+                </ion-col>
+            </ion-row>
+        </ion-list>
+        <ion-infinite-scroll *ngIf="showScroll" (ionInfinite)="doInfinite($event)">
+            <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+    </ion-grid>
+</ion-content>

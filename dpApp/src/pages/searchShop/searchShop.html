@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons start>
+            <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-searchbar maxlength="20" [(ngModel)]="searchWord" placeholder="店铺名" model="md" center></ion-searchbar>
+        <ion-buttons end>
+            <button ion-button small item-right (click)="search()">
+                搜索
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <div class="shopTatol" *ngIf="flag!=0 && show!='1'">
+        <div *ngFor="let itm of items" (click)="gotoShop(itm.id)" class="goodsPlate">
+            <div class="storeImg">
+              <!-- itm.icon.substring(0,7)=='http://'?itm.icon+'-storelist': -->
+                <img src="{{itm.icon}}" style="width:100%;"/>
+            </div>
+            <div class="storeName">{{itm.storeName}}</div>
+            <div class="storeCont">
+                <span>累计销售{{itm.sumSaleCount}}</span>
+                <span *ngIf="itm.distance!='0'">
+                    <img src="assets/images/addr.png"/>
+                    <span>{{itm.distanceRank}}</span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="flag==0" style="text-align: center;padding-top:200px; letter-spacing: 2px; line-height: 25px;">抱歉，没有搜索到你想要的店铺，<br>你还可以试试搜索其他店铺哦。</div>
+</ion-content>

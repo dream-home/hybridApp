@@ -1,0 +1,186 @@
+page-scoreExchange {
+    .scoreNum{
+        background:#fff;
+        height:40px;
+        line-height: 30px;
+        ion-col{
+            span:nth-child(1){
+                float:left;
+                margin-left:10px;
+            }
+            span:nth-child(2){
+                float:right;
+                color:#999;
+            }
+        }
+    }
+    .scoreExchang{
+        background:#fff;
+        margin-top:5px;
+        height:40px;
+        line-height: 30px;
+        span{
+            float: left;
+            margin-left:10px;
+        }
+        ion-input{
+            float: right;
+            width:200px;
+            display: inline-block;
+            input{
+                float: right;
+                text-align: right;
+                margin:0 !important;
+                padding:0 !important;
+                color:#999;
+            }
+        }
+    }
+    .actuallyObtain{
+        background:#fff;
+        margin-top:1px;
+        height:40px;
+        line-height: 30px;
+        ion-col{
+            span{
+                float:left;
+                margin-left:10px;
+            }
+            input{
+                height:30px;
+                line-height: 30px;
+                float: right;
+                text-align: right;
+                color:#999;
+            }
+        }
+    }
+    .prompt{
+        background:#fff;
+        margin-top:1px;
+        font-size: 12px;
+        ion-col{
+            span{
+                float:left;
+                margin-left:10px;
+                color:#1eb8ff;
+            }
+        }
+    }
+    .bankName{
+        background:#fff;
+        margin-top:5px;
+        height:40px;
+        line-height: 30px;
+        span:nth-child(1){
+            float: left;
+            margin-left:10px;
+        }
+        span:nth-child(2){
+            float: right;
+            color:#999;
+        }
+        ion-input{
+            float: right;
+            width:200px;
+            display: inline-block;
+            input{
+                float: right;
+                text-align: right;
+                margin:0 !important;
+                padding:0 !important;
+            }
+        }
+    }
+    .bankNamePrompt{
+        background:#fff;
+        margin-top:1px;
+        font-size: 12px;
+        ion-col{
+            span{
+                float:left;
+                margin-left:10px;
+                color:red;
+            }
+        }
+    }
+    .choiceBank{
+        background:#fff;
+        margin-top:1px;
+        height:40px;
+        line-height: 30px;
+        span{
+            float: left;
+            margin-left:10px;
+        }
+        ion-select{
+            float: right;
+            .select-text{
+                margin-right:5px;
+                color:#999;
+            }
+            .item-cover{
+                width:auto;
+            }
+        }
+    }
+    .cardNumber{
+        background:#fff;
+        margin-top:1px;
+        height:40px;
+        line-height: 30px;
+        span{
+            float: left;
+            margin-left:10px;
+        }
+        ion-input{
+            float: right;
+            width:200px;
+            display: inline-block;
+            input{
+                float: right;
+                text-align: right;
+                margin:0 !important;
+                padding:0 !important;
+                color:#999;
+            }
+        }
+    }
+    .btnSubmit{
+        margin-top:30px;
+        ion-col{
+            padding:0;
+            button{
+                width:95%;
+                background:#ff651e;
+                color:#fff;
+                height:30px;
+            }
+        }
+    }
+    .btnCancel{
+        margin-top:30px;
+        ion-col{
+            padding:0;
+            button{
+                width:95%;
+                background:#fff;
+                color:#ff651e;
+                height:30px;
+            }
+        }
+    }
+    .select-ios {
+        padding: 0 3px 0 0;
+    }
+    .select-ios .select-icon{
+        height:30px;
+        line-height: 30px;
+        .select-icon-inner{
+            left:0;
+        }
+    }
+    .item-block {
+        min-height:0;
+    }
+}

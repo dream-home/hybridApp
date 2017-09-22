@@ -1,0 +1,34 @@
+page-receivables {
+    .toReceivables{
+    	width:80%;
+    	margin:100px auto 15px auto;
+        background:#fff;
+        ion-col{
+        	margin:0 auto;
+        	img{
+        		width:200px;
+        		height:200px;
+        	}
+        }
+        .receivablesTitle{
+    		border-bottom:5px rgb(229, 229, 229) solid;
+            color:#999;
+            font-size:16px;
+        }
+        .receivablesTxt{
+            margin-top:15px;
+        }
+        .receivablesAmount{
+            margin-bottom:15px;
+            ion-col{
+                font-weight:bold;
+                font-size:24px;
+            }
+        }
+    }
+    .collectionBill{
+    	ion-col{
+    		padding:10px 0;
+    	}
+    }
+}

@@ -1,0 +1,46 @@
+<ion-header no-border>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>余额充值</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="background:#e5e5e5;">
+    <ion-list>
+        <ion-list no-padding no-margin>
+            <ion-item  no-padding>
+                <ion-label fixed>
+                    <span style="color:red;">&nbsp;&nbsp;*</span>
+                    充值余额
+                </ion-label>
+                <ion-input maxlength="20" bindon-ngModel="score" placeholder="请输入充值金额" type="number" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>支付方式</ion-label>
+                <ion-select [(ngModel)]="payType" okText="确认" cancelText="取消">
+                    <ion-option value="1">支付宝</ion-option>
+                    <ion-option value="2">微信支付</ion-option>
+                </ion-select>
+            </ion-item>
+           <!--  <div style="margin-top:5px;background:#fff;padding: 8px 0 8px 15px;color:#ff651e;">
+                温馨提示：1RMB == 1元
+            </div> -->
+        </ion-list>
+        <ion-grid style="margin-top:10px;">
+            <ion-row>
+                <ion-col text-center>
+                    <button style="width:100%;height:40px;font-size:18px;" ion-button (click)="submitData()" [disabled]="isDisable">确定</button>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <button style="width:100%;height:40px;font-size:18px;background:#fff;" color="light" (click)="goToBackPage()" ion-button>取消</button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-list>
+</ion-content>

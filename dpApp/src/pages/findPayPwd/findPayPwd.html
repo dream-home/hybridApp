@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>找回密码</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list no-margin *ngIf="!isShowSetPw">
+        <ion-item>
+            <ion-label>手机号</ion-label>
+            <ion-input maxlength="11" type="text" [disabled]="true" bindon-ngModel="phone" placeholder="输入手机号"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>验证码</ion-label>
+            <ion-input maxlength="4" type="text" bindon-ngModel="picCode" placeholder="输入验证码"></ion-input>
+            <img src="{{strImg}}" (click)="loadData()" style="height:35px;width:90px;" item-right ion-button clear>
+        </ion-item>
+    </ion-list>
+    <div padding *ngIf="!isShowSetPw">
+      <button ion-button (click)="loadMsg()" block>获取手机短信</button>
+    </div>
+    <ion-list no-margin *ngIf="isShowSetPw">
+        <ion-item>
+            <ion-label fixed>新密码</ion-label>
+            <ion-input maxlength="15" type="password" bindon-ngModel="newPwd" placeholder="输入新密码" clearInput></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>确认密码</ion-label>
+            <ion-input maxlength="15" type="password" bindon-ngModel="okPwd" placeholder="输入确认码" clearInput></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>短信验证码</ion-label>
+            <ion-input maxlength="6" type="text" bindon-ngModel="msgCode" placeholder="输入短信验证码" clearInput></ion-input>
+        </ion-item>
+    </ion-list>
+    <div padding *ngIf="isShowSetPw">
+      <button ion-button (click)="subData()" block>确认</button>
+    </div>
+</ion-content>

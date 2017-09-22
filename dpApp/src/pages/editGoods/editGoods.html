@@ -1,0 +1,161 @@
+<ion-header>
+    <ion-toolbar color="yanbao">
+        <ion-buttons start>
+          <button ion-button icon-only (click)="goToBackPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title center>编辑商品</ion-title>
+        <ion-buttons end>
+          <button [disabled]="isDisable" ion-button clear (click)="submitData()">
+              完成
+          </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid *ngIf="subData" no-pading>
+        <ion-row style="border-bottom:solid 1px #AFAFAF;">
+            <ion-col>
+                商品图片(<span color="yanbao">可添加6张</span>)
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-33>
+                <img (click)="uploadImg(0)" src="{{subData.icons[0].path}}" style="width:100%;"/>
+            </ion-col>
+            <ion-col width-33>
+                <img (click)="uploadImg(1)" src="{{subData.icons[1].path}}" style="width:100%;"/>
+            </ion-col>
+            <ion-col width-33>
+                <img (click)="uploadImg(2)" src="{{subData.icons[2].path}}" style="width:100%;"/>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-33>
+                <img (click)="uploadImg(3)" src="{{subData.icons[3].path}}" style="width:100%;"/>
+            </ion-col>
+            <ion-col width-33>
+                <img (click)="uploadImg(4)" src="{{subData.icons[4].path}}" style="width:100%;"/>
+            </ion-col>
+            <ion-col width-33>
+                <img (click)="uploadImg(5)" src="{{subData.icons[5].path}}" style="width:100%;"/>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-list *ngIf="subData" no-margin>
+        <ion-item>
+            <ion-label fixed>
+                <span style="color:red;">*</span>
+                商品名称
+            </ion-label>
+            <ion-input maxlength="20" bindon-ngModel="subData.name" placeholder="输入商品名称" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                <span style="color:red;">*</span>
+                商品类型
+            </ion-label>
+            <ion-select [(ngModel)]="subData.goodsSortId" okText="确认" cancelText="取消">
+                <ion-option *ngFor="let itm of types" value="{{itm.id}}">{{itm.name}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                <span style="color:red;">*</span>
+                商品门市价
+            </ion-label>
+            <ion-input maxlength="10" (blur)="countDP()" bindon-ngModel="subData.originalPrice" placeholder="输入商品门市价格" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                <span style="color:red;">*</span>
+                商品购买价
+            </ion-label>
+            <ion-input maxlength="10" (blur)="countDP()" bindon-ngModel="subData.price" placeholder="输入商品购买价格" type="number"></ion-input>
+        </ion-item>
+       <!--  <ion-item>
+            <ion-label fixed>
+                <span style="color:red;">*</span>
+                斗拍人数
+            </ion-label>
+            <ion-input maxlength="20" (blur)="countDP()" bindon-ngModel="subData.drawNum" placeholder="人数必须在{{commonService.params.drawNumMin}}~{{commonService.params.drawNumMax}}" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                <span style="color:red;">*</span>
+                斗拍价
+            </ion-label>
+            <ion-input disabled=true maxlength="20" bindon-ngModel="subData.drawPrice" placeholder="商品价格／斗拍人数" type="number"></ion-input>
+        </ion-item> -->
+        <ion-item>
+            <ion-label fixed>
+                一级分销
+            </ion-label>
+            <ion-input bindon-ngModel="subData.firstReferrerScale" placeholder="一级比例" type="number"></ion-input>
+            <span item-right style="color:red;">%</span>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                二级分销
+            </ion-label>
+            <ion-input bindon-ngModel="subData.secondReferrerScale" placeholder="二级比例" type="number"></ion-input>
+            <span item-right style="color:red;">%</span>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                三级分销
+            </ion-label>
+            <ion-input bindon-ngModel="subData.thirdReferrerScale" placeholder="三级比例" type="number"></ion-input>
+            <span item-right style="color:red;">%</span>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                赠送EP
+            </ion-label>
+            <ion-input bindon-ngModel="subData.businessSendEp" placeholder="输入EP数量" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                EP优惠比例
+            </ion-label>
+            <ion-input bindon-ngModel="subData.discountEP" placeholder="EP优惠比例" type="number"></ion-input>
+            <span item-right style="color:red;">%</span>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>
+                <span style="color:red;">*</span>
+                商品库存
+            </ion-label>
+            <ion-input maxlength="20" bindon-ngModel="subData.stock" placeholder="输入库存数1~{{commonService.params.storeStockMax}}件" type="number"></ion-input>
+        </ion-item>
+       <!--  <ion-item>
+            <ion-label fixed>
+                委托交易
+            </ion-label>
+            <ion-toggle bindon-ngModel="subData.saleSwitch" checked="false"></ion-toggle>
+        </ion-item> -->
+        <ion-item>
+            <ion-label fixed>
+                立即上线
+            </ion-label>
+            <ion-toggle bindon-ngModel="subData.status" checked="false"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked style="font-size:16px;">
+                <span style="color:red;background:none;margin-right: -3px;">*</span>
+                商品分享描述
+            </ion-label>
+            <ion-textarea maxlength="300" rows="4" bindon-ngModel="subData.detail" placeholder="输入商品分享描述" type="text" style="font-size:14px;"></ion-textarea>
+        </ion-item>
+         <button ion-item (click)="gotogoodsDetail(subData.id)">
+            商品详情
+        </button>
+    </ion-list>
+     <div style="height:60px;"></div>
+</ion-content>
+<ion-footer>
+
+    <button color="danger" (click)="deleteData()" no-margin ion-button full>删除商品</button>
+</ion-footer>

@@ -1,0 +1,16 @@
+page-beatInfo{
+    ion-content{
+        background: url('../assets/images/zjbj.png');
+        filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+        -moz-background-size:100% 100%;
+        background-size:100% 100%;
+    }
+    .jpbj{
+        height: 110px;
+        background: url('../assets/images/jpbj.png');
+        filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+        -moz-background-size:100% 100%;
+        background-size:100% 100%;
+        color: #fff;
+    }
+}
